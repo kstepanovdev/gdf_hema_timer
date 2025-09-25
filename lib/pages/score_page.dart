@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hema_scoring_machine/widgets/score_display.dart';
 
 import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
@@ -97,9 +98,21 @@ class _ScorePageState extends State<ScorePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                TimerDisplay(time: formatTime(timer), color: Colors.white),
+                ScoreDisplay(
+                  leftScore: leftScore,
+                  rightScore: rightScore,
+                  color: Colors.white,
+                  onLeftTap: () => {},
+                  onRightTap: () => {},
+                ),
+                TimerDisplay(color: Colors.white, time: formatTime(timer)),
+
                 const SizedBox(height: 20),
-                BigButton(label: "Stop", color: Colors.red, onPressed: stopTimer),
+                BigButton(
+                  label: "Stop",
+                  color: Colors.red,
+                  onPressed: stopTimer,
+                ),
               ],
             ),
           ),
@@ -113,6 +126,90 @@ class _ScorePageState extends State<ScorePage> {
         padding: const EdgeInsets.all(12),
         child: Column(
           children: [
+            /// Timer display
+            TimerDisplay(
+              time: formatTime(timer),
+              onDoubleTap: () async {
+                final newTime = await showDialog<Duration>(
+                  context: context,
+                  builder: (context) {
+                    final minutesController = TextEditingController();
+                    final secondsController = TextEditingController();
+                    return AlertDialog(
+                      title: const Text("Set Custom Time"),
+                      content: Row(
+                        children: [
+                          Expanded(
+                            child: TextField(
+                              controller: minutesController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                labelText: "Minutes",
+                              ),
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          Expanded(
+                            child: TextField(
+                              controller: secondsController,
+                              keyboardType: TextInputType.number,
+                              decoration: const InputDecoration(
+                                labelText: "Seconds",
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      actions: [
+                        TextButton(
+                          onPressed: () => Navigator.pop(context),
+                          child: const Text("Cancel"),
+                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            final min =
+                                int.tryParse(minutesController.text) ?? 0;
+                            final sec =
+                                int.tryParse(secondsController.text) ?? 0;
+                            Navigator.pop(
+                              context,
+                              Duration(minutes: min, seconds: sec),
+                            );
+                          },
+                          child: const Text("Set"),
+                        ),
+                      ],
+                    );
+                  },
+                );
+
+                if (newTime != null) {
+                  setState(() {
+                    timer = newTime;
+                  });
+                }
+              },
+            ),
+
+            const SizedBox(height: 12),
+
+            /// Time control
+            TimeControl(
+              onMinus1: () => setState(() {
+                if (timer > const Duration(seconds: 1)) {
+                  timer -= const Duration(seconds: 1);
+                } else {
+                  timer = Duration.zero;
+                }
+              }),
+              onPlus3: () =>
+                  setState(() => timer += const Duration(seconds: 3)),
+              onPlus5: () =>
+                  setState(() => timer += const Duration(seconds: 5)),
+            ),
+
+            const SizedBox(height: 12),
+
             /// Scoreboard with swap fighters icon
             ScoreBoard(
               leftName: leftName,
@@ -127,37 +224,8 @@ class _ScorePageState extends State<ScorePage> {
               onRightMinus: () => setState(() {
                 if (rightScore > 0) rightScore--;
               }),
-              swapFighters: swapFighters, // 👈 pass small button action
+              swapFighters: swapFighters,
             ),
-
-            const SizedBox(height: 12),
-
-            /// Timer display
-            TimerDisplay(time: formatTime(timer)),
-
-            const SizedBox(height: 12),
-
-            /// Time control
-            TimeControl(
-              onMinus30: () => setState(() {
-                if (timer > const Duration(seconds: 30)) {
-                  timer -= const Duration(seconds: 30);
-                } else {
-                  timer = Duration.zero;
-                }
-              }),
-              onPlus30: () => setState(() => timer += const Duration(seconds: 30)),
-              onMinus1: () => setState(() {
-                if (timer > const Duration(seconds: 1)) {
-                  timer -= const Duration(seconds: 1);
-                } else {
-                  timer = Duration.zero;
-                }
-              }),
-              onPlus1: () => setState(() => timer += const Duration(seconds: 1)),
-            ),
-
-
 
             const SizedBox(height: 16),
 
@@ -198,9 +266,21 @@ class _ScorePageState extends State<ScorePage> {
             /// Reset all + Reset timer
             Row(
               children: [
-                Expanded(child: BigButton(label: "Reset all", color: Colors.red, onPressed: resetAll)),
+                Expanded(
+                  child: BigButton(
+                    label: "Reset all",
+                    color: Colors.red,
+                    onPressed: resetAll,
+                  ),
+                ),
                 const SizedBox(width: 8),
-                Expanded(child: BigButton(label: "Reset timer", color: Colors.orange, onPressed: resetTimer)),
+                Expanded(
+                  child: BigButton(
+                    label: "Reset timer",
+                    color: Colors.orange,
+                    onPressed: resetTimer,
+                  ),
+                ),
               ],
             ),
           ],

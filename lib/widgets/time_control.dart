@@ -2,17 +2,15 @@ import 'package:flutter/material.dart';
 import 'big_button.dart';
 
 class TimeControl extends StatelessWidget {
-  final VoidCallback onMinus30;
-  final VoidCallback onPlus30;
   final VoidCallback onMinus1;
-  final VoidCallback onPlus1;
+  final VoidCallback onPlus3;
+  final VoidCallback onPlus5;
 
   const TimeControl({
     super.key,
-    required this.onMinus30,
-    required this.onPlus30,
     required this.onMinus1,
-    required this.onPlus1,
+    required this.onPlus3,
+    required this.onPlus5,
   });
 
   @override
@@ -21,17 +19,29 @@ class TimeControl extends StatelessWidget {
       children: [
         Row(
           children: [
-            Expanded(child: BigButton(label: "-30s", color: Colors.blueGrey, onPressed: onMinus30)),
+            Expanded(
+              child: BigButton(
+                label: "-1s",
+                color: Colors.blueGrey,
+                onPressed: onMinus1,
+              ),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: BigButton(label: "+30s", color: Colors.blueGrey, onPressed: onPlus30)),
-          ],
-        ),
-        const SizedBox(height: 8),
-        Row(
-          children: [
-            Expanded(child: BigButton(label: "-1s", color: Colors.blueGrey, onPressed: onMinus1)),
+            Expanded(
+              child: BigButton(
+                label: "+3s",
+                color: Colors.blueGrey,
+                onPressed: onPlus3,
+              ),
+            ),
             const SizedBox(width: 8),
-            Expanded(child: BigButton(label: "+1s", color: Colors.blueGrey, onPressed: onPlus1)),
+            Expanded(
+              child: BigButton(
+                label: "+5s",
+                color: Colors.blueGrey,
+                onPressed: onPlus5,
+              ),
+            ),
           ],
         ),
       ],

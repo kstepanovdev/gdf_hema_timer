@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hema_scoring_machine/widgets/score_display.dart';
 
 class ScoreBoard extends StatelessWidget {
   final String leftName;
@@ -32,33 +33,29 @@ class ScoreBoard extends StatelessWidget {
         /// Left fighter
         Expanded(
           child: Column(
-            children: [
-              Text(leftName, style: const TextStyle(fontSize: 18)),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  scoreButton("-", Colors.red, onLeftMinus),
-                  const SizedBox(width: 6),
-                  scoreButton("+", Colors.green, onLeftPlus),
-                ],
-              ),
-            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text(leftName, style: const TextStyle(fontSize: 18))],
           ),
         ),
 
         /// Middle: score + swap fighters
         Column(
           children: [
-            Text(
-              "$leftScore : $rightScore",
-              style: const TextStyle(
-                fontSize: 42,
-                fontWeight: FontWeight.bold,
-              ),
+            ScoreDisplay(
+              leftScore: leftScore,
+              rightScore: rightScore,
+              color: Colors.black,
+              onLeftTap: onLeftPlus,
+              onLeftDoubleTap: onLeftMinus,
+              onRightTap: onRightPlus,
+              onRightDoubleTap: onRightMinus,
             ),
             IconButton(
-              icon: const Icon(Icons.swap_horiz, size: 28, color: Colors.blueGrey),
+              icon: const Icon(
+                Icons.swap_horiz,
+                size: 28,
+                color: Colors.blueGrey,
+              ),
               onPressed: swapFighters,
             ),
           ],
@@ -67,18 +64,8 @@ class ScoreBoard extends StatelessWidget {
         /// Right fighter
         Expanded(
           child: Column(
-            children: [
-              Text(rightName, style: const TextStyle(fontSize: 18)),
-              const SizedBox(height: 4),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  scoreButton("-", Colors.red, onRightMinus),
-                  const SizedBox(width: 6),
-                  scoreButton("+", Colors.green, onRightPlus),
-                ],
-              ),
-            ],
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [Text(rightName, style: const TextStyle(fontSize: 18))],
           ),
         ),
       ],
@@ -93,9 +80,7 @@ class ScoreBoard extends StatelessWidget {
         style: ElevatedButton.styleFrom(
           backgroundColor: color,
           padding: EdgeInsets.zero,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(6),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
         onPressed: onPressed,
         child: Text(
