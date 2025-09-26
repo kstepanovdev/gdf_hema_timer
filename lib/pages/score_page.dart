@@ -19,12 +19,14 @@ class ScorePage extends StatefulWidget {
 class _ScorePageState extends State<ScorePage> {
   int leftScore = 0;
   int rightScore = 0;
+
   int leftWarn = 0;
   int rightWarn = 0;
+
   int doubleHits = 0;
 
-  String leftName = "Fighter 1";
-  String rightName = "Fighter 2";
+  String leftName = "F1";
+  String rightName = "F2";
 
   Duration timer = const Duration(minutes: 1, seconds: 30);
   Timer? countdown;
@@ -53,11 +55,6 @@ class _ScorePageState extends State<ScorePage> {
     setState(() => running = false);
   }
 
-  void resetTimer() {
-    stopTimer();
-    setState(() => timer = const Duration(minutes: 1, seconds: 30));
-  }
-
   void resetAll() {
     stopTimer();
     setState(() {
@@ -72,17 +69,20 @@ class _ScorePageState extends State<ScorePage> {
 
   void swapFighters() {
     setState(() {
-      final tempName = leftName;
-      final tempScore = leftScore;
-      final tempWarn = leftWarn;
-
-      leftName = rightName;
+      // swap scores
+      final tmpScore = leftScore;
       leftScore = rightScore;
-      leftWarn = rightWarn;
+      rightScore = tmpScore;
 
-      rightName = tempName;
-      rightScore = tempScore;
-      rightWarn = tempWarn;
+      // swap warnings
+      final tmpWarn = leftWarn;
+      leftWarn = rightWarn;
+      rightWarn = tmpWarn;
+
+      // swap names
+      final tmpName = leftName;
+      leftName = rightName;
+      rightName = tmpName;
     });
   }
 
@@ -104,6 +104,8 @@ class _ScorePageState extends State<ScorePage> {
                   color: Colors.white,
                   onLeftTap: () => {},
                   onRightTap: () => {},
+                  onLeftLongPress: () => {},
+                  onRightLongPress: () => {},
                 ),
                 TimerDisplay(color: Colors.white, time: formatTime(timer)),
 
@@ -123,7 +125,7 @@ class _ScorePageState extends State<ScorePage> {
     return Scaffold(
       appBar: AppBar(),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(12),
+        padding: const EdgeInsets.only(top: 0, left: 12, right: 12, bottom: 8),
         child: Column(
           children: [
             /// Timer display
@@ -148,7 +150,7 @@ class _ScorePageState extends State<ScorePage> {
                               ),
                             ),
                           ),
-                          const SizedBox(width: 12),
+                          const SizedBox(width: 4),
                           Expanded(
                             child: TextField(
                               controller: secondsController,
@@ -216,18 +218,18 @@ class _ScorePageState extends State<ScorePage> {
               rightName: rightName,
               leftScore: leftScore,
               rightScore: rightScore,
-              onLeftPlus: () => setState(() => leftScore++),
-              onLeftMinus: () => setState(() {
+              onLeftTap: () => setState(() => leftScore++),
+              onLeftLongPress: () => setState(() {
                 if (leftScore > 0) leftScore--;
               }),
-              onRightPlus: () => setState(() => rightScore++),
-              onRightMinus: () => setState(() {
+              onRightTap: () => setState(() => rightScore++),
+              onRightLongPress: () => setState(() {
                 if (rightScore > 0) rightScore--;
               }),
               swapFighters: swapFighters,
             ),
 
-            const SizedBox(height: 16),
+            const SizedBox(height: 4),
 
             /// Start button (biggest)
             SizedBox(
@@ -271,14 +273,6 @@ class _ScorePageState extends State<ScorePage> {
                     label: "Reset all",
                     color: Colors.red,
                     onPressed: resetAll,
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: BigButton(
-                    label: "Reset timer",
-                    color: Colors.orange,
-                    onPressed: resetTimer,
                   ),
                 ),
               ],

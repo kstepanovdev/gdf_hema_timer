@@ -29,39 +29,48 @@ class WarnAndDouble extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        /// First row: warnings (left + right)
         Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Expanded(
-              child: _counterBlock("Warn: $leftWarn", onLeftWarnMinus, onLeftWarnPlus),
+              child: _counterBlock(
+                "Warn: $leftWarn",
+                onLeftWarnMinus,
+                onLeftWarnPlus,
+              ),
             ),
-            const SizedBox(width: 8),
+            const SizedBox(width: 4),
             Expanded(
-              child: _counterBlock("Warn: $rightWarn", onRightWarnMinus, onRightWarnPlus),
+              child: _counterBlock(
+                "Double: $doubleHits",
+                onDoubleMinus,
+                onDoublePlus,
+              ),
             ),
-          ],
-        ),
-
-        const SizedBox(height: 12),
-
-        /// Second row: double hits (centered)
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            _counterBlock("Double: $doubleHits", onDoubleMinus, onDoublePlus),
+            const SizedBox(width: 4),
+            Expanded(
+              child: _counterBlock(
+                "Warn: $rightWarn",
+                onRightWarnMinus,
+                onRightWarnPlus,
+              ),
+            ),
           ],
         ),
       ],
     );
   }
 
-  Widget _counterBlock(String label, VoidCallback onMinus, VoidCallback onPlus) {
+  Widget _counterBlock(
+    String label,
+    VoidCallback onMinus,
+    VoidCallback onPlus,
+  ) {
     return Column(
       children: [
-        Text(label, style: const TextStyle(fontSize: 16)),
+        Text(label, style: const TextStyle(fontSize: 18)),
         const SizedBox(height: 4),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _smallButton("-", Colors.red, onMinus),
             const SizedBox(width: 6),
@@ -74,7 +83,7 @@ class WarnAndDouble extends StatelessWidget {
 
   Widget _smallButton(String label, Color color, VoidCallback onPressed) {
     return SizedBox(
-      width: 60,
+      width: 45,
       height: 45,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
@@ -83,7 +92,10 @@ class WarnAndDouble extends StatelessWidget {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(6)),
         ),
         onPressed: onPressed,
-        child: Text(label, style: const TextStyle(fontSize: 18)),
+        child: Text(
+          label,
+          style: const TextStyle(fontSize: 18, color: Colors.white),
+        ),
       ),
     );
   }
