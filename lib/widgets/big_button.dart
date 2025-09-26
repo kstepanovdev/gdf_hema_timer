@@ -15,7 +15,6 @@ class BigButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 70,
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: color,

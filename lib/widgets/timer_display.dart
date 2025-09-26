@@ -19,7 +19,7 @@ class TimerDisplay extends StatelessWidget {
       child: Text(
         time,
         style: TextStyle(
-          fontSize: 80,
+          fontSize: 50,
           fontWeight: FontWeight.bold,
           fontFamily: 'RobotoMono',
           color: color,

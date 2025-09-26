@@ -6,6 +6,7 @@ class ScoreBoard extends StatelessWidget {
   final String rightName;
   final int leftScore;
   final int rightScore;
+  final Color color;
 
   final VoidCallback onLeftTap;
   final VoidCallback onLeftLongPress;
@@ -19,6 +20,8 @@ class ScoreBoard extends StatelessWidget {
     required this.rightName,
     required this.leftScore,
     required this.rightScore,
+    this.color = Colors.black,
+
     required this.onLeftTap,
     required this.onLeftLongPress,
     required this.onRightTap,
@@ -31,18 +34,14 @@ class ScoreBoard extends StatelessWidget {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(leftName, style: const TextStyle(fontSize: 18)),
+            Text(leftName, style: TextStyle(fontSize: 18, color: color)),
             IconButton(
-              icon: const Icon(
-                Icons.swap_horiz,
-                size: 28,
-                color: Colors.blueGrey,
-              ),
+              icon: Icon(Icons.swap_horiz, size: 28, color: color),
               onPressed: swapFighters,
             ),
-            Text(rightName, style: const TextStyle(fontSize: 18)),
+            Text(rightName, style: TextStyle(fontSize: 18, color: color)),
           ],
         ),
         const SizedBox(height: 6),
@@ -53,7 +52,7 @@ class ScoreBoard extends StatelessWidget {
           onLeftLongPress: onLeftLongPress,
           onRightTap: onRightTap,
           onRightLongPress: onRightLongPress,
-          color: Colors.black,
+          color: color,
         ),
       ],
     );

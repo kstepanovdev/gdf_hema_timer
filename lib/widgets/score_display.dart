@@ -75,7 +75,7 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
-      fontSize: 100,
+      fontSize: 150,
       fontWeight: FontWeight.bold,
       color: widget.color,
     );

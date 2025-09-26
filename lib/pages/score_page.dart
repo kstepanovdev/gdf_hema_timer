@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hema_scoring_machine/widgets/score_display.dart';
+import 'package:hema_scoring_machine/widgets/active_timer_board.dart';
 
 import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
@@ -98,15 +98,7 @@ class _ScorePageState extends State<ScorePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ScoreDisplay(
-                  leftScore: leftScore,
-                  rightScore: rightScore,
-                  color: Colors.white,
-                  onLeftTap: () => {},
-                  onRightTap: () => {},
-                  onLeftLongPress: () => {},
-                  onRightLongPress: () => {},
-                ),
+                ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
                 TimerDisplay(color: Colors.white, time: formatTime(timer)),
 
                 const SizedBox(height: 20),
