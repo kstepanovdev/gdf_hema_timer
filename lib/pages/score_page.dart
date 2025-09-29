@@ -10,6 +10,7 @@ import '../widgets/warn_and_double.dart';
 import '../utils/time_utils.dart';
 import '../modules/fight_log/fight_log.dart';
 import '../modules/fight_log/fight_log_view.dart';
+import '../widgets/log_handle_panel.dart';
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -135,111 +136,112 @@ class _ScorePageState extends State<ScorePage> {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 8),
-        child: GestureDetector(
-          onVerticalDragEnd: (details) {
-            if (details.primaryVelocity != null &&
-                details.primaryVelocity! > 600) {
-              FightLogView.show(context, fightLog);
-            }
-          },
-          child: Column(
-            children: [
-              /// Timer display
-              TimerDisplay(
-                time: formatTime(timer),
-                onDoubleTap: () async {
-                  final newTime = await showTimeSelectDialog(context);
+        child: Column(
+          children: [
+            /// Timer display
+            TimerDisplay(
+              time: formatTime(timer),
+              onDoubleTap: () async {
+                final newTime = await showTimeSelectDialog(context);
 
-                  if (newTime != null) {
-                    setState(() {
-                      timer = newTime;
-                    });
-                  }
-                },
+                if (newTime != null) {
+                  setState(() {
+                    timer = newTime;
+                  });
+                }
+              },
+            ),
+
+            /// Time control
+            TimeControl(
+              onMinus1: () => setState(() {
+                if (timer > const Duration(seconds: 1)) {
+                  timer -= const Duration(seconds: 1);
+                } else {
+                  timer = Duration.zero;
+                }
+              }),
+              onPlus3: () =>
+                  setState(() => timer += const Duration(seconds: 3)),
+              onPlus5: () =>
+                  setState(() => timer += const Duration(seconds: 5)),
+            ),
+
+            /// Scoreboard with swap fighters icon
+            ScoreBoard(
+              leftName: leftName,
+              rightName: rightName,
+              leftScore: leftScore,
+              rightScore: rightScore,
+              onLeftTap: () => setState(() => leftScore++),
+              onLeftLongPress: () => setState(() {
+                if (leftScore > 0) leftScore--;
+              }),
+              onRightTap: () => setState(() => rightScore++),
+              onRightLongPress: () => setState(() {
+                if (rightScore > 0) rightScore--;
+              }),
+              swapFighters: swapFighters,
+            ),
+
+            SizedBox(
+              width: double.infinity,
+              height: 100,
+              child: BigButton(
+                label: "START",
+                color: Colors.deepPurple,
+                fontSize: 40,
+                onPressed: startTimer,
               ),
+            ),
+            GestureDetector(
+              onVerticalDragUpdate: (details) {
+                // user dragged up
+                if (details.primaryDelta != null &&
+                    details.primaryDelta! < -10) {
+                  FightLogView.show(context, fightLog);
+                }
+              },
+              child: LogHandlePanel(fightLog: fightLog),
+            ),
 
-              /// Time control
-              TimeControl(
-                onMinus1: () => setState(() {
-                  if (timer > const Duration(seconds: 1)) {
-                    timer -= const Duration(seconds: 1);
-                  } else {
-                    timer = Duration.zero;
-                  }
-                }),
-                onPlus3: () =>
-                    setState(() => timer += const Duration(seconds: 3)),
-                onPlus5: () =>
-                    setState(() => timer += const Duration(seconds: 5)),
-              ),
+            const SizedBox(height: 16),
 
-              /// Scoreboard with swap fighters icon
-              ScoreBoard(
-                leftName: leftName,
-                rightName: rightName,
-                leftScore: leftScore,
-                rightScore: rightScore,
-                onLeftTap: () => setState(() => leftScore++),
-                onLeftLongPress: () => setState(() {
-                  if (leftScore > 0) leftScore--;
-                }),
-                onRightTap: () => setState(() => rightScore++),
-                onRightLongPress: () => setState(() {
-                  if (rightScore > 0) rightScore--;
-                }),
-                swapFighters: swapFighters,
-              ),
+            /// Warnings + Doublehits
+            WarnAndDouble(
+              leftWarn: leftWarn,
+              rightWarn: rightWarn,
+              doubleHits: doubleHits,
+              onLeftWarnPlus: () => setState(() => leftWarn++),
+              onLeftWarnMinus: () => setState(() {
+                if (leftWarn > 0) leftWarn--;
+              }),
+              onRightWarnPlus: () => setState(() => rightWarn++),
+              onRightWarnMinus: () => setState(() {
+                if (rightWarn > 0) rightWarn--;
+              }),
+              onDoublePlus: () => setState(() => doubleHits++),
+              onDoubleMinus: () => setState(() {
+                if (doubleHits > 0) doubleHits--;
+              }),
+            ),
 
-              /// Start button (biggest)
-              SizedBox(
-                width: double.infinity,
-                height: 100,
-                child: BigButton(
-                  label: "START",
-                  color: Colors.deepPurple,
-                  fontSize: 40,
-                  onPressed: startTimer,
-                ),
-              ),
+            const SizedBox(height: 16),
 
-              const SizedBox(height: 16),
-
-              /// Warnings + Doublehits
-              WarnAndDouble(
-                leftWarn: leftWarn,
-                rightWarn: rightWarn,
-                doubleHits: doubleHits,
-                onLeftWarnPlus: () => setState(() => leftWarn++),
-                onLeftWarnMinus: () => setState(() {
-                  if (leftWarn > 0) leftWarn--;
-                }),
-                onRightWarnPlus: () => setState(() => rightWarn++),
-                onRightWarnMinus: () => setState(() {
-                  if (rightWarn > 0) rightWarn--;
-                }),
-                onDoublePlus: () => setState(() => doubleHits++),
-                onDoubleMinus: () => setState(() {
-                  if (doubleHits > 0) doubleHits--;
-                }),
-              ),
-
-              const SizedBox(height: 16),
-
-              /// Reset all + Reset timer
-              Row(
-                children: [
-                  Expanded(
-                    child: BigButton(
-                      label: "Reset all",
-                      color: Colors.red,
-                      fontSize: 30,
-                      onPressed: resetAll,
-                    ),
+            /// Reset all + Reset timer
+            Row(
+              children: [
+                Expanded(
+                  child: BigButton(
+                    label: "Reset all",
+                    color: Colors.red,
+                    fontSize: 30,
+                    onPressed: resetAll,
                   ),
-                ],
-              ),
-            ],
-          ),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
