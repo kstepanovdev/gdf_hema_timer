@@ -1,7 +1,80 @@
+import 'package:flutter/material.dart';
+
 String formatTime(Duration d) {
   final minutes = d.inMinutes.remainder(60).toString().padLeft(2, '0');
   final seconds = d.inSeconds.remainder(60).toString().padLeft(2, '0');
-  final millis =
-      (d.inMilliseconds.remainder(1000) ~/ 10).toString().padLeft(2, '0');
+  final millis = (d.inMilliseconds.remainder(1000) ~/ 10).toString().padLeft(
+    2,
+    '0',
+  );
   return "$minutes:$seconds.$millis";
+}
+
+Future<Duration?> showTimeSelectDialog(BuildContext context) async {
+  int minutes = 1;
+  int seconds = 0;
+
+  return showDialog<Duration>(
+    context: context,
+    builder: (ctx) {
+      return StatefulBuilder(
+        builder: (context, setState) {
+          return AlertDialog(
+            title: const Text('Select Time'),
+            content: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                // Minutes dropdown
+                DropdownButton<int>(
+                  value: minutes,
+                  items: List.generate(
+                    31,
+                    (i) => DropdownMenuItem(value: i, child: Text('$i m')),
+                  ),
+                  onChanged: (val) {
+                    if (val != null) {
+                      setState(() {
+                        minutes = val;
+                      });
+                    }
+                  },
+                ),
+
+                // Seconds dropdown
+                DropdownButton<int>(
+                  value: seconds,
+                  items: List.generate(
+                    60,
+                    (i) => DropdownMenuItem(value: i, child: Text('$i s')),
+                  ),
+                  onChanged: (val) {
+                    if (val != null) {
+                      setState(() {
+                        seconds = val;
+                      });
+                    }
+                  },
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx),
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  Navigator.pop(
+                    ctx,
+                    Duration(minutes: minutes, seconds: seconds),
+                  );
+                },
+                child: const Text('OK'),
+              ),
+            ],
+          );
+        },
+      );
+    },
+  );
 }

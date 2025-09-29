@@ -24,18 +24,18 @@ class ActiveTimerBoard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 "$leftScore",
-                style: TextStyle(fontSize: 100, color: color),
+                style: TextStyle(fontSize: 70, color: color),
               ),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(":", style: TextStyle(fontSize: 100, color: color)),
+              child: Text(":", style: TextStyle(fontSize: 70, color: color)),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
                 "$rightScore",
-                style: TextStyle(fontSize: 100, color: color),
+                style: TextStyle(fontSize: 70, color: color),
               ),
             ),
           ],

@@ -8,6 +8,8 @@ import '../widgets/timer_display.dart';
 import '../widgets/time_control.dart';
 import '../widgets/warn_and_double.dart';
 import '../utils/time_utils.dart';
+import '../modules/fight_log/fight_log.dart';
+import '../modules/fight_log/fight_log_view.dart';
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -17,12 +19,12 @@ class ScorePage extends StatefulWidget {
 }
 
 class _ScorePageState extends State<ScorePage> {
+  final fightLog = FightLog();
+
   int leftScore = 0;
   int rightScore = 0;
-
   int leftWarn = 0;
   int rightWarn = 0;
-
   int doubleHits = 0;
 
   String leftName = "F1";
@@ -32,7 +34,23 @@ class _ScorePageState extends State<ScorePage> {
   Timer? countdown;
   bool running = false;
 
+  void _onStartPressed() {
+    setState(() {
+      fightLog.startFight(); // or resume fight if needed
+      fightLog.logDiff(
+        leftScore: leftScore,
+        rightScore: rightScore,
+        leftWarn: leftWarn,
+        rightWarn: rightWarn,
+        doubleHits: doubleHits,
+        leftName: leftName,
+        rightName: rightName,
+      );
+    });
+  }
+
   void startTimer() {
+    _onStartPressed();
     countdown?.cancel();
     countdown = Timer.periodic(const Duration(milliseconds: 100), (t) {
       setState(() {
@@ -57,6 +75,7 @@ class _ScorePageState extends State<ScorePage> {
 
   void resetAll() {
     stopTimer();
+    fightLog.reset();
     setState(() {
       leftScore = 0;
       rightScore = 0;
@@ -90,7 +109,6 @@ class _ScorePageState extends State<ScorePage> {
   Widget build(BuildContext context) {
     if (running) {
       return GestureDetector(
-        behavior: HitTestBehavior.opaque,
         onTap: stopTimer,
         child: Scaffold(
           backgroundColor: Colors.black,
@@ -98,13 +116,13 @@ class _ScorePageState extends State<ScorePage> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
                 TimerDisplay(color: Colors.white, time: formatTime(timer)),
+                ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
 
-                const SizedBox(height: 20),
                 BigButton(
                   label: "Stop",
                   color: Colors.red,
+                  fontSize: 20,
                   onPressed: stopTimer,
                 ),
               ],
@@ -115,161 +133,113 @@ class _ScorePageState extends State<ScorePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.only(top: 0, left: 12, right: 12, bottom: 8),
-        child: Column(
-          children: [
-            /// Timer display
-            TimerDisplay(
-              time: formatTime(timer),
-              onDoubleTap: () async {
-                final newTime = await showDialog<Duration>(
-                  context: context,
-                  builder: (context) {
-                    final minutesController = TextEditingController();
-                    final secondsController = TextEditingController();
-                    return AlertDialog(
-                      title: const Text("Set Custom Time"),
-                      content: Row(
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              controller: minutesController,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: "Minutes",
-                              ),
-                            ),
-                          ),
-                          const SizedBox(width: 4),
-                          Expanded(
-                            child: TextField(
-                              controller: secondsController,
-                              keyboardType: TextInputType.number,
-                              decoration: const InputDecoration(
-                                labelText: "Seconds",
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.pop(context),
-                          child: const Text("Cancel"),
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            final min =
-                                int.tryParse(minutesController.text) ?? 0;
-                            final sec =
-                                int.tryParse(secondsController.text) ?? 0;
-                            Navigator.pop(
-                              context,
-                              Duration(minutes: min, seconds: sec),
-                            );
-                          },
-                          child: const Text("Set"),
-                        ),
-                      ],
-                    );
-                  },
-                );
+      body: Padding(
+        padding: const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 8),
+        child: GestureDetector(
+          onVerticalDragEnd: (details) {
+            if (details.primaryVelocity != null &&
+                details.primaryVelocity! > 600) {
+              FightLogView.show(context, fightLog);
+            }
+          },
+          child: Column(
+            children: [
+              /// Timer display
+              TimerDisplay(
+                time: formatTime(timer),
+                onDoubleTap: () async {
+                  final newTime = await showTimeSelectDialog(context);
 
-                if (newTime != null) {
-                  setState(() {
-                    timer = newTime;
-                  });
-                }
-              },
-            ),
-
-            const SizedBox(height: 12),
-
-            /// Time control
-            TimeControl(
-              onMinus1: () => setState(() {
-                if (timer > const Duration(seconds: 1)) {
-                  timer -= const Duration(seconds: 1);
-                } else {
-                  timer = Duration.zero;
-                }
-              }),
-              onPlus3: () =>
-                  setState(() => timer += const Duration(seconds: 3)),
-              onPlus5: () =>
-                  setState(() => timer += const Duration(seconds: 5)),
-            ),
-
-            const SizedBox(height: 12),
-
-            /// Scoreboard with swap fighters icon
-            ScoreBoard(
-              leftName: leftName,
-              rightName: rightName,
-              leftScore: leftScore,
-              rightScore: rightScore,
-              onLeftTap: () => setState(() => leftScore++),
-              onLeftLongPress: () => setState(() {
-                if (leftScore > 0) leftScore--;
-              }),
-              onRightTap: () => setState(() => rightScore++),
-              onRightLongPress: () => setState(() {
-                if (rightScore > 0) rightScore--;
-              }),
-              swapFighters: swapFighters,
-            ),
-
-            const SizedBox(height: 4),
-
-            /// Start button (biggest)
-            SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: BigButton(
-                label: "START",
-                color: Colors.deepPurple,
-                onPressed: startTimer,
+                  if (newTime != null) {
+                    setState(() {
+                      timer = newTime;
+                    });
+                  }
+                },
               ),
-            ),
 
-            const SizedBox(height: 16),
+              /// Time control
+              TimeControl(
+                onMinus1: () => setState(() {
+                  if (timer > const Duration(seconds: 1)) {
+                    timer -= const Duration(seconds: 1);
+                  } else {
+                    timer = Duration.zero;
+                  }
+                }),
+                onPlus3: () =>
+                    setState(() => timer += const Duration(seconds: 3)),
+                onPlus5: () =>
+                    setState(() => timer += const Duration(seconds: 5)),
+              ),
 
-            /// Warnings + Doublehits
-            WarnAndDouble(
-              leftWarn: leftWarn,
-              rightWarn: rightWarn,
-              doubleHits: doubleHits,
-              onLeftWarnPlus: () => setState(() => leftWarn++),
-              onLeftWarnMinus: () => setState(() {
-                if (leftWarn > 0) leftWarn--;
-              }),
-              onRightWarnPlus: () => setState(() => rightWarn++),
-              onRightWarnMinus: () => setState(() {
-                if (rightWarn > 0) rightWarn--;
-              }),
-              onDoublePlus: () => setState(() => doubleHits++),
-              onDoubleMinus: () => setState(() {
-                if (doubleHits > 0) doubleHits--;
-              }),
-            ),
+              /// Scoreboard with swap fighters icon
+              ScoreBoard(
+                leftName: leftName,
+                rightName: rightName,
+                leftScore: leftScore,
+                rightScore: rightScore,
+                onLeftTap: () => setState(() => leftScore++),
+                onLeftLongPress: () => setState(() {
+                  if (leftScore > 0) leftScore--;
+                }),
+                onRightTap: () => setState(() => rightScore++),
+                onRightLongPress: () => setState(() {
+                  if (rightScore > 0) rightScore--;
+                }),
+                swapFighters: swapFighters,
+              ),
 
-            const SizedBox(height: 16),
-
-            /// Reset all + Reset timer
-            Row(
-              children: [
-                Expanded(
-                  child: BigButton(
-                    label: "Reset all",
-                    color: Colors.red,
-                    onPressed: resetAll,
-                  ),
+              /// Start button (biggest)
+              SizedBox(
+                width: double.infinity,
+                height: 100,
+                child: BigButton(
+                  label: "START",
+                  color: Colors.deepPurple,
+                  fontSize: 40,
+                  onPressed: startTimer,
                 ),
-              ],
-            ),
-          ],
+              ),
+
+              const SizedBox(height: 16),
+
+              /// Warnings + Doublehits
+              WarnAndDouble(
+                leftWarn: leftWarn,
+                rightWarn: rightWarn,
+                doubleHits: doubleHits,
+                onLeftWarnPlus: () => setState(() => leftWarn++),
+                onLeftWarnMinus: () => setState(() {
+                  if (leftWarn > 0) leftWarn--;
+                }),
+                onRightWarnPlus: () => setState(() => rightWarn++),
+                onRightWarnMinus: () => setState(() {
+                  if (rightWarn > 0) rightWarn--;
+                }),
+                onDoublePlus: () => setState(() => doubleHits++),
+                onDoubleMinus: () => setState(() {
+                  if (doubleHits > 0) doubleHits--;
+                }),
+              ),
+
+              const SizedBox(height: 16),
+
+              /// Reset all + Reset timer
+              Row(
+                children: [
+                  Expanded(
+                    child: BigButton(
+                      label: "Reset all",
+                      color: Colors.red,
+                      fontSize: 30,
+                      onPressed: resetAll,
+                    ),
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

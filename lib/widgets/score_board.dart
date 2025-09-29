@@ -44,7 +44,6 @@ class ScoreBoard extends StatelessWidget {
             Text(rightName, style: TextStyle(fontSize: 18, color: color)),
           ],
         ),
-        const SizedBox(height: 6),
         ScoreDisplay(
           leftScore: leftScore,
           rightScore: rightScore,
