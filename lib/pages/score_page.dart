@@ -6,7 +6,7 @@ import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
 import '../widgets/timer_display.dart';
 import '../widgets/time_control.dart';
-import '../widgets/warn_and_double.dart';
+import '../widgets/penalties_control.dart';
 import '../utils/time_utils.dart';
 import '../modules/fight_log/fight_log.dart';
 import '../modules/fight_log/fight_log_view.dart';
@@ -24,8 +24,10 @@ class _ScorePageState extends State<ScorePage> {
 
   int leftScore = 0;
   int rightScore = 0;
-  int leftWarn = 0;
-  int rightWarn = 0;
+  int leftWarning = 0;
+  int rightWarning = 0;
+  int leftCaution = 0;
+  int rightCaution = 0;
   int doubleHits = 0;
 
   String leftName = "F1";
@@ -35,14 +37,27 @@ class _ScorePageState extends State<ScorePage> {
   Timer? countdown;
   bool running = false;
 
+  void _inc(int Function() getter, void Function(int) setter) {
+    setState(() => setter(getter() + 1));
+  }
+
+  void _dec(int Function() getter, void Function(int) setter) {
+    setState(() {
+      final value = getter();
+      if (value > 0) setter(value - 1);
+    });
+  }
+
   void _onStartPressed() {
     setState(() {
       fightLog.startFight(); // or resume fight if needed
       fightLog.logDiff(
         leftScore: leftScore,
         rightScore: rightScore,
-        leftWarn: leftWarn,
-        rightWarn: rightWarn,
+        leftWarning: leftWarning,
+        rightWarning: rightWarning,
+        leftCaution: leftCaution,
+        rightCaution: rightCaution,
         doubleHits: doubleHits,
         leftName: leftName,
         rightName: rightName,
@@ -80,8 +95,10 @@ class _ScorePageState extends State<ScorePage> {
     setState(() {
       leftScore = 0;
       rightScore = 0;
-      leftWarn = 0;
-      rightWarn = 0;
+      leftWarning = 0;
+      rightWarning = 0;
+      leftCaution = 0;
+      rightCaution = 0;
       doubleHits = 0;
       timer = const Duration(minutes: 1, seconds: 30);
     });
@@ -95,9 +112,14 @@ class _ScorePageState extends State<ScorePage> {
       rightScore = tmpScore;
 
       // swap warnings
-      final tmpWarn = leftWarn;
-      leftWarn = rightWarn;
-      rightWarn = tmpWarn;
+      final tmpWarning = leftWarning;
+      leftWarning = rightWarning;
+      rightWarning = tmpWarning;
+
+      // swap cautions
+      final tmpCaution = leftCaution;
+      leftCaution = rightCaution;
+      rightCaution = tmpCaution;
 
       // swap names
       final tmpName = leftName;
@@ -232,22 +254,31 @@ class _ScorePageState extends State<ScorePage> {
             const SizedBox(height: 16),
 
             /// Warnings + Doublehits
-            WarnAndDouble(
-              leftWarn: leftWarn,
-              rightWarn: rightWarn,
+            PenaltiesControl(
+              leftWarning: leftWarning,
+              rightWarning: rightWarning,
+              leftCaution: leftCaution,
+              rightCaution: rightCaution,
               doubleHits: doubleHits,
-              onLeftWarnPlus: () => setState(() => leftWarn++),
-              onLeftWarnMinus: () => setState(() {
-                if (leftWarn > 0) leftWarn--;
-              }),
-              onRightWarnPlus: () => setState(() => rightWarn++),
-              onRightWarnMinus: () => setState(() {
-                if (rightWarn > 0) rightWarn--;
-              }),
-              onDoublePlus: () => setState(() => doubleHits++),
-              onDoubleMinus: () => setState(() {
-                if (doubleHits > 0) doubleHits--;
-              }),
+              onLeftWarningPlus: () =>
+                  _inc(() => leftWarning, (v) => leftWarning = v),
+              onLeftWarningMinus: () =>
+                  _dec(() => leftWarning, (v) => leftWarning = v),
+              onRightWarningPlus: () =>
+                  _inc(() => rightWarning, (v) => rightWarning = v),
+              onRightWarningMinus: () =>
+                  _dec(() => rightWarning, (v) => rightWarning = v),
+              onDoublePlus: () => _inc(() => doubleHits, (v) => doubleHits = v),
+              onDoubleMinus: () =>
+                  _dec(() => doubleHits, (v) => doubleHits = v),
+              onLeftCautionPlus: () =>
+                  _inc(() => leftCaution, (v) => leftCaution = v),
+              onLeftCautionMinus: () =>
+                  _dec(() => leftCaution, (v) => leftCaution = v),
+              onRightCautionPlus: () =>
+                  _inc(() => rightCaution, (v) => rightCaution = v),
+              onRightCautionMinus: () =>
+                  _dec(() => rightCaution, (v) => rightCaution = v),
             ),
             const Spacer(),
 

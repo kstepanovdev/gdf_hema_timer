@@ -1,26 +1,39 @@
 import 'package:flutter/material.dart';
 
-class WarnAndDouble extends StatelessWidget {
-  final int leftWarn;
-  final int rightWarn;
+class PenaltiesControl extends StatelessWidget {
+  final int leftWarning;
+  final int rightWarning;
+  final int leftCaution;
+  final int rightCaution;
   final int doubleHits;
 
-  final VoidCallback onLeftWarnPlus;
-  final VoidCallback onLeftWarnMinus;
-  final VoidCallback onRightWarnPlus;
-  final VoidCallback onRightWarnMinus;
+  final VoidCallback onLeftWarningPlus;
+  final VoidCallback onLeftWarningMinus;
+  final VoidCallback onRightWarningPlus;
+  final VoidCallback onRightWarningMinus;
+  final VoidCallback onLeftCautionPlus;
+  final VoidCallback onLeftCautionMinus;
+  final VoidCallback onRightCautionPlus;
+  final VoidCallback onRightCautionMinus;
+
   final VoidCallback onDoublePlus;
   final VoidCallback onDoubleMinus;
 
-  const WarnAndDouble({
+  const PenaltiesControl({
     super.key,
-    required this.leftWarn,
-    required this.rightWarn,
+    required this.leftWarning,
+    required this.rightWarning,
+    required this.leftCaution,
+    required this.rightCaution,
     required this.doubleHits,
-    required this.onLeftWarnPlus,
-    required this.onLeftWarnMinus,
-    required this.onRightWarnPlus,
-    required this.onRightWarnMinus,
+    required this.onLeftWarningPlus,
+    required this.onLeftWarningMinus,
+    required this.onRightWarningPlus,
+    required this.onRightWarningMinus,
+    required this.onLeftCautionMinus,
+    required this.onLeftCautionPlus,
+    required this.onRightCautionMinus,
+    required this.onRightCautionPlus,
     required this.onDoublePlus,
     required this.onDoubleMinus,
   });
@@ -34,9 +47,9 @@ class WarnAndDouble extends StatelessWidget {
           children: [
             Expanded(
               child: _counterBlock(
-                "Warn: $leftWarn",
-                onLeftWarnMinus,
-                onLeftWarnPlus,
+                "Warning: $leftWarning",
+                onLeftWarningMinus,
+                onLeftWarningPlus,
               ),
             ),
             const SizedBox(width: 4),
@@ -50,9 +63,28 @@ class WarnAndDouble extends StatelessWidget {
             const SizedBox(width: 4),
             Expanded(
               child: _counterBlock(
-                "Warn: $rightWarn",
-                onRightWarnMinus,
-                onRightWarnPlus,
+                "Warning: $rightWarning",
+                onRightWarningMinus,
+                onRightWarningPlus,
+              ),
+            ),
+          ],
+        ),
+        Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Expanded(
+              child: _counterBlock(
+                "Caution: $leftCaution",
+                onLeftCautionMinus,
+                onLeftCautionPlus,
+              ),
+            ),
+            Expanded(
+              child: _counterBlock(
+                "Caution: $rightCaution",
+                onRightCautionMinus,
+                onRightCautionPlus,
               ),
             ),
           ],

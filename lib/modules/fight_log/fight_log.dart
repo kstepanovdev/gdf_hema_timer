@@ -5,8 +5,10 @@ class FightLog {
   // Previous snapshot
   int _prevLeftScore = 0;
   int _prevRightScore = 0;
-  int _prevLeftWarn = 0;
-  int _prevRightWarn = 0;
+  int _prevLeftWarning = 0;
+  int _prevRightWarning = 0;
+  int _prevLeftCaution = 0;
+  int _prevRightCaution = 0;
   int _prevDoubleHits = 0;
 
   List<String> get events => List.unmodifiable(_events);
@@ -36,8 +38,10 @@ class FightLog {
   void logDiff({
     required int leftScore,
     required int rightScore,
-    required int leftWarn,
-    required int rightWarn,
+    required int leftWarning,
+    required int rightWarning,
+    required int leftCaution,
+    required int rightCaution,
     required int doubleHits,
     required String leftName,
     required String rightName,
@@ -48,18 +52,32 @@ class FightLog {
     }
 
     // Left warns diff
-    if (leftWarn > _prevLeftWarn) {
-      final diff = leftWarn - _prevLeftWarn;
+    if (leftWarning > _prevLeftWarning) {
+      final diff = leftWarning - _prevLeftWarning;
       for (int i = 0; i < diff; i++) {
         addEvent("warning to $leftName");
       }
     }
 
     // Right warns diff
-    if (rightWarn > _prevRightWarn) {
-      final diff = rightWarn - _prevRightWarn;
+    if (rightWarning > _prevRightWarning) {
+      final diff = rightWarning - _prevRightWarning;
       for (int i = 0; i < diff; i++) {
         addEvent("warning to $rightName");
+      }
+    }
+
+    if (leftCaution > _prevLeftCaution) {
+      final diff = leftCaution - _prevLeftCaution;
+      for (int i = 0; i < diff; i++) {
+        addEvent("caution to $leftName");
+      }
+    }
+
+    if (rightCaution > _prevRightCaution) {
+      final diff = rightCaution - _prevRightCaution;
+      for (int i = 0; i < diff; i++) {
+        addEvent("caution to $rightName");
       }
     }
 
@@ -74,14 +92,16 @@ class FightLog {
     // Update snapshot
     _prevLeftScore = leftScore;
     _prevRightScore = rightScore;
-    _prevLeftWarn = leftWarn;
-    _prevRightWarn = rightWarn;
+    _prevLeftWarning = leftWarning;
+    _prevRightWarning = rightWarning;
+    _prevLeftCaution = leftCaution;
+    _prevRightCaution = rightCaution;
     _prevDoubleHits = doubleHits;
   }
 
   void reset() {
     _prevLeftScore = _prevRightScore = 0;
-    _prevLeftWarn = _prevRightWarn = 0;
+    _prevLeftWarning = _prevRightWarning = 0;
     _prevDoubleHits = 0;
     _events.clear();
   }
