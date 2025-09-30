@@ -113,18 +113,41 @@ class _ScorePageState extends State<ScorePage> {
         onTap: stopTimer,
         child: Scaffold(
           backgroundColor: Colors.black,
-          body: Center(
+          body: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                TimerDisplay(color: Colors.white, time: formatTime(timer)),
-                ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
+                // Center section
+                Expanded(
+                  child: Center(
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        TimerDisplay(
+                          color: Colors.white,
+                          time: formatTime(timer),
+                          fontSize: 80,
+                        ),
+                        ActiveTimerBoard(
+                          leftScore: leftScore,
+                          rightScore: rightScore,
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
 
-                BigButton(
-                  label: "Stop",
-                  color: Colors.red,
-                  fontSize: 20,
-                  onPressed: stopTimer,
+                // Bottom button section
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SizedBox(
+                    child: BigButton(
+                      label: "Stop",
+                      color: Colors.red,
+                      fontSize: 28,
+                      onPressed: stopTimer,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -141,6 +164,7 @@ class _ScorePageState extends State<ScorePage> {
             /// Timer display
             TimerDisplay(
               time: formatTime(timer),
+              fontSize: 70,
               onDoubleTap: () async {
                 final newTime = await showTimeSelectDialog(context);
 
@@ -225,8 +249,7 @@ class _ScorePageState extends State<ScorePage> {
                 if (doubleHits > 0) doubleHits--;
               }),
             ),
-
-            const SizedBox(height: 16),
+            const Spacer(),
 
             /// Reset all + Reset timer
             Row(
@@ -235,7 +258,7 @@ class _ScorePageState extends State<ScorePage> {
                   child: BigButton(
                     label: "Reset all",
                     color: Colors.red,
-                    fontSize: 30,
+                    fontSize: 35,
                     onPressed: resetAll,
                   ),
                 ),
