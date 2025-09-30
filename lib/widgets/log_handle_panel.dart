@@ -20,32 +20,22 @@ class LogHandlePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Positioned(
-      bottom: 8,
-      left: 0,
-      right: 0,
-      child: Center(
-        child: Container(
-          // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-          decoration: BoxDecoration(
-            color: Colors.black.withAlpha(30),
-            borderRadius: BorderRadius.circular(10),
+    return Container(
+      width: double.infinity,
+      // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+      decoration: BoxDecoration(
+        color: Colors.black.withAlpha(30),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: const [
+          Icon(Icons.keyboard_arrow_up, size: 18, color: Colors.grey),
+          Text(
+            "Drag up for logs",
+            style: TextStyle(color: Colors.grey, fontSize: 14),
           ),
-          child: Row(
-            mainAxisSize: MainAxisSize.max,
-            children: const [
-              Icon(Icons.keyboard_arrow_up, size: 18, color: Colors.grey),
-              Text(
-                "Drag up for logs",
-                style: TextStyle(
-                  color: Colors.grey,
-                  fontSize: 14,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ],
-          ),
-        ),
+        ],
       ),
     );
   }
