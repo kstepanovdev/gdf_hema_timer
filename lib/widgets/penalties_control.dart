@@ -15,7 +15,6 @@ class PenaltiesControl extends StatelessWidget {
   final VoidCallback onLeftCautionMinus;
   final VoidCallback onRightCautionPlus;
   final VoidCallback onRightCautionMinus;
-
   final VoidCallback onDoublePlus;
   final VoidCallback onDoubleMinus;
 
@@ -30,66 +29,67 @@ class PenaltiesControl extends StatelessWidget {
     required this.onLeftWarningMinus,
     required this.onRightWarningPlus,
     required this.onRightWarningMinus,
-    required this.onLeftCautionMinus,
     required this.onLeftCautionPlus,
-    required this.onRightCautionMinus,
+    required this.onLeftCautionMinus,
     required this.onRightCautionPlus,
+    required this.onRightCautionMinus,
     required this.onDoublePlus,
     required this.onDoubleMinus,
   });
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: _counterBlock(
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _counterBlock(
                 "Warning: $leftWarning",
                 onLeftWarningMinus,
                 onLeftWarningPlus,
               ),
-            ),
-            const SizedBox(width: 4),
-            Expanded(
-              child: _counterBlock(
-                "Double: $doubleHits",
-                onDoubleMinus,
-                onDoublePlus,
-              ),
-            ),
-            const SizedBox(width: 4),
-            Expanded(
-              child: _counterBlock(
-                "Warning: $rightWarning",
-                onRightWarningMinus,
-                onRightWarningPlus,
-              ),
-            ),
-          ],
-        ),
-        Row(
-          // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Expanded(
-              child: _counterBlock(
+              const SizedBox(height: 12),
+              _counterBlock(
                 "Caution: $leftCaution",
                 onLeftCautionMinus,
                 onLeftCautionPlus,
               ),
-            ),
-            Expanded(
-              child: _counterBlock(
+            ],
+          ),
+
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              _counterBlock("Double: $doubleHits", onDoubleMinus, onDoublePlus),
+            ],
+          ),
+
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              _counterBlock(
+                "Warning: $rightWarning",
+                onRightWarningMinus,
+                onRightWarningPlus,
+              ),
+              const SizedBox(height: 12),
+              _counterBlock(
                 "Caution: $rightCaution",
                 onRightCautionMinus,
                 onRightCautionPlus,
               ),
-            ),
-          ],
-        ),
-      ],
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -99,13 +99,20 @@ class PenaltiesControl extends StatelessWidget {
     VoidCallback onPlus,
   ) {
     return Column(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(label, style: const TextStyle(fontSize: 18)),
-        const SizedBox(height: 4),
+        Text(
+          label,
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        ),
+        const SizedBox(height: 6),
         Row(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _smallButton("-", Colors.red, onMinus),
-            const SizedBox(width: 6),
+            const SizedBox(width: 8),
             _smallButton("+", Colors.green, onPlus),
           ],
         ),
@@ -126,7 +133,11 @@ class PenaltiesControl extends StatelessWidget {
         onPressed: onPressed,
         child: Text(
           label,
-          style: const TextStyle(fontSize: 18, color: Colors.white),
+          style: const TextStyle(
+            fontSize: 18,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
     );
