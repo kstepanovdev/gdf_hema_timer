@@ -1,3 +1,5 @@
+import 'package:hema_scoring_machine/utils/time_utils.dart';
+
 class FightLog {
   final List<String> _events = [];
   DateTime? _startTime;
@@ -23,15 +25,13 @@ class FightLog {
 
   void addEvent(String message) {
     final time = _formattedElapsed();
-    _events.add("$time $message");
+    _events.add("$time - $message");
   }
 
   String _formattedElapsed() {
-    if (_startTime == null) return "0:00";
+    if (_startTime == null) return "0:00.000";
     final diff = DateTime.now().difference(_startTime!);
-    final minutes = diff.inMinutes;
-    final seconds = (diff.inSeconds % 60).toString().padLeft(2, '0');
-    return "$minutes:$seconds";
+    return formatTime(diff);
   }
 
   /// Diff-based snapshot

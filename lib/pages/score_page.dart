@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hema_scoring_machine/modules/fight_log/timer/storage.dart';
-import 'package:hema_scoring_machine/widgets/active_timer_board.dart';
+import 'package:hema_scoring_machine/modules/timer/storage.dart';
+import 'package:hema_scoring_machine/widgets/fight_in_progress.dart';
 import 'package:hema_scoring_machine/widgets/reset_button.dart';
 
 import '../widgets/big_button.dart';
@@ -83,10 +83,10 @@ class _ScorePageState extends State<ScorePage> {
   void startTimer() {
     _onStartPressed();
     countdown?.cancel();
-    countdown = Timer.periodic(const Duration(milliseconds: 100), (t) {
+    countdown = Timer.periodic(const Duration(milliseconds: 10), (t) {
       setState(() {
         if (timer.inMilliseconds > 0) {
-          timer -= const Duration(milliseconds: 100);
+          timer -= const Duration(milliseconds: 10);
           if (timer.isNegative) {
             timer = Duration.zero;
           }
@@ -163,7 +163,7 @@ class _ScorePageState extends State<ScorePage> {
                         TimerDisplay(
                           color: Colors.white,
                           time: formatTime(timer),
-                          fontSize: 80,
+                          fontSize: 65,
                         ),
                         ActiveTimerBoard(
                           leftScore: leftScore,
@@ -201,7 +201,7 @@ class _ScorePageState extends State<ScorePage> {
             /// Timer display
             TimerDisplay(
               time: formatTime(timer),
-              fontSize: 70,
+              fontSize: 65,
               onDoubleTap: () async {
                 final newTime = await showTimeSelectDialog(context);
 
