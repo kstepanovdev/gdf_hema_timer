@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:hema_scoring_machine/modules/fight_log/timer/storage.dart';
 import 'package:hema_scoring_machine/widgets/active_timer_board.dart';
 import 'package:hema_scoring_machine/widgets/reset_button.dart';
 
@@ -37,6 +38,19 @@ class _ScorePageState extends State<ScorePage> {
   Duration timer = const Duration(minutes: 1, seconds: 30);
   Timer? countdown;
   bool running = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadTimer();
+  }
+
+  Future<void> _loadTimer() async {
+    final loaded = await loadTimerValue(); // your async function
+    setState(() {
+      timer = loaded;
+    });
+  }
 
   void _inc(int Function() getter, void Function(int) setter) {
     setState(() => setter(getter() + 1));
@@ -100,12 +114,6 @@ class _ScorePageState extends State<ScorePage> {
       leftCaution = 0;
       rightCaution = 0;
       doubleHits = 0;
-      timer = const Duration(minutes: 1, seconds: 30);
-    });
-  }
-
-  void resetTime() {
-    setState(() {
       timer = const Duration(minutes: 1, seconds: 30);
     });
   }
@@ -295,7 +303,7 @@ class _ScorePageState extends State<ScorePage> {
                     label: "Reset",
                     color: Colors.red,
                     onPressed: resetAll,
-                    onLongPress: resetTime,
+                    onLongPress: _loadTimer,
                   ),
                 ),
               ],

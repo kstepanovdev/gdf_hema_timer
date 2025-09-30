@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hema_scoring_machine/modules/fight_log/timer/storage.dart';
 
 String formatTime(Duration d) {
   final minutes = d.inMinutes.remainder(60).toString().padLeft(2, '0');
@@ -68,10 +69,10 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
               ),
               TextButton(
                 onPressed: () {
-                  Navigator.pop(
-                    ctx,
-                    Duration(minutes: minutes, seconds: seconds),
-                  );
+                  final newTimer = Duration(minutes: minutes, seconds: seconds);
+                  saveTimerValue(newTimer);
+
+                  Navigator.pop(ctx, newTimer);
                 },
                 child: const Text('OK'),
               ),
