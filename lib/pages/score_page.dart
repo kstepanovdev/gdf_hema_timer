@@ -46,7 +46,7 @@ class _ScorePageState extends State<ScorePage> {
   }
 
   Future<void> _loadTimer() async {
-    final loaded = await loadTimerValue(); // your async function
+    final loaded = await loadTimerValue();
     setState(() {
       timer = loaded;
     });
@@ -104,8 +104,9 @@ class _ScorePageState extends State<ScorePage> {
     setState(() => running = false);
   }
 
-  void resetAll() {
+  void resetAll() async {
     fightLog.reset();
+    final loadedTimer = await loadTimerValue();
     setState(() {
       leftScore = 0;
       rightScore = 0;
@@ -114,7 +115,7 @@ class _ScorePageState extends State<ScorePage> {
       leftCaution = 0;
       rightCaution = 0;
       doubleHits = 0;
-      timer = const Duration(minutes: 1, seconds: 30);
+      timer = loadedTimer;
     });
   }
 
