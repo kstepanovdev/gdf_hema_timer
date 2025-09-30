@@ -12,7 +12,7 @@ String formatTime(Duration d) {
 
 Future<Duration?> showTimeSelectDialog(BuildContext context) async {
   int minutes = 1;
-  int seconds = 0;
+  int seconds = 30;
 
   return showDialog<Duration>(
     context: context,
@@ -28,7 +28,7 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                 DropdownButton<int>(
                   value: minutes,
                   items: List.generate(
-                    31,
+                    11,
                     (i) => DropdownMenuItem(value: i, child: Text('$i m')),
                   ),
                   onChanged: (val) {
@@ -43,10 +43,14 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                 // Seconds dropdown
                 DropdownButton<int>(
                   value: seconds,
-                  items: List.generate(
-                    60,
-                    (i) => DropdownMenuItem(value: i, child: Text('$i s')),
-                  ),
+                  items: List.generate(2, (i) {
+                    final value = i * 30;
+                    return DropdownMenuItem(
+                      value: value,
+                      child: Text("$value s"),
+                    );
+                  }),
+
                   onChanged: (val) {
                     if (val != null) {
                       setState(() {

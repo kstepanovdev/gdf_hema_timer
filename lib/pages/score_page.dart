@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:hema_scoring_machine/widgets/active_timer_board.dart';
+import 'package:hema_scoring_machine/widgets/reset_button.dart';
 
 import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
@@ -90,7 +91,6 @@ class _ScorePageState extends State<ScorePage> {
   }
 
   void resetAll() {
-    stopTimer();
     fightLog.reset();
     setState(() {
       leftScore = 0;
@@ -100,6 +100,12 @@ class _ScorePageState extends State<ScorePage> {
       leftCaution = 0;
       rightCaution = 0;
       doubleHits = 0;
+      timer = const Duration(minutes: 1, seconds: 30);
+    });
+  }
+
+  void resetTime() {
+    setState(() {
       timer = const Duration(minutes: 1, seconds: 30);
     });
   }
@@ -282,15 +288,14 @@ class _ScorePageState extends State<ScorePage> {
             ),
             const Spacer(),
 
-            /// Reset all + Reset timer
             Row(
               children: [
                 Expanded(
-                  child: BigButton(
-                    label: "Reset all",
+                  child: ResetButton(
+                    label: "Reset",
                     color: Colors.red,
-                    fontSize: 35,
                     onPressed: resetAll,
+                    onLongPress: resetTime,
                   ),
                 ),
               ],
