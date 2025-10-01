@@ -110,6 +110,12 @@ class _ScorePageState extends State<ScorePage> {
     setState(() => running = false);
   }
 
+  void resetTimerOnly() async {
+    await _loadTimer();
+    fightLog.addSeparator();
+    fightLog.addEvent("Next fight started", timer);
+  }
+
   void resetAll() async {
     fightLog.reset();
     final loadedTimer = await loadTimerValue();
@@ -198,7 +204,7 @@ class _ScorePageState extends State<ScorePage> {
                   label: "Reset",
                   color: Colors.red,
                   onPressed: resetAll,
-                  onLongPress: _loadTimer,
+                  onLongPress: resetTimerOnly,
                 ),
               ),
 

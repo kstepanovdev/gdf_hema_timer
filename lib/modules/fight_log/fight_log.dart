@@ -26,6 +26,10 @@ class FightLog {
     _fightStarted = true;
   }
 
+  void addSeparator() {
+    _events.add("--------------------------");
+  }
+
   void addEvent(String message, Duration elapsedTime) async {
     Duration fightTimeFormat = await loadTimerValue();
     final diff = formatTime(fightTimeFormat - elapsedTime);
