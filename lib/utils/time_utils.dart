@@ -68,7 +68,6 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                 onPressed: () {
                   final newTimer = Duration(minutes: minutes, seconds: seconds);
                   saveTimerValue(newTimer);
-
                   Navigator.pop(ctx, newTimer);
                 },
                 child: const Text('OK'),

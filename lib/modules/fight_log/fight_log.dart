@@ -1,8 +1,8 @@
+import 'package:hema_scoring_machine/modules/timer/storage.dart';
 import 'package:hema_scoring_machine/utils/time_utils.dart';
 
 class FightLog {
   final List<String> _events = [];
-  DateTime? _startTime;
 
   // Previous snapshot
   int _prevLeftScore = 0;
@@ -13,25 +13,23 @@ class FightLog {
   int _prevRightCaution = 0;
   int _prevDoubleHits = 0;
 
+  bool _fightStarted = false;
+
   List<String> get events => List.unmodifiable(_events);
 
-  void startFight() {
-    if (_startTime == null) {
+  void startFight() async {
+    if (!_fightStarted) {
       reset();
-      addEvent("Fight started");
-      _startTime = DateTime.now();
+      Duration fightTimeFormat = await loadTimerValue();
+      addEvent("Fight started", fightTimeFormat);
     }
+    _fightStarted = true;
   }
 
-  void addEvent(String message) {
-    final time = _formattedElapsed();
-    _events.add("$time - $message");
-  }
-
-  String _formattedElapsed() {
-    if (_startTime == null) return "0:00.000";
-    final diff = DateTime.now().difference(_startTime!);
-    return formatTime(diff);
+  void addEvent(String message, Duration elapsedTime) async {
+    Duration fightTimeFormat = await loadTimerValue();
+    final diff = formatTime(fightTimeFormat - elapsedTime);
+    _events.add("$diff - $message");
   }
 
   /// Diff-based snapshot
@@ -45,17 +43,18 @@ class FightLog {
     required int doubleHits,
     required String leftName,
     required String rightName,
+    required Duration elapsedTime,
   }) {
     // Score changed?
     if (leftScore != _prevLeftScore || rightScore != _prevRightScore) {
-      addEvent("$leftScore:$rightScore");
+      addEvent("$leftScore:$rightScore", elapsedTime);
     }
 
     // Left warns diff
     if (leftWarning > _prevLeftWarning) {
       final diff = leftWarning - _prevLeftWarning;
       for (int i = 0; i < diff; i++) {
-        addEvent("warning to $leftName");
+        addEvent("warning to $leftName", elapsedTime);
       }
     }
 
@@ -63,21 +62,21 @@ class FightLog {
     if (rightWarning > _prevRightWarning) {
       final diff = rightWarning - _prevRightWarning;
       for (int i = 0; i < diff; i++) {
-        addEvent("warning to $rightName");
+        addEvent("warning to $rightName", elapsedTime);
       }
     }
 
     if (leftCaution > _prevLeftCaution) {
       final diff = leftCaution - _prevLeftCaution;
       for (int i = 0; i < diff; i++) {
-        addEvent("caution to $leftName");
+        addEvent("caution to $leftName", elapsedTime);
       }
     }
 
     if (rightCaution > _prevRightCaution) {
       final diff = rightCaution - _prevRightCaution;
       for (int i = 0; i < diff; i++) {
-        addEvent("caution to $rightName");
+        addEvent("caution to $rightName", elapsedTime);
       }
     }
 
@@ -85,7 +84,7 @@ class FightLog {
     if (doubleHits > _prevDoubleHits) {
       final diff = doubleHits - _prevDoubleHits;
       for (int i = 0; i < diff; i++) {
-        addEvent("double hit");
+        addEvent("double hit", elapsedTime);
       }
     }
 
@@ -103,6 +102,7 @@ class FightLog {
     _prevLeftScore = _prevRightScore = 0;
     _prevLeftWarning = _prevRightWarning = 0;
     _prevDoubleHits = 0;
+    _fightStarted = false;
     _events.clear();
   }
 

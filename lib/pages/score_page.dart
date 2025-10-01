@@ -76,6 +76,7 @@ class _ScorePageState extends State<ScorePage> {
         doubleHits: doubleHits,
         leftName: leftName,
         rightName: rightName,
+        elapsedTime: timer,
       );
     });
   }
@@ -206,6 +207,7 @@ class _ScorePageState extends State<ScorePage> {
                 final newTime = await showTimeSelectDialog(context);
 
                 if (newTime != null) {
+                  resetAll();
                   setState(() {
                     timer = newTime;
                   });
