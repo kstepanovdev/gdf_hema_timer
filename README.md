@@ -64,9 +64,8 @@ flutter build apk --release
 ```
 
 ## 🤝 Contributing
-
 Contributions are welcome!
-Fork the repo
-Create a new branch: git checkout -b feature/my-improvement
-Commit your changes: git commit -am 'Add feature'
-Push and open a Pull Request
+  1. Fork the repo
+  2. Create a new branch: git checkout -b feature/my-improvement
+  3. Commit your changes: git commit -am 'Add feature'
+  4. Push and open a Pull Request
