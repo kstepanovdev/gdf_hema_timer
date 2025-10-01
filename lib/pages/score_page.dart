@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:hema_scoring_machine/modules/timer/storage.dart';
 import 'package:hema_scoring_machine/widgets/fight_in_progress.dart';
 import 'package:hema_scoring_machine/widgets/reset_button.dart';
+import 'package:vibration/vibration.dart';
 
 import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
@@ -94,6 +95,10 @@ class _ScorePageState extends State<ScorePage> {
         } else {
           t.cancel();
           running = false;
+
+          Vibration.hasVibrator().then((hasVibrator) {
+            Vibration.vibrate(duration: 1000, amplitude: 255);
+          });
         }
       });
     });
