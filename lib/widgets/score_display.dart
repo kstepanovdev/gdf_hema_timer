@@ -75,17 +75,16 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
-      fontSize: 120,
+      fontSize: 140,
       fontWeight: FontWeight.bold,
       color: widget.color,
+      height: 1,
     );
 
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.end,
       children: [
         GestureDetector(
-          behavior: HitTestBehavior.translucent,
           onTapDown: _onLeftDown,
           onTapUp: _onLeftUp,
           onTapCancel: _onLeftCancel,
@@ -96,7 +95,6 @@ class _ScoreDisplayState extends State<ScoreDisplay> {
         ),
         Text(":", style: style),
         GestureDetector(
-          behavior: HitTestBehavior.translucent,
           onTapDown: _onRightDown,
           onTapUp: _onRightUp,
           onTapCancel: _onRightCancel,

@@ -16,20 +16,17 @@ class TimerDisplay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = TextStyle(
+      fontFamily: 'RobotoMono',
+      fontWeight: FontWeight.bold,
+      fontSize: fontSize,
+      height: 0.8,
+      color: color,
+    );
+
     return GestureDetector(
       onDoubleTap: onDoubleTap,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 16),
-        child: Text(
-          time,
-          style: TextStyle(
-            fontSize: fontSize,
-            fontWeight: FontWeight.bold,
-            fontFamily: 'RobotoMono',
-            color: color,
-          ),
-        ),
-      ),
+      child: Text(time, style: style),
     );
   }
 }

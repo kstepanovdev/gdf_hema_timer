@@ -158,29 +158,16 @@ class _ScorePageState extends State<ScorePage> {
           backgroundColor: Colors.black,
           body: SafeArea(
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                // Center section
-                Expanded(
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        TimerDisplay(
-                          color: Colors.white,
-                          time: formatTime(timer),
-                          fontSize: 65,
-                        ),
-                        ActiveTimerBoard(
-                          leftScore: leftScore,
-                          rightScore: rightScore,
-                        ),
-                      ],
-                    ),
-                  ),
+                TimerDisplay(
+                  color: Colors.white,
+                  time: formatTime(timer),
+                  fontSize: 75,
                 ),
 
-                // Bottom button section
+                ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
+
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: SizedBox(
@@ -200,123 +187,122 @@ class _ScorePageState extends State<ScorePage> {
     }
 
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(top: 12, left: 12, right: 12, bottom: 8),
-        child: Column(
-          children: [
-            /// Timer display
-            TimerDisplay(
-              time: formatTime(timer),
-              fontSize: 65,
-              onDoubleTap: () async {
-                final newTime = await showTimeSelectDialog(context);
-
-                if (newTime != null) {
-                  resetAll();
-                  setState(() {
-                    timer = newTime;
-                  });
-                }
-              },
-            ),
-
-            /// Time control
-            TimeControl(
-              onMinus1: () => setState(() {
-                if (timer > const Duration(seconds: 1)) {
-                  timer -= const Duration(seconds: 1);
-                } else {
-                  timer = Duration.zero;
-                }
-              }),
-              onPlus3: () =>
-                  setState(() => timer += const Duration(seconds: 3)),
-              onPlus5: () =>
-                  setState(() => timer += const Duration(seconds: 5)),
-            ),
-
-            /// Scoreboard with swap fighters icon
-            ScoreBoard(
-              leftName: leftName,
-              rightName: rightName,
-              leftScore: leftScore,
-              rightScore: rightScore,
-              onLeftTap: () => setState(() => leftScore++),
-              onLeftLongPress: () => setState(() {
-                if (leftScore > 0) leftScore--;
-              }),
-              onRightTap: () => setState(() => rightScore++),
-              onRightLongPress: () => setState(() {
-                if (rightScore > 0) rightScore--;
-              }),
-              swapFighters: swapFighters,
-            ),
-
-            SizedBox(
-              width: double.infinity,
-              height: 100,
-              child: BigButton(
-                label: "START",
-                color: Colors.deepPurple,
-                fontSize: 40,
-                onPressed: startTimer,
-              ),
-            ),
-            GestureDetector(
-              onVerticalDragUpdate: (details) {
-                // user dragged up
-                if (details.primaryDelta != null &&
-                    details.primaryDelta! < -10) {
-                  FightLogView.show(context, fightLog);
-                }
-              },
-              child: LogHandlePanel(fightLog: fightLog),
-            ),
-
-            const SizedBox(height: 16),
-
-            /// Warnings + Doublehits
-            PenaltiesControl(
-              leftWarning: leftWarning,
-              rightWarning: rightWarning,
-              leftCaution: leftCaution,
-              rightCaution: rightCaution,
-              doubleHits: doubleHits,
-              onLeftWarningPlus: () =>
-                  _inc(() => leftWarning, (v) => leftWarning = v),
-              onLeftWarningMinus: () =>
-                  _dec(() => leftWarning, (v) => leftWarning = v),
-              onRightWarningPlus: () =>
-                  _inc(() => rightWarning, (v) => rightWarning = v),
-              onRightWarningMinus: () =>
-                  _dec(() => rightWarning, (v) => rightWarning = v),
-              onDoublePlus: () => _inc(() => doubleHits, (v) => doubleHits = v),
-              onDoubleMinus: () =>
-                  _dec(() => doubleHits, (v) => doubleHits = v),
-              onLeftCautionPlus: () =>
-                  _inc(() => leftCaution, (v) => leftCaution = v),
-              onLeftCautionMinus: () =>
-                  _dec(() => leftCaution, (v) => leftCaution = v),
-              onRightCautionPlus: () =>
-                  _inc(() => rightCaution, (v) => rightCaution = v),
-              onRightCautionMinus: () =>
-                  _dec(() => rightCaution, (v) => rightCaution = v),
-            ),
-            const Spacer(),
-
-            Row(
-              children: [
-                Expanded(
-                  child: ResetButton(
-                    label: "Reset",
-                    color: Colors.red,
-                    onPressed: resetAll,
-                    onLongPress: _loadTimer,
-                  ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ResetButton(
+                  label: "Reset",
+                  color: Colors.red,
+                  onPressed: resetAll,
+                  onLongPress: _loadTimer,
                 ),
-              ],
-            ),
-          ],
+              ),
+
+              /// Timer display
+              TimerDisplay(
+                time: formatTime(timer),
+                fontSize: 65,
+                onDoubleTap: () async {
+                  final newTime = await showTimeSelectDialog(context);
+
+                  if (newTime != null) {
+                    resetAll();
+                    setState(() {
+                      timer = newTime;
+                    });
+                  }
+                },
+              ),
+
+              /// Scoreboard with swap fighters icon
+              ScoreBoard(
+                leftName: leftName,
+                rightName: rightName,
+                leftScore: leftScore,
+                rightScore: rightScore,
+                onLeftTap: () => _inc(() => leftScore, (v) => leftScore = v),
+                onLeftLongPress: () =>
+                    _dec(() => leftScore, (v) => leftScore = v),
+                onRightTap: () => _inc(() => rightScore, (v) => rightScore = v),
+                onRightLongPress: () =>
+                    _dec(() => rightScore, (v) => rightScore = v),
+                swapFighters: swapFighters,
+              ),
+
+              SizedBox(
+                width: double.infinity,
+                height: 150,
+                child: BigButton(
+                  label: "START",
+                  color: Colors.deepPurple,
+                  fontSize: 40,
+                  onPressed: startTimer,
+                ),
+              ),
+              GestureDetector(
+                onVerticalDragUpdate: (details) {
+                  // user dragged up
+                  if (details.primaryDelta != null &&
+                      details.primaryDelta! < -10) {
+                    FightLogView.show(context, fightLog);
+                  }
+                },
+                child: LogHandlePanel(fightLog: fightLog),
+              ),
+
+              const SizedBox(height: 10),
+
+              /// Time control
+              TimeControl(
+                onMinus1: () => setState(() {
+                  if (timer > const Duration(seconds: 1)) {
+                    timer -= const Duration(seconds: 1);
+                  } else {
+                    timer = Duration.zero;
+                  }
+                }),
+                onPlus3: () =>
+                    setState(() => timer += const Duration(seconds: 3)),
+                onPlus5: () =>
+                    setState(() => timer += const Duration(seconds: 5)),
+              ),
+
+              const Spacer(),
+
+              /// Warnings + Doublehits
+              PenaltiesControl(
+                leftWarning: leftWarning,
+                rightWarning: rightWarning,
+                leftCaution: leftCaution,
+                rightCaution: rightCaution,
+                doubleHits: doubleHits,
+                onLeftWarningPlus: () =>
+                    _inc(() => leftWarning, (v) => leftWarning = v),
+                onLeftWarningMinus: () =>
+                    _dec(() => leftWarning, (v) => leftWarning = v),
+                onRightWarningPlus: () =>
+                    _inc(() => rightWarning, (v) => rightWarning = v),
+                onRightWarningMinus: () =>
+                    _dec(() => rightWarning, (v) => rightWarning = v),
+                onDoublePlus: () =>
+                    _inc(() => doubleHits, (v) => doubleHits = v),
+                onDoubleMinus: () =>
+                    _dec(() => doubleHits, (v) => doubleHits = v),
+                onLeftCautionPlus: () =>
+                    _inc(() => leftCaution, (v) => leftCaution = v),
+                onLeftCautionMinus: () =>
+                    _dec(() => leftCaution, (v) => leftCaution = v),
+                onRightCautionPlus: () =>
+                    _inc(() => rightCaution, (v) => rightCaution = v),
+                onRightCautionMinus: () =>
+                    _dec(() => rightCaution, (v) => rightCaution = v),
+              ),
+            ],
+          ),
         ),
       ),
     );

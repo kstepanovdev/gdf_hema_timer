@@ -14,29 +14,32 @@ class ActiveTimerBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final style = TextStyle(
+      fontFamily: 'RobotoMono',
+      fontWeight: FontWeight.bold,
+      fontSize: 90,
+      height: 0.8,
+      letterSpacing: 2,
+      color: Colors.white,
+    );
+    const padding = EdgeInsets.symmetric(horizontal: 8.0);
+
     return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.end,
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "$leftScore",
-                style: TextStyle(fontSize: 70, color: color),
-              ),
+              padding: padding,
+              child: Text("$leftScore", style: style),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(":", style: TextStyle(fontSize: 70, color: color)),
+              padding: padding,
+              child: Text(":", style: style),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Text(
-                "$rightScore",
-                style: TextStyle(fontSize: 70, color: color),
-              ),
+              padding: padding,
+              child: Text("$rightScore", style: style),
             ),
           ],
         ),
