@@ -61,3 +61,12 @@ git clone https://github.com/yourname/hema_scoring_machine.git
 cd hema_scoring_machine
 flutter pub get
 flutter build apk --release
+```
+
+## 🤝 Contributing
+
+Contributions are welcome!
+Fork the repo
+Create a new branch: git checkout -b feature/my-improvement
+Commit your changes: git commit -am 'Add feature'
+Push and open a Pull Request
