@@ -1,0 +1,71 @@
+---
+name: Build & Release APK
+
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - "pubspec.yaml"
+      - ".github/workflows/release.yml"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: 3.24.0
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+
+      - name: Rename APK
+        run: |
+          VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //') && mv build/app/outputs/flutter-apk/app-release.apk GDF_HEMA_Timer_v${VERSION}.apk
+
+      - name: Upload APK Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: GDF_HEMA_Timer
+          path: GDF_HEMA_Timer_v*.apk
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Download built artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: GDF_HEMA_Timer
+
+      - name: Extract version
+        id: version
+        run: |
+          echo "VERSION=$(grep '^version:' pubspec.yaml | sed 's/version: //;s/+[0-9]*//')" >> $GITHUB_ENV
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: v${{ env.VERSION }}
+          name: GDF HEMA Timer v${{ env.VERSION }}
+          body: |
+            ✨ Automated release
+            - Version: v${{ env.VERSION }}
+            - Triggered by push to main
+          files: GDF_HEMA_Timer_v${{ env.VERSION }}.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
