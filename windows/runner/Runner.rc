@@ -90,12 +90,12 @@ BEGIN
         BLOCK "040904e4"
         BEGIN
             VALUE "CompanyName", "com.example" "\0"
-            VALUE "FileDescription", "hema_scoring_machine" "\0"
+            VALUE "FileDescription", "gdf_hema_timer" "\0"
             VALUE "FileVersion", VERSION_AS_STRING "\0"
-            VALUE "InternalName", "hema_scoring_machine" "\0"
+            VALUE "InternalName", "gdf_hema_timer" "\0"
             VALUE "LegalCopyright", "Copyright (C) 2025 com.example. All rights reserved." "\0"
-            VALUE "OriginalFilename", "hema_scoring_machine.exe" "\0"
-            VALUE "ProductName", "hema_scoring_machine" "\0"
+            VALUE "OriginalFilename", "gdf_hema_timer.exe" "\0"
+            VALUE "ProductName", "gdf_hema_timer" "\0"
             VALUE "ProductVersion", VERSION_AS_STRING "\0"
         END
     END

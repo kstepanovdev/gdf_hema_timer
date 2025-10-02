@@ -1,5 +1,5 @@
-import 'package:hema_scoring_machine/modules/timer/storage.dart';
-import 'package:hema_scoring_machine/utils/time_utils.dart';
+import 'package:gdf_hema_timer/modules/timer/storage.dart';
+import 'package:gdf_hema_timer/utils/time_utils.dart';
 
 class FightLog {
   final List<String> _events = [];

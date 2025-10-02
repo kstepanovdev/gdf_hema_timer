@@ -1,6 +1,6 @@
 # 🗡️ HEMA Scoring Machine
 
-A lightweight, open-source **timer and scoring app** for Historical European Martial Arts (HEMA) bouts.  
+A lightweight, open-source **timer and scoring app** for Historical European Martial Arts (HEMA) bouts.
 Designed for clarity, speed, and offline use during tournaments and sparring sessions.
 
 ---
@@ -46,7 +46,7 @@ Designed for clarity, speed, and offline use during tournaments and sparring ses
 You’ll soon find **HEMA Scoring Machine** on [F-Droid](https://f-droid.org/).
 
 ### 🛠️ Manual Install
-1. Download the latest `.apk` from [Releases](https://github.com/kstepanovdev/hema_scoring_machine/releases)
+1. Download the latest `.apk` from [Releases](https://github.com/kstepanovdev/gdf_hema_timer/releases)
 2. Enable “Install unknown apps” on your Android device
 3. Open the file to install
 
@@ -57,8 +57,8 @@ You’ll soon find **HEMA Scoring Machine** on [F-Droid](https://f-droid.org/).
 You can build and sign it yourself:
 
 ```bash
-git clone https://github.com/yourname/hema_scoring_machine.git
-cd hema_scoring_machine
+git clone https://github.com/yourname/gdf_hema_timer.git
+cd gdf_hema_timer
 flutter pub get
 flutter build apk --release
 ```

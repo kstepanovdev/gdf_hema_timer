@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:hema_scoring_machine/modules/timer/storage.dart';
+import 'package:gdf_hema_timer/modules/timer/storage.dart';
 
 String formatTime(Duration d) {
   final minutes = d.inMinutes.remainder(60).toString().padLeft(2, '0');

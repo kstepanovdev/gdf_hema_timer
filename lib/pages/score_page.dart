@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:hema_scoring_machine/modules/timer/storage.dart';
-import 'package:hema_scoring_machine/widgets/fight_in_progress.dart';
-import 'package:hema_scoring_machine/widgets/reset_button.dart';
+import 'package:gdf_hema_timer/modules/timer/storage.dart';
+import 'package:gdf_hema_timer/widgets/fight_in_progress.dart';
+import 'package:gdf_hema_timer/widgets/reset_button.dart';
 import 'package:vibration/vibration.dart';
 
 import '../widgets/big_button.dart';

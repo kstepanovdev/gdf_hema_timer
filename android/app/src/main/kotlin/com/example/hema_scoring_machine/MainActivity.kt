@@ -1,4 +1,4 @@
-package com.example.hema_scoring_machine
+package com.example.gdf_hema_timer
 
 import io.flutter.embedding.android.FlutterActivity
 

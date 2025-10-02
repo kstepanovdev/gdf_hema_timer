@@ -1,6 +1,6 @@
 {
-    "name": "hema_scoring_machine",
-    "short_name": "hema_scoring_machine",
+    "name": "gdf_hema_timer",
+    "short_name": "gdf_hema_timer",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
