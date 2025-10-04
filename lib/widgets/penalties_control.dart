@@ -50,13 +50,15 @@ class PenaltiesControl extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _counterBlock(
-                "Warning: $leftWarning",
+                "Warning",
+                leftWarning,
                 onLeftWarningMinus,
                 onLeftWarningPlus,
               ),
               const SizedBox(height: 12),
               _counterBlock(
-                "Caution: $leftCaution",
+                "Caution",
+                leftCaution,
                 onLeftCautionMinus,
                 onLeftCautionPlus,
               ),
@@ -67,7 +69,7 @@ class PenaltiesControl extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              _counterBlock("Double: $doubleHits", onDoubleMinus, onDoublePlus),
+              _counterBlock("Double", doubleHits, onDoubleMinus, onDoublePlus),
             ],
           ),
 
@@ -76,13 +78,15 @@ class PenaltiesControl extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               _counterBlock(
-                "Warning: $rightWarning",
+                "Warning",
+                rightWarning,
                 onRightWarningMinus,
                 onRightWarningPlus,
               ),
               const SizedBox(height: 12),
               _counterBlock(
-                "Caution: $rightCaution",
+                "Caution",
+                rightCaution,
                 onRightCautionMinus,
                 onRightCautionPlus,
               ),
@@ -95,6 +99,7 @@ class PenaltiesControl extends StatelessWidget {
 
   Widget _counterBlock(
     String label,
+    int counter,
     VoidCallback onMinus,
     VoidCallback onPlus,
   ) {
@@ -102,11 +107,20 @@ class PenaltiesControl extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Text(
-          label,
-          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+        Row(
+          children: [
+            Text(
+              "$label: ",
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            Text(
+              "$counter",
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
+            ),
+          ],
         ),
-        const SizedBox(height: 6),
+
+        // const SizedBox(height: 6),
         Row(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,

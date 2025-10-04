@@ -1,4 +1,4 @@
-package gdf_hema_timer
+package com.gdf.hema_timer
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -192,7 +192,6 @@ class _ScorePageState extends State<ScorePage> {
       );
     }
 
-    // 🧭 IDLE MODE — full controls
     return Scaffold(
       body: SafeArea(
         child: LayoutBuilder(
@@ -205,7 +204,7 @@ class _ScorePageState extends State<ScorePage> {
                   padding: const EdgeInsets.all(10),
                   child: IntrinsicHeight(
                     child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(bottom: 10),
