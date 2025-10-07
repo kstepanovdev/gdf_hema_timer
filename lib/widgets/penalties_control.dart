@@ -42,55 +42,73 @@ class PenaltiesControl extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 8.0),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              _counterBlock(
-                "Warning",
-                leftWarning,
-                onLeftWarningMinus,
-                onLeftWarningPlus,
-              ),
-              const SizedBox(height: 12),
-              _counterBlock(
-                "Caution",
-                leftCaution,
-                onLeftCautionMinus,
-                onLeftCautionPlus,
-              ),
-            ],
+          // Left column (Warnings & Cautions)
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _counterBlock(
+                  "Warning",
+                  leftWarning,
+                  onLeftWarningMinus,
+                  onLeftWarningPlus,
+                ),
+                const SizedBox(height: 12),
+                _counterBlock(
+                  "Caution",
+                  leftCaution,
+                  onLeftCautionMinus,
+                  onLeftCautionPlus,
+                ),
+              ],
+            ),
           ),
 
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              _counterBlock("Double", doubleHits, onDoubleMinus, onDoublePlus),
-            ],
+          // Middle column — Double (vertical layout, big buttons)
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  "Double",
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                _bigButton("$doubleHits", Colors.green, onDoublePlus),
+                const SizedBox(height: 8),
+                _bigButton("$doubleHits", Colors.red, onDoubleMinus),
+              ],
+            ),
           ),
 
-          Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.end,
-            children: [
-              _counterBlock(
-                "Warning",
-                rightWarning,
-                onRightWarningMinus,
-                onRightWarningPlus,
-              ),
-              const SizedBox(height: 12),
-              _counterBlock(
-                "Caution",
-                rightCaution,
-                onRightCautionMinus,
-                onRightCautionPlus,
-              ),
-            ],
+          // Right column (Warnings & Cautions)
+          Expanded(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                _counterBlock(
+                  "Warning",
+                  rightWarning,
+                  onRightWarningMinus,
+                  onRightWarningPlus,
+                ),
+                const SizedBox(height: 12),
+                _counterBlock(
+                  "Caution",
+                  rightCaution,
+                  onRightCautionMinus,
+                  onRightCautionPlus,
+                ),
+              ],
+            ),
           ),
         ],
       ),
@@ -107,26 +125,16 @@ class PenaltiesControl extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        Row(
-          children: [
-            Text(
-              "$label: ",
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
-            ),
-            Text(
-              "$counter",
-              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w900),
-            ),
-          ],
+        Text(
+          "$label: $counter",
+          style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
         ),
-
-        // const SizedBox(height: 6),
+        const SizedBox(height: 6),
         Row(
-          mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             _smallButton("-", Colors.red, onMinus),
-            const SizedBox(width: 8),
+            const SizedBox(width: 6),
             _smallButton("+", Colors.green, onPlus),
           ],
         ),
@@ -148,7 +156,32 @@ class PenaltiesControl extends StatelessWidget {
         child: Text(
           label,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 20,
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _bigButton(String label, Color color, VoidCallback onPressed) {
+    return SizedBox(
+      width: 64,
+      height: 64,
+      child: ElevatedButton(
+        style: ElevatedButton.styleFrom(
+          backgroundColor: color,
+          padding: EdgeInsets.zero,
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10),
+          ),
+        ),
+        onPressed: onPressed,
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 28,
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
