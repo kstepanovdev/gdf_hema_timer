@@ -88,7 +88,7 @@ class FightLog {
     if (doubleHits > _prevDoubleHits) {
       final diff = doubleHits - _prevDoubleHits;
       for (int i = 0; i < diff; i++) {
-        addEvent("double hit", elapsedTime);
+        addEvent("double hit #${i + 1}", elapsedTime);
       }
     }
 
