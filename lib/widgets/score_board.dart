@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'score_display.dart';
+import '../utils/touch_number.dart';
 
 class ScoreBoard extends StatelessWidget {
   final String leftName;
@@ -8,10 +8,8 @@ class ScoreBoard extends StatelessWidget {
   final int rightScore;
   final Color color;
 
-  final VoidCallback onLeftTap;
-  final VoidCallback onLeftLongPress;
-  final VoidCallback onRightTap;
-  final VoidCallback onRightLongPress;
+  final ValueChanged<int> onLeftChanged;
+  final ValueChanged<int> onRightChanged;
   final VoidCallback swapFighters;
 
   const ScoreBoard({
@@ -20,17 +18,21 @@ class ScoreBoard extends StatelessWidget {
     required this.rightName,
     required this.leftScore,
     required this.rightScore,
-    this.color = Colors.black,
-
-    required this.onLeftTap,
-    required this.onLeftLongPress,
-    required this.onRightTap,
-    required this.onRightLongPress,
+    required this.onLeftChanged,
+    required this.onRightChanged,
     required this.swapFighters,
+    this.color = Colors.black,
   });
 
   @override
   Widget build(BuildContext context) {
+    final textStyle = TextStyle(
+      fontSize: 100,
+      fontWeight: FontWeight.bold,
+      color: color,
+      height: 1,
+    );
+
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -45,14 +47,21 @@ class ScoreBoard extends StatelessWidget {
             Text(rightName, style: TextStyle(fontSize: 18, color: color)),
           ],
         ),
-        ScoreDisplay(
-          leftScore: leftScore,
-          rightScore: rightScore,
-          onLeftTap: onLeftTap,
-          onLeftLongPress: onLeftLongPress,
-          onRightTap: onRightTap,
-          onRightLongPress: onRightLongPress,
-          color: color,
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            TouchNumber(
+              value: leftScore,
+              onChanged: onLeftChanged,
+              textStyle: textStyle,
+            ),
+            Text(" : ", style: textStyle),
+            TouchNumber(
+              value: rightScore,
+              onChanged: onRightChanged,
+              textStyle: textStyle,
+            ),
+          ],
         ),
       ],
     );

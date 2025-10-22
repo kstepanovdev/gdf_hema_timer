@@ -105,6 +105,7 @@ class FightLog {
   void reset() {
     _prevLeftScore = _prevRightScore = 0;
     _prevLeftWarning = _prevRightWarning = 0;
+    _prevLeftCaution = _prevRightCaution = 0;
     _prevDoubleHits = 0;
     _fightStarted = false;
     _events.clear();
