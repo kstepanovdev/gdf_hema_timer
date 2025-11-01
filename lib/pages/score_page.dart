@@ -179,8 +179,6 @@ class _ScorePageState extends State<ScorePage> {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(bottom: 10),
@@ -191,6 +189,7 @@ class _ScorePageState extends State<ScorePage> {
                         onLongPress: resetTimerOnly,
                       ),
                     ),
+                    const SizedBox(height: 10),
 
                     TimerDisplay(
                       time: formatTime(timer),
