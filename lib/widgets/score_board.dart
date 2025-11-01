@@ -39,30 +39,31 @@ class ScoreBoard extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(leftName, style: TextStyle(fontSize: 18, color: color)),
-            IconButton(
-              icon: Icon(Icons.swap_horiz, size: 28, color: color),
-              padding: EdgeInsets.zero,
-              constraints: const BoxConstraints(), // removes min 48x48
-              visualDensity: VisualDensity.compact, // tighter hitbox
-              onPressed: swapFighters,
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerRight,
+                child: TouchNumber(
+                  value: leftScore,
+                  onChanged: onLeftChanged,
+                  textStyle: textStyle,
+                ),
+              ),
             ),
-            Text(rightName, style: TextStyle(fontSize: 18, color: color)),
-          ],
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            TouchNumber(
-              value: leftScore,
-              onChanged: onLeftChanged,
-              textStyle: textStyle,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              child: Text(":", style: textStyle),
             ),
-            Text(" : ", style: textStyle),
-            TouchNumber(
-              value: rightScore,
-              onChanged: onRightChanged,
-              textStyle: textStyle,
+            Expanded(
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                alignment: Alignment.centerLeft,
+                child: TouchNumber(
+                  value: rightScore,
+                  onChanged: onRightChanged,
+                  textStyle: textStyle,
+                ),
+              ),
             ),
           ],
         ),

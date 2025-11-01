@@ -17,7 +17,7 @@ class TimerDisplay extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
-      fontFamily: 'RobotoMono',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: fontSize,
       height: 0.8,

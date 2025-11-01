@@ -176,13 +176,10 @@ class _ScorePageState extends State<ScorePage> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              physics: const BouncingScrollPhysics(),
               child: Padding(
-                // Move elements down slightly (top padding = 20)
-                padding: const EdgeInsets.fromLTRB(10, 20, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
                 child: Column(
-                  mainAxisSize:
-                      MainAxisSize.min, // prevents bottom overflow gap
+                  mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Padding(
