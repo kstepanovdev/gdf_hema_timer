@@ -52,7 +52,15 @@ class _TouchNumberState extends State<TouchNumber> {
       onTapDown: _onTapDown,
       onTapUp: _onTapUp,
       onTapCancel: _onTapCancel,
-      child: Text("${widget.value}", style: widget.textStyle),
+      behavior: HitTestBehavior.translucent,
+      child: FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(
+          "${widget.value}",
+          style: widget.textStyle.copyWith(height: 1),
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
   }
 }

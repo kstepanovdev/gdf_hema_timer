@@ -30,7 +30,7 @@ class PenaltiesControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    const labelStyle = TextStyle(fontSize: 20, fontWeight: FontWeight.bold);
+    const labelStyle = TextStyle(fontSize: 23, fontWeight: FontWeight.bold);
 
     Widget block(String label, int value, ValueChanged<int> onChanged) {
       return Column(
@@ -42,7 +42,7 @@ class PenaltiesControl extends StatelessWidget {
             value: value,
             onChanged: onChanged,
             textStyle: const TextStyle(
-              fontSize: 45,
+              fontSize: 65,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -60,7 +60,7 @@ class PenaltiesControl extends StatelessWidget {
             value: value,
             onChanged: onChanged,
             textStyle: const TextStyle(
-              fontSize: 65,
+              fontSize: 75,
               fontWeight: FontWeight.bold,
             ),
           ),

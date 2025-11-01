@@ -42,6 +42,9 @@ class ScoreBoard extends StatelessWidget {
             Text(leftName, style: TextStyle(fontSize: 18, color: color)),
             IconButton(
               icon: Icon(Icons.swap_horiz, size: 28, color: color),
+              padding: EdgeInsets.zero,
+              constraints: const BoxConstraints(), // removes min 48x48
+              visualDensity: VisualDensity.compact, // tighter hitbox
               onPressed: swapFighters,
             ),
             Text(rightName, style: TextStyle(fontSize: 18, color: color)),
