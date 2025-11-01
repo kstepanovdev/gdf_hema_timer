@@ -150,7 +150,7 @@ class _ScorePageState extends State<ScorePage> {
                 TimerDisplay(
                   color: Colors.white,
                   time: formatTime(timer),
-                  fontSize: 65,
+                  fontSize: 60,
                 ),
                 ActiveTimerBoard(leftScore: leftScore, rightScore: rightScore),
                 Padding(
@@ -177,7 +177,7 @@ class _ScorePageState extends State<ScorePage> {
           builder: (context, constraints) {
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 10),
+                padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -194,7 +194,7 @@ class _ScorePageState extends State<ScorePage> {
 
                     TimerDisplay(
                       time: formatTime(timer),
-                      fontSize: 65,
+                      fontSize: 60,
                       onLongPress: () async {
                         final newTime = await showTimeSelectDialog(context);
                         if (newTime != null) {
@@ -204,6 +204,7 @@ class _ScorePageState extends State<ScorePage> {
                       },
                     ),
 
+                    const SizedBox(height: 10),
                     ScoreBoard(
                       leftName: leftName,
                       rightName: rightName,
@@ -213,6 +214,7 @@ class _ScorePageState extends State<ScorePage> {
                       onRightChanged: (v) => setState(() => rightScore = v),
                       swapFighters: swapFighters,
                     ),
+                    const SizedBox(height: 10),
 
                     SizedBox(
                       width: double.infinity,
