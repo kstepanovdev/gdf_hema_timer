@@ -15,7 +15,7 @@ class ActiveTimerBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
-      fontFamily: 'RobotoMono',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: 90,
       height: 0.8,

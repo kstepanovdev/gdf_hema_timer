@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class TimerDisplay extends StatelessWidget {
   final String time;
   final Color color;
-  final VoidCallback? onDoubleTap;
+  final VoidCallback? onLongPress;
   final double fontSize;
 
   const TimerDisplay({
@@ -11,13 +11,13 @@ class TimerDisplay extends StatelessWidget {
     required this.time,
     required this.fontSize,
     this.color = Colors.black,
-    this.onDoubleTap,
+    this.onLongPress,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = TextStyle(
-      fontFamily: 'RobotoMono',
+      fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: fontSize,
       height: 0.8,
@@ -25,7 +25,7 @@ class TimerDisplay extends StatelessWidget {
     );
 
     return GestureDetector(
-      onDoubleTap: onDoubleTap,
+      onLongPress: onLongPress,
       child: Text(time, style: style),
     );
   }

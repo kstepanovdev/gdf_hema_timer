@@ -14,9 +14,7 @@ class ScoreApp extends StatelessWidget {
       title: 'Scoreboard',
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(fontFamily: 'RobotoMono'),
-        ),
+        textTheme: const TextTheme(bodyMedium: TextStyle(fontFamily: 'Roboto')),
       ),
       home: ScorePage(), // no const here
     );

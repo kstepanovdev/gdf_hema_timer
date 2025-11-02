@@ -28,9 +28,8 @@ class LogHandlePanel extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        mainAxisSize: MainAxisSize.min,
         children: const [
-          Icon(Icons.keyboard_arrow_up, size: 18, color: Colors.grey),
+          Icon(Icons.keyboard_arrow_up, size: 30, color: Colors.grey),
           Text(
             "Drag up for logs",
             style: TextStyle(color: Colors.grey, fontSize: 14),
