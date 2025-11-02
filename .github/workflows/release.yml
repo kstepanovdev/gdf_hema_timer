@@ -4,7 +4,7 @@ name: Build & Release APK
 "on":
   push:
     tags:
-      - 'v*' # Trigger when pushing a tag like v1.0.0
+      - "v*" # Trigger when pushing a tag like v1.0.0
 
 permissions:
   contents: write
@@ -42,14 +42,13 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-
       - name: Build release APK
-        run: flutter build apk --release
+        run: flutter build apk --release --obfuscate --split-debug-info=./debug-info --split-per-abi
 
       - name: Rename APK
         run: |
           TAG=${GITHUB_REF_NAME}
-          mv build/app/outputs/flutter-apk/app-release.apk GDF_HEMA_Timer_${TAG}.apk
+          mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk GDF_HEMA_Timer_${TAG}.apk
 
       - name: Upload APK Artifact
         uses: actions/upload-artifact@v4
