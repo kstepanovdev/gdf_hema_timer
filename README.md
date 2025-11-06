@@ -1,58 +1,58 @@
-# 🗡️ HEMA Scoring Machine
+# HEMA Scoring Machine
 
 A lightweight, open-source **timer and scoring app** for Historical European Martial Arts (HEMA) bouts.
 Designed for clarity, speed, and offline use during tournaments and sparring sessions.
 
 ---
 
-## ⚙️ Features
+## Features
 
-- 🕐 **Customizable Timer**
+- **Customizable Timer**
   - Set time easily (tap to edit, +/− controls)
   - Millisecond precision
   - Auto-stop vibration when time runs out
 
-- ⚔️ **Score Tracking**
+- **Score Tracking**
   - Tap to increment/decrement scores
   - Prevents negative values
   - Swap fighter sides instantly
 
-- 🚨 **Warnings & Doubles**
+- **Warnings & Doubles**
   - Quick +/− warning counters per fighter
   - Central double-hit counter
 
-- 🧾 **Fight Log**
+- **Fight Log**
   - Automatically records score & warning changes per start/stop cycle
   - Viewable via drag-up “Logs” panel
 
-- 🎨 **Clean Interface**
+- **Clean Interface**
   - Large readable fonts (`RobotoMono`)
   - Compact layout optimised for phones
   - Colour contrast for visibility
 
-- 📳 **Haptic Feedback**
+- **Haptic Feedback**
   - Vibrates when the timer ends
 
-- 🪄 **Open Source & Offline**
+- **Open Source & Offline**
   - No ads, no tracking, no internet required
 
 ---
 
-## 📦 Installation
+## Installation
 
-### 🧭 From F-Droid (recommended)
+### From F-Droid (recommended)
 *(Pending approval — will update when published)*
 
 You’ll soon find **HEMA Scoring Machine** on [F-Droid](https://f-droid.org/).
 
-### 🛠️ Manual Install
+### Manual Install
 1. Download the latest `.apk` from [Releases](https://github.com/kstepanovdev/gdf_hema_timer/releases)
 2. Enable “Install unknown apps” on your Android device
 3. Open the file to install
 
 ---
 
-## 🧰 Build from Source
+## Build from Source
 
 You can build and sign it yourself:
 
@@ -63,7 +63,7 @@ flutter pub get
 flutter build apk --release
 ```
 
-## 🤝 Contributing
+## Contributing
 Contributions are welcome!
   1. Fork the repo
   2. Create a new branch: git checkout -b feature/my-improvement
