@@ -1,7 +1,7 @@
 ---
 name: Build & Release APK
 
-"on":
+'on':
   push:
     tags:
       - "v*" # Trigger when pushing a tag like v1.0.0
@@ -42,19 +42,14 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Build release APK
+      - name: Build release APKs (per ABI)
         run: flutter build apk --release --obfuscate --split-debug-info=./debug-info --split-per-abi
 
-      - name: Rename APK
-        run: |
-          TAG=${GITHUB_REF_NAME}
-          mv build/app/outputs/flutter-apk/app-arm64-v8a-release.apk GDF_HEMA_Timer_${TAG}.apk
-
-      - name: Upload APK Artifact
+      - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: GDF_HEMA_Timer
-          path: GDF_HEMA_Timer_*.apk
+          name: apk-builds
+          path: build/app/outputs/flutter-apk/*.apk
 
   release:
     needs: build
@@ -65,10 +60,11 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Download built artifact
+      - name: Download built APKs
         uses: actions/download-artifact@v4
         with:
-          name: GDF_HEMA_Timer
+          name: apk-builds
+          path: dist/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -76,6 +72,6 @@ jobs:
           tag_name: ${{ github.ref_name }}
           name: GDF HEMA Timer ${{ github.ref_name }}
           generate_release_notes: true
-          files: GDF_HEMA_Timer_${{ github.ref_name }}.apk
+          files: dist/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
