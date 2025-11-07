@@ -1,0 +1,12 @@
+GDF HEMA Timer is a precise and minimal timer designed for Historical European Martial Arts (HEMA) training.
+It helps fencers, instructors, and tournament organizers manage timing during drills, bouts, and sparring sessions.
+
+Features:
+- Simple interface with large, readable display
+- Configurable round and break durations
+- Audible and vibration alerts for start and end signals
+- Preset saving for repeated training routines
+- Works fully offline, with no ads or tracking
+- Open-source and lightweight
+
+This timer is developed by practitioners for practitioners, focusing on reliability and clarity during intense training sessions.
