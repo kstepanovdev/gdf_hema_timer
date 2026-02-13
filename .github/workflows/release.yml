@@ -5,28 +5,22 @@ name: Build & Release APK
   push:
     tags:
       - "v*" # Trigger when pushing a tag like v1.0.0
-
 permissions:
   contents: write
-
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Setup Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: '3.35.4'
+          flutter-version: '3.41.0'
           channel: stable
           cache: true
-
       - name: Install dependencies
         run: flutter pub get
-
       - name: Restore keystore and key.properties
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
@@ -41,37 +35,30 @@ jobs:
           KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
-
       - name: Build release APKs (per ABI)
         run: flutter build apk --release --obfuscate --split-debug-info=./debug-info --split-per-abi
-
       - name: Upload APK Artifacts
         uses: actions/upload-artifact@v4
         with:
           name: apk-builds
           path: build/app/outputs/flutter-apk/*.apk
-
   release:
     needs: build
     runs-on: ubuntu-latest
     if: startsWith(github.ref, 'refs/tags/')
-
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Download built APKs
         uses: actions/download-artifact@v4
         with:
           name: apk-builds
           path: dist/
-
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: ${{ github.ref_name }}
-          name: GDF HEMA Timer ${{ github.ref_name }}
-          generate_release_notes: true
-          files: dist/*.apk
+        run: |
+          gh release create "${{ github.ref_name }}" \
+            --title "GDF HEMA Timer ${{ github.ref_name }}" \
+            --generate-notes \
+            dist/*.apk
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
