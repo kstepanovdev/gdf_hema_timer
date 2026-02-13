@@ -176,99 +176,103 @@ class _ScorePageState extends State<ScorePage> {
         child: LayoutBuilder(
           builder: (context, constraints) {
             return SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: ResetButton(
-                        label: "Reset",
-                        color: Colors.red,
-                        onPressed: resetAll,
-                        onLongPress: resetTimerOnly,
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: ResetButton(
+                          label: "Reset",
+                          color: Colors.red,
+                          onPressed: resetAll,
+                          onLongPress: resetTimerOnly,
+                        ),
                       ),
-                    ),
-                    const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                    TimerDisplay(
-                      time: formatTime(timer),
-                      fontSize: 60,
-                      onLongPress: () async {
-                        final newTime = await showTimeSelectDialog(context);
-                        if (newTime != null) {
-                          resetAll();
-                          setState(() => timer = newTime);
-                        }
-                      },
-                    ),
-
-                    const SizedBox(height: 10),
-                    ScoreBoard(
-                      leftName: leftName,
-                      rightName: rightName,
-                      leftScore: leftScore,
-                      rightScore: rightScore,
-                      onLeftChanged: (v) => setState(() => leftScore = v),
-                      onRightChanged: (v) => setState(() => rightScore = v),
-                      swapFighters: swapFighters,
-                    ),
-                    const SizedBox(height: 10),
-
-                    SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: BigButton(
-                        label: "START",
-                        color: Colors.deepPurple,
-                        fontSize: 40,
-                        onPressed: startTimer,
+                      TimerDisplay(
+                        time: formatTime(timer),
+                        fontSize: 60,
+                        onLongPress: () async {
+                          final newTime = await showTimeSelectDialog(context);
+                          if (newTime != null) {
+                            resetAll();
+                            setState(() => timer = newTime);
+                          }
+                        },
                       ),
-                    ),
 
-                    GestureDetector(
-                      onVerticalDragUpdate: (details) {
-                        if (details.primaryDelta != null &&
-                            details.primaryDelta! < -10) {
-                          FightLogView.show(context, fightLog);
-                        }
-                      },
-                      child: LogHandlePanel(fightLog: fightLog),
-                    ),
+                      const SizedBox(height: 10),
+                      ScoreBoard(
+                        leftName: leftName,
+                        rightName: rightName,
+                        leftScore: leftScore,
+                        rightScore: rightScore,
+                        onLeftChanged: (v) => setState(() => leftScore = v),
+                        onRightChanged: (v) => setState(() => rightScore = v),
+                        swapFighters: swapFighters,
+                      ),
+                      const SizedBox(height: 10),
 
-                    const SizedBox(height: 10),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 150,
+                        child: BigButton(
+                          label: "START",
+                          color: Colors.deepPurple,
+                          fontSize: 40,
+                          onPressed: startTimer,
+                        ),
+                      ),
 
-                    TimeControl(
-                      onMinus1: () => setState(() {
-                        timer = timer > const Duration(seconds: 1)
-                            ? timer - const Duration(seconds: 1)
-                            : Duration.zero;
-                      }),
-                      onPlus3: () =>
-                          setState(() => timer += const Duration(seconds: 3)),
-                      onPlus5: () =>
-                          setState(() => timer += const Duration(seconds: 5)),
-                    ),
+                      GestureDetector(
+                        onVerticalDragUpdate: (details) {
+                          if (details.primaryDelta != null &&
+                              details.primaryDelta! < -10) {
+                            FightLogView.show(context, fightLog);
+                          }
+                        },
+                        child: LogHandlePanel(fightLog: fightLog),
+                      ),
 
-                    const SizedBox(height: 10),
+                      const SizedBox(height: 10),
 
-                    PenaltiesControl(
-                      leftWarning: leftWarning,
-                      rightWarning: rightWarning,
-                      leftCaution: leftCaution,
-                      rightCaution: rightCaution,
-                      doubleHits: doubleHits,
-                      onLeftWarningChanged: (v) =>
-                          setState(() => leftWarning = v),
-                      onRightWarningChanged: (v) =>
-                          setState(() => rightWarning = v),
-                      onLeftCautionChanged: (v) =>
-                          setState(() => leftCaution = v),
-                      onRightCautionChanged: (v) =>
-                          setState(() => rightCaution = v),
-                      onDoubleChanged: (v) => setState(() => doubleHits = v),
-                    ),
-                  ],
+                      TimeControl(
+                        onMinus1: () => setState(() {
+                          timer = timer > const Duration(seconds: 1)
+                              ? timer - const Duration(seconds: 1)
+                              : Duration.zero;
+                        }),
+                        onPlus3: () =>
+                            setState(() => timer += const Duration(seconds: 3)),
+                        onPlus5: () =>
+                            setState(() => timer += const Duration(seconds: 5)),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      PenaltiesControl(
+                        leftWarning: leftWarning,
+                        rightWarning: rightWarning,
+                        leftCaution: leftCaution,
+                        rightCaution: rightCaution,
+                        doubleHits: doubleHits,
+                        onLeftWarningChanged: (v) =>
+                            setState(() => leftWarning = v),
+                        onRightWarningChanged: (v) =>
+                            setState(() => rightWarning = v),
+                        onLeftCautionChanged: (v) =>
+                            setState(() => leftCaution = v),
+                        onRightCautionChanged: (v) =>
+                            setState(() => rightCaution = v),
+                        onDoubleChanged: (v) => setState(() => doubleHits = v),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );
