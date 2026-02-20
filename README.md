@@ -41,9 +41,10 @@ Designed for clarity, speed, and offline use during tournaments and sparring ses
 ## Installation
 
 ### From F-Droid (recommended)
-*(Pending approval — will update when published)*
+[F-Droid GDF HEMA Timer](https://f-droid.org/en/packages/com.gdf.hema_timer)
 
-You’ll soon find **HEMA Scoring Machine** on [F-Droid](https://f-droid.org/).
+### From App Store
+[App Store GDF HEMA Timer](https://apps.apple.com/us/app/gdf-hema-timer/id6754407702)
 
 ### Manual Install
 1. Download the latest `.apk` from [Releases](https://github.com/kstepanovdev/gdf_hema_timer/releases)
