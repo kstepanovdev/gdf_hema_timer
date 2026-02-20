@@ -1,0 +1,2 @@
+- Pin main screen to the button to improve ergonomics for one-handed usage
+- Update flutter and dependencies versions
