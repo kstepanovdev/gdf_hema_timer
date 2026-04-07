@@ -4,8 +4,8 @@ import 'package:gdf_hema_timer/modules/timer/storage.dart';
 String formatTime(Duration d) {
   final minutes = d.inMinutes.remainder(60).toString().padLeft(2, '0');
   final seconds = d.inSeconds.remainder(60).toString().padLeft(2, '0');
-  final millis = d.inMilliseconds.remainder(1000).toString().padLeft(3, '0');
-  return "$minutes:$seconds.$millis";
+  final centis = (d.inMilliseconds.remainder(1000) ~/ 10).toString().padLeft(2, '0');
+  return "$minutes:$seconds.$centis";
 }
 
 Future<Duration?> showTimeSelectDialog(BuildContext context) async {
