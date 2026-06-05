@@ -13,7 +13,9 @@ import '../widgets/penalties_control.dart';
 import '../utils/time_utils.dart';
 import '../modules/fight_log/fight_log.dart';
 import '../modules/fight_log/fight_log_view.dart';
+import '../modules/help/help_storage.dart';
 import '../widgets/log_handle_panel.dart';
+import '../widgets/help_dialog.dart';
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -44,6 +46,15 @@ class _ScorePageState extends State<ScorePage> {
   void initState() {
     super.initState();
     _loadTimer();
+    _maybeShowHelp();
+  }
+
+  Future<void> _maybeShowHelp() async {
+    if (!await loadShowHelpOnLaunch()) return;
+    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) HelpDialog.show(context);
+    });
   }
 
   Future<void> _loadTimer() async {
@@ -183,6 +194,16 @@ class _ScorePageState extends State<ScorePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: IconButton(
+                          icon: const Icon(Icons.help_outline),
+                          color: Colors.grey,
+                          tooltip: "How to use",
+                          onPressed: () =>
+                              HelpDialog.show(context, showSkipOption: false),
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: ResetButton(
