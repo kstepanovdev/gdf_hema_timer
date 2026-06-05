@@ -194,16 +194,6 @@ class _ScorePageState extends State<ScorePage> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
-                      Align(
-                        alignment: Alignment.centerRight,
-                        child: IconButton(
-                          icon: const Icon(Icons.help_outline),
-                          color: Colors.grey,
-                          tooltip: "How to use",
-                          onPressed: () =>
-                              HelpDialog.show(context, showSkipOption: false),
-                        ),
-                      ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: ResetButton(
