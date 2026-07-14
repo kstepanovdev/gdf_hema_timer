@@ -3,7 +3,7 @@ import '../../utils/time_utils.dart';
 import 'fight_event.dart';
 
 /// Renders a structured [FightEvent] into a localized log line, e.g.
-/// `"01:15 - Point to F1"`.
+/// `"01:15 - 2 : 0"`.
 ///
 /// Pure function of the event plus the current localization — events are
 /// self-describing (they carry the fighter's name). The exhaustive `switch`
@@ -12,7 +12,8 @@ import 'fight_event.dart';
 String formatFightEvent(FightEvent event, AppLocalizations l10n) {
   final message = switch (event) {
     FightStarted() => l10n.logFightStarted,
-    ScoreChanged(:final fighter) => l10n.logPointTo(fighter),
+    ScoreChanged(:final leftTotal, :final rightTotal) =>
+      '$leftTotal : $rightTotal',
     PenaltyChanged(:final fighter, :final kind) => switch (kind) {
       PenaltyKind.warning => l10n.logWarningTo(fighter),
       PenaltyKind.caution => l10n.logCautionTo(fighter),

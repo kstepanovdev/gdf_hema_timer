@@ -27,10 +27,12 @@ class FightLogView {
               : ListView.builder(
                   itemCount: events.length,
                   itemBuilder: (context, index) {
+                    // Show most-recent first: index 0 is the last event.
+                    final event = events[events.length - 1 - index];
                     return Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4.0),
                       child: Text(
-                        formatFightEvent(events[index], l10n),
+                        formatFightEvent(event, l10n),
                         style: const TextStyle(fontSize: 16),
                       ),
                     );

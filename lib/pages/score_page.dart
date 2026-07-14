@@ -112,9 +112,8 @@ class _ScorePageState extends State<ScorePage> {
     fightLog.emit(
       ScoreChanged(
         timer,
-        fighter: _nameOf(fighter),
-        delta: delta,
-        total: newValue,
+        leftTotal: leftScore,
+        rightTotal: rightScore,
       ),
     );
   }

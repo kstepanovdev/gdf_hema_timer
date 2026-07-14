@@ -22,6 +22,7 @@
   "yehorsSpecialSubtitle": "Play a sound on Double hit",
   "showTutorial": "Show tutorial",
   "language": "Language",
+  "systemDefault": "System default",
   "selectTime": "Select Time",
   "cancel": "Cancel",
   "ok": "OK",
@@ -44,12 +45,6 @@
   "dragUpForLogs": "Drag up for logs",
   "noEventsYet": "No events yet",
   "logFightStarted": "Fight started",
-  "logPointTo": "Point to {name}",
-  "@logPointTo": {
-    "placeholders": {
-      "name": { "type": "String" }
-    }
-  },
   "logWarningTo": "Warning to {name}",
   "@logWarningTo": {
     "placeholders": {

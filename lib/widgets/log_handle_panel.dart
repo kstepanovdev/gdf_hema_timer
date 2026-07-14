@@ -22,11 +22,14 @@ class LogHandlePanel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // The faint overlay that reads fine on a light background all but vanishes
+    // on a dark one, so lift the alpha in dark theme to keep the handle visible.
+    final isDark = Theme.of(context).brightness == Brightness.dark;
     return Container(
       width: double.infinity,
       // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
+        color: Theme.of(context).colorScheme.onSurface.withAlpha(isDark ? 45 : 20),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(

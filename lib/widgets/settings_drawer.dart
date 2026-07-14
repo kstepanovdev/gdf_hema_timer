@@ -57,24 +57,30 @@ class SettingsDrawer extends StatelessWidget {
             ValueListenableBuilder<Locale?>(
               valueListenable: localeOverride,
               builder: (context, locale, _) {
-                // Only the languages we actually ship are offered. When no
-                // explicit choice is stored, reflect whichever supported locale
-                // is currently active.
-                final active =
-                    locale?.languageCode ??
-                    Localizations.localeOf(context).languageCode;
+                // `null` = follow the system locale (falls back to English when
+                // the system language isn't one we ship). A stored override
+                // pins one of the languages we actually offer.
                 return ListTile(
                   leading: const Icon(Icons.language),
                   title: Text(l10n.language),
-                  trailing: DropdownButton<String>(
-                    value: active,
+                  trailing: DropdownButton<String?>(
+                    value: locale?.languageCode,
                     underline: const SizedBox.shrink(),
-                    onChanged: (code) {
-                      if (code != null) setLocale(Locale(code));
-                    },
-                    items: const [
-                      DropdownMenuItem(value: 'en', child: Text('English')),
-                      DropdownMenuItem(value: 'uk', child: Text('Українська')),
+                    onChanged: (code) =>
+                        setLocale(code == null ? null : Locale(code)),
+                    items: [
+                      DropdownMenuItem(
+                        value: null,
+                        child: Text(l10n.systemDefault),
+                      ),
+                      const DropdownMenuItem(
+                        value: 'en',
+                        child: Text('English'),
+                      ),
+                      const DropdownMenuItem(
+                        value: 'uk',
+                        child: Text('Українська'),
+                      ),
                     ],
                   ),
                 );

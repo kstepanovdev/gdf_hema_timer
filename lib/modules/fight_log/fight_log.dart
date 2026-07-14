@@ -13,8 +13,10 @@ class FightLog {
   List<FightEvent> get events => List.unmodifiable(_events);
   bool get isEmpty => _events.isEmpty;
 
-  /// Emits an event into the log. Corrections (negative deltas) pass through
-  /// here but are not appended to the recorded history.
+  /// Emits an event into the log. Penalty/double-hit corrections (negative
+  /// deltas) pass through here but are not appended to the recorded history.
+  /// Score changes are always kept — including decrements — since each entry
+  /// records the resulting scoreline, so a decrement reads as a valid state.
   void emit(FightEvent event) {
     if (_isCorrection(event)) return;
     _events.add(event);
@@ -35,7 +37,7 @@ class FightLog {
   }
 
   static bool _isCorrection(FightEvent event) => switch (event) {
-    ScoreChanged(:final delta) => delta < 0,
+    ScoreChanged() => false,
     PenaltyChanged(:final delta) => delta < 0,
     DoubleHitChanged(:final delta) => delta < 0,
     FightStarted() => false,

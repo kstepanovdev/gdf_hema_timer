@@ -24,20 +24,20 @@ final class FightStarted extends FightEvent {
   const FightStarted(super.clock);
 }
 
-/// A fighter's score changed by [delta] (to [total]).
+/// The score changed, captured as the resulting scoreline
+/// ([leftTotal] : [rightTotal]) at the moment it happened.
 ///
-/// [fighter] is the fighter's name captured when the event occurred, so the
-/// attribution is correct even if sides are later swapped.
+/// The full scoreline is snapshotted so the log can show the score as it stood,
+/// which stays correct regardless of any later side swaps. Decrements are
+/// recorded too — each entry is a valid state, not a delta.
 final class ScoreChanged extends FightEvent {
-  final String fighter;
-  final int delta;
-  final int total;
+  final int leftTotal;
+  final int rightTotal;
 
   const ScoreChanged(
     super.clock, {
-    required this.fighter,
-    required this.delta,
-    required this.total,
+    required this.leftTotal,
+    required this.rightTotal,
   });
 }
 

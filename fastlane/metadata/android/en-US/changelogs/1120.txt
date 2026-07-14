@@ -1,0 +1,6 @@
+- Fight log now shows the score at each moment (e.g. "2 : 0") instead of naming the fighter
+- Removing a point is now recorded in the log too
+- Log lists the most recent event first
+- New "System default" language option that follows your device language (falls back to English)
+- Ukrainian penalty labels now use a condensed font and a consistent size so longer words fit
+- Log handle is easier to see in dark theme

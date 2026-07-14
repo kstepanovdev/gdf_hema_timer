@@ -78,6 +78,9 @@ class AppLocalizationsUk extends AppLocalizations {
   String get language => 'Мова';
 
   @override
+  String get systemDefault => 'Як у системі';
+
+  @override
   String get selectTime => 'Оберіть час';
 
   @override
@@ -107,11 +110,6 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String get logFightStarted => 'Бій розпочато';
-
-  @override
-  String logPointTo(String name) {
-    return 'Очко для $name';
-  }
 
   @override
   String logWarningTo(String name) {

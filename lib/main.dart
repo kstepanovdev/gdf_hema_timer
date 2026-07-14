@@ -31,6 +31,24 @@ class ScoreApp extends StatelessWidget {
           locale: localeOverride.value,
           localizationsDelegates: AppLocalizations.localizationsDelegates,
           supportedLocales: AppLocalizations.supportedLocales,
+          // `locale: null` follows the system locale; resolve it against what
+          // we ship and fall back to English when the system language isn't
+          // one of them.
+          localeResolutionCallback: (locale, supported) {
+            for (final s in supported) {
+              if (s.languageCode == locale?.languageCode) return s;
+            }
+            return const Locale('en');
+          },
+          // Swap to the condensed font for the Ukrainian UI only. Runs below
+          // Localizations, so the resolved locale is available here.
+          builder: (context, child) {
+            if (child == null) return const SizedBox.shrink();
+            final isUk = Localizations.localeOf(context).languageCode == 'uk';
+            return isUk
+                ? Theme(data: AppTheme.withUkFont(Theme.of(context)), child: child)
+                : child;
+          },
           home: const ScorePage(),
         );
       },

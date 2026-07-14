@@ -77,6 +77,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Language';
 
   @override
+  String get systemDefault => 'System default';
+
+  @override
   String get selectTime => 'Select Time';
 
   @override
@@ -106,11 +109,6 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get logFightStarted => 'Fight started';
-
-  @override
-  String logPointTo(String name) {
-    return 'Point to $name';
-  }
 
   @override
   String logWarningTo(String name) {

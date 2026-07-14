@@ -230,6 +230,12 @@ abstract class AppLocalizations {
   /// **'Language'**
   String get language;
 
+  /// No description provided for @systemDefault.
+  ///
+  /// In en, this message translates to:
+  /// **'System default'**
+  String get systemDefault;
+
   /// No description provided for @selectTime.
   ///
   /// In en, this message translates to:
@@ -283,12 +289,6 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Fight started'**
   String get logFightStarted;
-
-  /// No description provided for @logPointTo.
-  ///
-  /// In en, this message translates to:
-  /// **'Point to {name}'**
-  String logPointTo(String name);
 
   /// No description provided for @logWarningTo.
   ///

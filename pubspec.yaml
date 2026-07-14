@@ -16,7 +16,7 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.1.9+119
+version: 1.1.20+1120
 
 environment:
   sdk: ^3.9.2
@@ -69,6 +69,14 @@ flutter:
     - family: Roboto
       fonts:
         - asset: assets/fonts/RobotoMono-Regular.ttf
+    # Condensed sans used for the Ukrainian UI so long Cyrillic labels
+    # (e.g. "Попередження") fit at a readable size. OFL — see
+    # assets/fonts/PTSansNarrow-OFL.txt.
+    - family: PTSansNarrow
+      fonts:
+        - asset: assets/fonts/PTSansNarrow-Regular.ttf
+        - asset: assets/fonts/PTSansNarrow-Bold.ttf
+          weight: 700
 
   # To add assets to your application, add an assets section, like this:
   # assets:
