@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../theme/app_colors.dart';
 import 'big_button.dart';
 
@@ -16,13 +17,14 @@ class TimeControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final s = AppLocalizations.of(context).secondsShort;
     return Column(
       children: [
         Row(
           children: [
             Expanded(
               child: BigButton(
-                label: "-1s",
+                label: "-1$s",
                 color: AppColors.neutral,
                 onPressed: onMinus1,
               ),
@@ -30,7 +32,7 @@ class TimeControl extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: BigButton(
-                label: "+3s",
+                label: "+3$s",
                 color: AppColors.neutral,
                 onPressed: onPlus3,
               ),
@@ -38,7 +40,7 @@ class TimeControl extends StatelessWidget {
             const SizedBox(width: 8),
             Expanded(
               child: BigButton(
-                label: "+5s",
+                label: "+5$s",
                 color: AppColors.neutral,
                 onPressed: onPlus5,
               ),

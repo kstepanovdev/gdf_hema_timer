@@ -37,6 +37,10 @@
       "count": { "type": "int" }
     }
   },
+  "secondsShort": "s",
+  "@secondsShort": {
+    "description": "Abbreviation for seconds used on the time-adjust buttons, e.g. the 's' in '+3s'."
+  },
   "dragUpForLogs": "Drag up for logs",
   "noEventsYet": "No events yet",
   "logFightStarted": "Fight started",

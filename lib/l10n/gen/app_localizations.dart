@@ -260,6 +260,12 @@ abstract class AppLocalizations {
   /// **'{count} s'**
   String secondsLabel(int count);
 
+  /// Abbreviation for seconds used on the time-adjust buttons, e.g. the 's' in '+3s'.
+  ///
+  /// In en, this message translates to:
+  /// **'s'**
+  String get secondsShort;
+
   /// No description provided for @dragUpForLogs.
   ///
   /// In en, this message translates to:

@@ -21,10 +21,10 @@ class AppLocalizationsUk extends AppLocalizations {
   String get stop => 'Стоп';
 
   @override
-  String get warning => 'Попередження';
+  String get warning => 'Зауваження';
 
   @override
-  String get caution => 'Застереження';
+  String get caution => 'Попередження';
 
   @override
   String get double => 'Обопільні';
@@ -97,6 +97,9 @@ class AppLocalizationsUk extends AppLocalizations {
   }
 
   @override
+  String get secondsShort => 'с';
+
+  @override
   String get dragUpForLogs => 'Потягніть вгору для журналу';
 
   @override
@@ -112,12 +115,12 @@ class AppLocalizationsUk extends AppLocalizations {
 
   @override
   String logWarningTo(String name) {
-    return 'Попередження для $name';
+    return 'Зауваження для $name';
   }
 
   @override
   String logCautionTo(String name) {
-    return 'Застереження для $name';
+    return 'Попередження для $name';
   }
 
   @override

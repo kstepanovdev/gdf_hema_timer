@@ -96,6 +96,9 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
+  String get secondsShort => 's';
+
+  @override
   String get dragUpForLogs => 'Drag up for logs';
 
   @override
