@@ -1,0 +1,2 @@
+- Faster sound on double hit — no more delay before playback
+- Localized the seconds unit on the time-adjust buttons

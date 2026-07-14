@@ -54,6 +54,17 @@ class _ScorePageState extends State<ScorePage> {
     super.initState();
     _loadTimer();
     _maybeShowHelp();
+    _initBruhPlayer();
+  }
+
+  /// Preloads the "bruh" sound so playback starts instantly. Without this,
+  /// [AudioPlayer.play] would set the source (read the asset) on every hit,
+  /// which caused a noticeable delay before the sound was heard.
+  /// [ReleaseMode.stop] keeps the source loaded after playback completes
+  /// (the default [ReleaseMode.release] frees it, reintroducing the delay).
+  Future<void> _initBruhPlayer() async {
+    await _bruhPlayer.setReleaseMode(ReleaseMode.stop);
+    await _bruhPlayer.setSource(AssetSource('sounds/bruh.mp3'));
   }
 
   @override
@@ -66,8 +77,10 @@ class _ScorePageState extends State<ScorePage> {
   /// Plays the "bruh" sound effect when Yehor's special is enabled.
   void _playBruh() {
     if (!yehorsSpecialEnabled.value) return;
-    _bruhPlayer.stop();
-    _bruhPlayer.play(AssetSource('sounds/bruh.mp3'));
+    // Source is preloaded in [_initBruhPlayer]; rewind + resume replays it
+    // immediately without re-preparing the player.
+    _bruhPlayer.seek(Duration.zero);
+    _bruhPlayer.resume();
   }
 
   Future<void> _maybeShowHelp() async {
