@@ -1,0 +1,62 @@
+{
+  "@@locale": "en",
+  "appTitle": "Scoreboard",
+  "reset": "Reset",
+  "start": "START",
+  "stop": "Stop",
+  "warning": "Warning",
+  "caution": "Caution",
+  "double": "Double",
+  "helpTitle": "How to use",
+  "helpTap": "Tap a number to add a point.",
+  "helpLongPress": "Long-press a number to remove a point.",
+  "helpTimer": "Long-press the timer to change the round time.",
+  "helpLog": "Drag the log bar up to open the fight log.",
+  "helpResetScore": "Long-press Reset to reset the score (keeps the time).",
+  "helpSettings": "Swipe from the left edge to open Settings — dark theme, sounds, and this guide live there.",
+  "dontShowAgain": "Don't show this again",
+  "continueLabel": "Continue",
+  "settingsTitle": "Settings",
+  "darkTheme": "Dark theme",
+  "yehorsSpecial": "Yehor's special",
+  "yehorsSpecialSubtitle": "Play a sound on Double hit",
+  "showTutorial": "Show tutorial",
+  "language": "Language",
+  "selectTime": "Select Time",
+  "cancel": "Cancel",
+  "ok": "OK",
+  "minutesLabel": "{count} m",
+  "@minutesLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "secondsLabel": "{count} s",
+  "@secondsLabel": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "dragUpForLogs": "Drag up for logs",
+  "noEventsYet": "No events yet",
+  "logFightStarted": "Fight started",
+  "logPointTo": "Point to {name}",
+  "@logPointTo": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "logWarningTo": "Warning to {name}",
+  "@logWarningTo": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "logCautionTo": "Caution to {name}",
+  "@logCautionTo": {
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "logDoubleHit": "Double hit"
+}

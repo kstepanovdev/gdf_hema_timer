@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gdf_hema_timer/l10n/gen/app_localizations.dart';
 import 'package:gdf_hema_timer/modules/timer/storage.dart';
 
 String formatTime(Duration d) {
@@ -15,10 +16,11 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
   return showDialog<Duration>(
     context: context,
     builder: (ctx) {
+      final l10n = AppLocalizations.of(ctx);
       return StatefulBuilder(
         builder: (context, setState) {
           return AlertDialog(
-            title: const Text('Select Time'),
+            title: Text(l10n.selectTime),
             content: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -27,7 +29,10 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                   value: minutes,
                   items: List.generate(
                     11,
-                    (i) => DropdownMenuItem(value: i, child: Text('$i m')),
+                    (i) => DropdownMenuItem(
+                      value: i,
+                      child: Text(l10n.minutesLabel(i)),
+                    ),
                   ),
                   onChanged: (val) {
                     if (val != null) {
@@ -45,7 +50,7 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                     final value = i * 30;
                     return DropdownMenuItem(
                       value: value,
-                      child: Text("$value s"),
+                      child: Text(l10n.secondsLabel(value)),
                     );
                   }),
 
@@ -62,7 +67,7 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(ctx),
-                child: const Text('Cancel'),
+                child: Text(l10n.cancel),
               ),
               TextButton(
                 onPressed: () {
@@ -70,7 +75,7 @@ Future<Duration?> showTimeSelectDialog(BuildContext context) async {
                   saveTimerValue(newTimer);
                   Navigator.pop(ctx, newTimer);
                 },
-                child: const Text('OK'),
+                child: Text(l10n.ok),
               ),
             ],
           );

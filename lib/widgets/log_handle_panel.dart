@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../modules/fight_log/fight_log.dart';
+import '../theme/app_colors.dart';
 
 /// A small bottom panel that can be tapped or dragged up to open the fight log.
 ///
@@ -24,15 +26,15 @@ class LogHandlePanel extends StatelessWidget {
       width: double.infinity,
       // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
       decoration: BoxDecoration(
-        color: Colors.black.withAlpha(30),
+        color: Theme.of(context).colorScheme.onSurface.withAlpha(20),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
-        children: const [
-          Icon(Icons.keyboard_arrow_up, size: 30, color: Colors.grey),
+        children: [
+          const Icon(Icons.keyboard_arrow_up, size: 30, color: AppColors.hint),
           Text(
-            "Drag up for logs",
-            style: TextStyle(color: Colors.grey, fontSize: 14),
+            AppLocalizations.of(context).dragUpForLogs,
+            style: const TextStyle(color: AppColors.hint, fontSize: 14),
           ),
         ],
       ),

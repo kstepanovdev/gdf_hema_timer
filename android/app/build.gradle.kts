@@ -29,6 +29,13 @@ android {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
 
+    dependenciesInfo {
+        // Disables dependency metadata when building APKs (required by F-Droid).
+        includeInApk = false
+        // Disables dependency metadata when building Android App Bundles.
+        includeInBundle = false
+    }
+
     defaultConfig {
         applicationId = "com.gdf.hema_timer"
         // You can update the following values to match your application needs.

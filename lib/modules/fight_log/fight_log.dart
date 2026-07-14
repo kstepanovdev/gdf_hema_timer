@@ -1,115 +1,43 @@
-import 'package:gdf_hema_timer/modules/timer/storage.dart';
-import 'package:gdf_hema_timer/utils/time_utils.dart';
+import 'fight_event.dart';
 
+/// The recorded history of a bout, as a list of structured [FightEvent]s.
+///
+/// Actions are reported through [emit] — a single, uniform entry point.
+/// Recording *policy* lives here, not in the UI: correction actions (a negative
+/// delta from a long-press) are emitted like anything else but are intentionally
+/// **not** kept in the persisted history.
 class FightLog {
-  final List<String> _events = [];
+  final List<FightEvent> _events = [];
+  bool _started = false;
 
-  // Previous snapshot
-  int _prevLeftScore = 0;
-  int _prevRightScore = 0;
-  int _prevLeftWarning = 0;
-  int _prevRightWarning = 0;
-  int _prevLeftCaution = 0;
-  int _prevRightCaution = 0;
-  int _prevDoubleHits = 0;
-
-  bool _fightStarted = false;
-
-  List<String> get events => List.unmodifiable(_events);
-
-  void startFight() async {
-    if (!_fightStarted) {
-      reset();
-      Duration fightTimeFormat = await loadTimerValue();
-      addEvent("Fight started", fightTimeFormat);
-    }
-    _fightStarted = true;
-  }
-
-  void addSeparator() {
-    _events.add("--------------------------");
-  }
-
-  void addEvent(String message, Duration elapsedTime) async {
-    Duration fightTimeFormat = await loadTimerValue();
-    final diff = formatTime(fightTimeFormat - elapsedTime);
-    _events.add("$diff - $message");
-  }
-
-  /// Diff-based snapshot
-  void logDiff({
-    required int leftScore,
-    required int rightScore,
-    required int leftWarning,
-    required int rightWarning,
-    required int leftCaution,
-    required int rightCaution,
-    required int doubleHits,
-    required String leftName,
-    required String rightName,
-    required Duration elapsedTime,
-  }) {
-    // Score changed?
-    if (leftScore != _prevLeftScore || rightScore != _prevRightScore) {
-      addEvent("$leftScore:$rightScore", elapsedTime);
-    }
-
-    // Left warns diff
-    if (leftWarning > _prevLeftWarning) {
-      final diff = leftWarning - _prevLeftWarning;
-      for (int i = 0; i < diff; i++) {
-        addEvent("warning to $leftName", elapsedTime);
-      }
-    }
-
-    // Right warns diff
-    if (rightWarning > _prevRightWarning) {
-      final diff = rightWarning - _prevRightWarning;
-      for (int i = 0; i < diff; i++) {
-        addEvent("warning to $rightName", elapsedTime);
-      }
-    }
-
-    if (leftCaution > _prevLeftCaution) {
-      final diff = leftCaution - _prevLeftCaution;
-      for (int i = 0; i < diff; i++) {
-        addEvent("caution to $leftName", elapsedTime);
-      }
-    }
-
-    if (rightCaution > _prevRightCaution) {
-      final diff = rightCaution - _prevRightCaution;
-      for (int i = 0; i < diff; i++) {
-        addEvent("caution to $rightName", elapsedTime);
-      }
-    }
-
-    // Double hits diff
-    if (doubleHits > _prevDoubleHits) {
-      final diff = doubleHits - _prevDoubleHits;
-      for (int i = 0; i < diff; i++) {
-        addEvent("double hit #${i + 1}", elapsedTime);
-      }
-    }
-
-    // Update snapshot
-    _prevLeftScore = leftScore;
-    _prevRightScore = rightScore;
-    _prevLeftWarning = leftWarning;
-    _prevRightWarning = rightWarning;
-    _prevLeftCaution = leftCaution;
-    _prevRightCaution = rightCaution;
-    _prevDoubleHits = doubleHits;
-  }
-
-  void reset() {
-    _prevLeftScore = _prevRightScore = 0;
-    _prevLeftWarning = _prevRightWarning = 0;
-    _prevLeftCaution = _prevRightCaution = 0;
-    _prevDoubleHits = 0;
-    _fightStarted = false;
-    _events.clear();
-  }
-
+  List<FightEvent> get events => List.unmodifiable(_events);
   bool get isEmpty => _events.isEmpty;
+
+  /// Emits an event into the log. Corrections (negative deltas) pass through
+  /// here but are not appended to the recorded history.
+  void emit(FightEvent event) {
+    if (_isCorrection(event)) return;
+    _events.add(event);
+  }
+
+  /// Records the one-time "fight started" marker on the first start of a bout.
+  /// No-op on subsequent starts until the log is [reset].
+  void markStarted(Duration clock) {
+    if (_started) return;
+    _started = true;
+    emit(FightStarted(clock));
+  }
+
+  /// Clears the history and arms [markStarted] again for a fresh bout.
+  void reset() {
+    _events.clear();
+    _started = false;
+  }
+
+  static bool _isCorrection(FightEvent event) => switch (event) {
+    ScoreChanged(:final delta) => delta < 0,
+    PenaltyChanged(:final delta) => delta < 0,
+    DoubleHitChanged(:final delta) => delta < 0,
+    FightStarted() => false,
+  };
 }

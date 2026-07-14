@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../modules/help/help_storage.dart';
+import '../theme/app_colors.dart';
 
 /// A short controls guide shown on launch (and re-openable on demand).
 ///
@@ -40,47 +42,52 @@ class _HelpDialogState extends State<HelpDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     return AlertDialog(
-      title: const Text("How to use"),
+      title: Text(l10n.helpTitle),
       contentPadding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
-      content: SingleChildScrollView(
+      content: SizedBox(
+        width: double.maxFinite,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const _HelpItem(
-              icon: Icons.touch_app,
-              text: "Tap a number to add a point.",
-            ),
-            const _HelpItem(
-              icon: Icons.touch_app_outlined,
-              text: "Long-press a number to remove a point.",
-            ),
-            const _HelpItem(
-              icon: Icons.timer_outlined,
-              text: "Long-press the timer to change the round time.",
-            ),
-            const _HelpItem(
-              icon: Icons.keyboard_arrow_up,
-              text: "Drag the log bar up to open the fight log.",
+            // The guide items scroll; the skip checkbox below stays pinned so
+            // it is always visible even when the text is long.
+            Flexible(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _HelpItem(icon: Icons.touch_app, text: l10n.helpTap),
+                    _HelpItem(
+                      icon: Icons.touch_app_outlined,
+                      text: l10n.helpLongPress,
+                    ),
+                    _HelpItem(icon: Icons.timer_outlined, text: l10n.helpTimer),
+                    _HelpItem(icon: Icons.keyboard_arrow_up, text: l10n.helpLog),
+                    _HelpItem(
+                      icon: Icons.restart_alt,
+                      text: l10n.helpResetScore,
+                    ),
+                    _HelpItem(icon: Icons.menu, text: l10n.helpSettings),
+                  ],
+                ),
+              ),
             ),
             if (widget.showSkipOption) ...[
-              const SizedBox(height: 8),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 0),
-                child: InkWell(
-                  onTap: () => setState(() => _skip = !_skip),
-                  child: Row(
-                    children: [
-                      Checkbox(
-                        value: _skip,
-                        onChanged: (v) => setState(() => _skip = v ?? false),
-                      ),
-                      const Expanded(
-                        child: Text("Don't show this again"),
-                      ),
-                    ],
-                  ),
+              const Divider(height: 8),
+              InkWell(
+                onTap: () => setState(() => _skip = !_skip),
+                child: Row(
+                  children: [
+                    Checkbox(
+                      value: _skip,
+                      onChanged: (v) => setState(() => _skip = v ?? false),
+                    ),
+                    Expanded(child: Text(l10n.dontShowAgain)),
+                  ],
                 ),
               ),
             ],
@@ -90,7 +97,7 @@ class _HelpDialogState extends State<HelpDialog> {
       actions: [
         TextButton(
           onPressed: _continue,
-          child: const Text("Continue"),
+          child: Text(l10n.continueLabel),
         ),
       ],
     );
@@ -110,7 +117,7 @@ class _HelpItem extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 26, color: Colors.deepPurple),
+          Icon(icon, size: 26, color: AppColors.primary),
           const SizedBox(width: 14),
           Expanded(
             child: Text(text, style: const TextStyle(fontSize: 16)),

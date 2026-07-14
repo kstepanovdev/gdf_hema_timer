@@ -1,0 +1,6 @@
+- New settings panel — swipe from the left edge to open
+- Dark theme
+- Ukrainian language with an in-app language switcher
+- Optional sound on double hit
+- Re-open the tutorial any time from settings
+- Long-press Reset to clear the score while keeping the time

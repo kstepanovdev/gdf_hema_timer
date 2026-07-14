@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 import 'big_button.dart';
 
 class TimeControl extends StatelessWidget {
@@ -22,7 +23,7 @@ class TimeControl extends StatelessWidget {
             Expanded(
               child: BigButton(
                 label: "-1s",
-                color: Colors.blueGrey,
+                color: AppColors.neutral,
                 onPressed: onMinus1,
               ),
             ),
@@ -30,7 +31,7 @@ class TimeControl extends StatelessWidget {
             Expanded(
               child: BigButton(
                 label: "+3s",
-                color: Colors.blueGrey,
+                color: AppColors.neutral,
                 onPressed: onPlus3,
               ),
             ),
@@ -38,7 +39,7 @@ class TimeControl extends StatelessWidget {
             Expanded(
               child: BigButton(
                 label: "+5s",
-                color: Colors.blueGrey,
+                color: AppColors.neutral,
                 onPressed: onPlus5,
               ),
             ),

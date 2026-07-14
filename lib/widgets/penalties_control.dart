@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../utils/touch_number.dart';
 
 class PenaltiesControl extends StatelessWidget {
@@ -30,37 +31,34 @@ class PenaltiesControl extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     const labelStyle = TextStyle(fontSize: 23, fontWeight: FontWeight.bold);
 
-    Widget block(String label, int value, ValueChanged<int> onChanged) {
-      return Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Text(label, style: labelStyle),
-          const SizedBox(height: 6),
-          TouchNumber(
-            value: value,
-            onChanged: onChanged,
-            textStyle: const TextStyle(
-              fontSize: 65,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-        ],
+    // Labels shrink to fit their column so long translations (e.g. Ukrainian
+    // "Попередження") never overflow.
+    Widget label(String text) {
+      return FittedBox(
+        fit: BoxFit.scaleDown,
+        child: Text(text, style: labelStyle, maxLines: 1),
       );
     }
 
-    Widget doubleBlock(String label, int value, ValueChanged<int> onChanged) {
+    Widget block(
+      String text,
+      int value,
+      ValueChanged<int> onChanged, {
+      double numberSize = 65,
+    }) {
       return Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(label, style: labelStyle),
+          label(text),
           const SizedBox(height: 6),
           TouchNumber(
             value: value,
             onChanged: onChanged,
-            textStyle: const TextStyle(
-              fontSize: 75,
+            textStyle: TextStyle(
+              fontSize: numberSize,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -69,22 +67,32 @@ class PenaltiesControl extends StatelessWidget {
     }
 
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: [
-        Column(
-          children: [
-            block("Warning", leftWarning, onLeftWarningChanged),
-            const SizedBox(height: 6),
-            block("Caution", leftCaution, onLeftCautionChanged),
-          ],
+        Expanded(
+          child: Column(
+            children: [
+              block(l10n.warning, leftWarning, onLeftWarningChanged),
+              const SizedBox(height: 6),
+              block(l10n.caution, leftCaution, onLeftCautionChanged),
+            ],
+          ),
         ),
-        doubleBlock("Double", doubleHits, onDoubleChanged),
-        Column(
-          children: [
-            block("Warning", rightWarning, onRightWarningChanged),
-            const SizedBox(height: 6),
-            block("Caution", rightCaution, onRightCautionChanged),
-          ],
+        Expanded(
+          child: block(
+            l10n.double,
+            doubleHits,
+            onDoubleChanged,
+            numberSize: 75,
+          ),
+        ),
+        Expanded(
+          child: Column(
+            children: [
+              block(l10n.warning, rightWarning, onRightWarningChanged),
+              const SizedBox(height: 6),
+              block(l10n.caution, rightCaution, onRightCautionChanged),
+            ],
+          ),
         ),
       ],
     );

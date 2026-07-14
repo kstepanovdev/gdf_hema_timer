@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 
 class TimerDisplay extends StatelessWidget {
   final String time;
-  final Color color;
+
+  /// Text color. When null, follows the theme (`onSurface`) so the timer stays
+  /// legible in both light and dark themes.
+  final Color? color;
   final VoidCallback? onLongPress;
   final double fontSize;
 
@@ -10,7 +13,7 @@ class TimerDisplay extends StatelessWidget {
     super.key,
     required this.time,
     required this.fontSize,
-    this.color = Colors.black,
+    this.color,
     this.onLongPress,
   });
 
@@ -21,7 +24,7 @@ class TimerDisplay extends StatelessWidget {
       fontWeight: FontWeight.bold,
       fontSize: fontSize,
       height: 0.8,
-      color: color,
+      color: color ?? Theme.of(context).colorScheme.onSurface,
     );
 
     return GestureDetector(

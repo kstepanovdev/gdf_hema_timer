@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:gdf_hema_timer/modules/timer/storage.dart';
 import 'package:gdf_hema_timer/widgets/fight_in_progress.dart';
@@ -11,11 +12,16 @@ import '../widgets/timer_display.dart';
 import '../widgets/time_control.dart';
 import '../widgets/penalties_control.dart';
 import '../utils/time_utils.dart';
+import '../modules/fight_log/fight_event.dart';
 import '../modules/fight_log/fight_log.dart';
 import '../modules/fight_log/fight_log_view.dart';
+import '../l10n/gen/app_localizations.dart';
 import '../modules/help/help_storage.dart';
+import '../modules/settings/settings_storage.dart';
+import '../theme/app_colors.dart';
 import '../widgets/log_handle_panel.dart';
 import '../widgets/help_dialog.dart';
+import '../widgets/settings_drawer.dart';
 
 class ScorePage extends StatefulWidget {
   const ScorePage({super.key});
@@ -26,6 +32,7 @@ class ScorePage extends StatefulWidget {
 
 class _ScorePageState extends State<ScorePage> {
   final fightLog = FightLog();
+  final AudioPlayer _bruhPlayer = AudioPlayer();
 
   int leftScore = 0;
   int rightScore = 0;
@@ -49,6 +56,20 @@ class _ScorePageState extends State<ScorePage> {
     _maybeShowHelp();
   }
 
+  @override
+  void dispose() {
+    countdown?.cancel();
+    _bruhPlayer.dispose();
+    super.dispose();
+  }
+
+  /// Plays the "bruh" sound effect when Yehor's special is enabled.
+  void _playBruh() {
+    if (!yehorsSpecialEnabled.value) return;
+    _bruhPlayer.stop();
+    _bruhPlayer.play(AssetSource('sounds/bruh.mp3'));
+  }
+
   Future<void> _maybeShowHelp() async {
     if (!await loadShowHelpOnLaunch()) return;
     if (!mounted) return;
@@ -62,26 +83,71 @@ class _ScorePageState extends State<ScorePage> {
     setState(() => timer = loaded);
   }
 
-  void _onStartPressed() {
+  String _nameOf(Fighter fighter) =>
+      fighter == Fighter.left ? leftName : rightName;
+
+  void _changeScore(Fighter fighter, int newValue) {
+    final delta = newValue - (fighter == Fighter.left ? leftScore : rightScore);
+    if (delta == 0) return;
     setState(() {
-      fightLog.startFight();
-      fightLog.logDiff(
-        leftScore: leftScore,
-        rightScore: rightScore,
-        leftWarning: leftWarning,
-        rightWarning: rightWarning,
-        leftCaution: leftCaution,
-        rightCaution: rightCaution,
-        doubleHits: doubleHits,
-        leftName: leftName,
-        rightName: rightName,
-        elapsedTime: timer,
-      );
+      if (fighter == Fighter.left) {
+        leftScore = newValue;
+      } else {
+        rightScore = newValue;
+      }
     });
+    fightLog.emit(
+      ScoreChanged(
+        timer,
+        fighter: _nameOf(fighter),
+        delta: delta,
+        total: newValue,
+      ),
+    );
+  }
+
+  void _changePenalty(Fighter fighter, PenaltyKind kind, int newValue) {
+    final old = switch ((fighter, kind)) {
+      (Fighter.left, PenaltyKind.warning) => leftWarning,
+      (Fighter.right, PenaltyKind.warning) => rightWarning,
+      (Fighter.left, PenaltyKind.caution) => leftCaution,
+      (Fighter.right, PenaltyKind.caution) => rightCaution,
+    };
+    final delta = newValue - old;
+    if (delta == 0) return;
+    setState(() {
+      switch ((fighter, kind)) {
+        case (Fighter.left, PenaltyKind.warning):
+          leftWarning = newValue;
+        case (Fighter.right, PenaltyKind.warning):
+          rightWarning = newValue;
+        case (Fighter.left, PenaltyKind.caution):
+          leftCaution = newValue;
+        case (Fighter.right, PenaltyKind.caution):
+          rightCaution = newValue;
+      }
+    });
+    fightLog.emit(
+      PenaltyChanged(
+        timer,
+        fighter: _nameOf(fighter),
+        kind: kind,
+        delta: delta,
+        total: newValue,
+      ),
+    );
+  }
+
+  void _changeDouble(int newValue) {
+    final delta = newValue - doubleHits;
+    if (delta == 0) return;
+    if (delta > 0) _playBruh();
+    setState(() => doubleHits = newValue);
+    fightLog.emit(DoubleHitChanged(timer, delta: delta, total: newValue));
   }
 
   void startTimer() {
-    _onStartPressed();
+    fightLog.markStarted(timer);
     countdown?.cancel();
     countdown = Timer.periodic(const Duration(milliseconds: 10), (t) {
       setState(() {
@@ -105,10 +171,19 @@ class _ScorePageState extends State<ScorePage> {
     setState(() => running = false);
   }
 
-  void resetTimerOnly() async {
-    await _loadTimer();
-    fightLog.addSeparator();
-    fightLog.addEvent("Next fight started", timer);
+  /// Clears scores and penalties for a new bout while keeping the current
+  /// timer value untouched. Triggered by long-pressing the Reset button.
+  void resetScoreOnly() {
+    fightLog.reset();
+    setState(() {
+      leftScore = 0;
+      rightScore = 0;
+      leftWarning = 0;
+      rightWarning = 0;
+      leftCaution = 0;
+      rightCaution = 0;
+      doubleHits = 0;
+    });
   }
 
   void resetAll() async {
@@ -149,17 +224,18 @@ class _ScorePageState extends State<ScorePage> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context);
     if (running) {
       return GestureDetector(
         onTap: stopTimer,
         child: Scaffold(
-          backgroundColor: Colors.black,
+          backgroundColor: AppColors.stage,
           body: SafeArea(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TimerDisplay(
-                  color: Colors.white,
+                  color: AppColors.onStage,
                   time: formatTime(timer),
                   fontSize: 60,
                 ),
@@ -168,8 +244,8 @@ class _ScorePageState extends State<ScorePage> {
                   padding: const EdgeInsets.all(16.0),
                   child: SizedBox(
                     child: BigButton(
-                      label: "Stop",
-                      color: Colors.red,
+                      label: l10n.stop,
+                      color: AppColors.danger,
                       fontSize: 28,
                       onPressed: stopTimer,
                     ),
@@ -183,6 +259,13 @@ class _ScorePageState extends State<ScorePage> {
     }
 
     return Scaffold(
+      drawer: const SettingsDrawer(),
+      // The default 20px edge-drag zone sits entirely inside Android's system
+      // gesture-nav (back-swipe) region, so the drawer never opens. Widen the
+      // zone past the system-reserved inset so a swipe that starts just inboard
+      // of the edge still opens Settings.
+      drawerEdgeDragWidth:
+          MediaQuery.of(context).systemGestureInsets.left + 80,
       body: SafeArea(
         child: LayoutBuilder(
           builder: (context, constraints) {
@@ -197,10 +280,10 @@ class _ScorePageState extends State<ScorePage> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
                         child: ResetButton(
-                          label: "Reset",
-                          color: Colors.red,
+                          label: l10n.reset,
+                          color: AppColors.danger,
                           onPressed: resetAll,
-                          onLongPress: resetTimerOnly,
+                          onLongPress: resetScoreOnly,
                         ),
                       ),
                       const SizedBox(height: 10),
@@ -223,8 +306,8 @@ class _ScorePageState extends State<ScorePage> {
                         rightName: rightName,
                         leftScore: leftScore,
                         rightScore: rightScore,
-                        onLeftChanged: (v) => setState(() => leftScore = v),
-                        onRightChanged: (v) => setState(() => rightScore = v),
+                        onLeftChanged: (v) => _changeScore(Fighter.left, v),
+                        onRightChanged: (v) => _changeScore(Fighter.right, v),
                         swapFighters: swapFighters,
                       ),
                       const SizedBox(height: 10),
@@ -233,8 +316,8 @@ class _ScorePageState extends State<ScorePage> {
                         width: double.infinity,
                         height: 150,
                         child: BigButton(
-                          label: "START",
-                          color: Colors.deepPurple,
+                          label: l10n.start,
+                          color: AppColors.primary,
                           fontSize: 40,
                           onPressed: startTimer,
                         ),
@@ -273,14 +356,20 @@ class _ScorePageState extends State<ScorePage> {
                         rightCaution: rightCaution,
                         doubleHits: doubleHits,
                         onLeftWarningChanged: (v) =>
-                            setState(() => leftWarning = v),
-                        onRightWarningChanged: (v) =>
-                            setState(() => rightWarning = v),
+                            _changePenalty(Fighter.left, PenaltyKind.warning, v),
+                        onRightWarningChanged: (v) => _changePenalty(
+                          Fighter.right,
+                          PenaltyKind.warning,
+                          v,
+                        ),
                         onLeftCautionChanged: (v) =>
-                            setState(() => leftCaution = v),
-                        onRightCautionChanged: (v) =>
-                            setState(() => rightCaution = v),
-                        onDoubleChanged: (v) => setState(() => doubleHits = v),
+                            _changePenalty(Fighter.left, PenaltyKind.caution, v),
+                        onRightCautionChanged: (v) => _changePenalty(
+                          Fighter.right,
+                          PenaltyKind.caution,
+                          v,
+                        ),
+                        onDoubleChanged: _changeDouble,
                       ),
                     ],
                   ),

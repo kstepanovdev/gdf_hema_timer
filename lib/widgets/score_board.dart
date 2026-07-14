@@ -6,7 +6,10 @@ class ScoreBoard extends StatelessWidget {
   final String rightName;
   final int leftScore;
   final int rightScore;
-  final Color color;
+
+  /// Number color. When null, follows the theme (`onSurface`) so numbers stay
+  /// legible in both light and dark themes.
+  final Color? color;
 
   final ValueChanged<int> onLeftChanged;
   final ValueChanged<int> onRightChanged;
@@ -21,7 +24,7 @@ class ScoreBoard extends StatelessWidget {
     required this.onLeftChanged,
     required this.onRightChanged,
     required this.swapFighters,
-    this.color = Colors.black,
+    this.color,
   });
 
   @override
@@ -29,7 +32,7 @@ class ScoreBoard extends StatelessWidget {
     final textStyle = TextStyle(
       fontSize: 100,
       fontWeight: FontWeight.bold,
-      color: color,
+      color: color ?? Theme.of(context).colorScheme.onSurface,
       height: 1,
     );
 
