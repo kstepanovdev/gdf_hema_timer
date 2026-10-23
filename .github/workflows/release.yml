@@ -21,6 +21,8 @@ jobs:
           cache: true
       - name: Install dependencies
         run: flutter pub get
+      - name: Test
+        run: flutter test --exclude-tags golden
       - name: Restore keystore and key.properties
         run: |
           echo "$KEYSTORE_BASE64" | base64 --decode > android/app/upload-keystore.jks
