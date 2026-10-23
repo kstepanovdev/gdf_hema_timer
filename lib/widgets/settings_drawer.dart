@@ -3,9 +3,7 @@ import '../l10n/gen/app_localizations.dart';
 import '../modules/settings/settings_storage.dart';
 import 'help_dialog.dart';
 
-/// The left slide-in settings panel, opened by dragging from the left screen
-/// edge. Holds the app-wide toggles ([darkThemeEnabled], [yehorsSpecialEnabled],
-/// [localeOverride]) and a shortcut to re-show the tutorial ([HelpDialog]).
+/// The settings panel, opened by dragging from the left screen edge.
 class SettingsDrawer extends StatelessWidget {
   const SettingsDrawer({super.key});
 
@@ -37,7 +35,7 @@ class SettingsDrawer extends StatelessWidget {
                   secondary: const Icon(Icons.dark_mode),
                   title: Text(l10n.darkTheme),
                   value: isDark,
-                  onChanged: (v) => setDarkTheme(v),
+                  onChanged: setDarkTheme,
                 );
               },
             ),
@@ -49,7 +47,7 @@ class SettingsDrawer extends StatelessWidget {
                   title: Text(l10n.yehorsSpecial),
                   subtitle: Text(l10n.yehorsSpecialSubtitle),
                   value: enabled,
-                  onChanged: (v) => setYehorsSpecial(v),
+                  onChanged: setYehorsSpecial,
                 );
               },
             ),
@@ -57,9 +55,7 @@ class SettingsDrawer extends StatelessWidget {
             ValueListenableBuilder<Locale?>(
               valueListenable: localeOverride,
               builder: (context, locale, _) {
-                // `null` = follow the system locale (falls back to English when
-                // the system language isn't one we ship). A stored override
-                // pins one of the languages we actually offer.
+                // `null` follows the system locale.
                 return ListTile(
                   leading: const Icon(Icons.language),
                   title: Text(l10n.language),
@@ -92,7 +88,7 @@ class SettingsDrawer extends StatelessWidget {
               title: Text(l10n.showTutorial),
               onTap: () {
                 Navigator.of(context).pop();
-                HelpDialog.show(context, showSkipOption: true);
+                HelpDialog.show(context);
               },
             ),
           ],

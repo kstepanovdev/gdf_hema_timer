@@ -1,9 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 
-/// Controlled number widget
-/// Tap → increment
-/// Long press (~200ms) → decrement
+/// A number that increments on tap and decrements on a ~200ms hold.
 class TouchNumber extends StatefulWidget {
   final int value;
   final ValueChanged<int> onChanged;

@@ -11,11 +11,11 @@ Designed for clarity, speed, and offline use during tournaments and sparring ses
   - Set time easily (tap to edit, +/− controls)
   - Millisecond precision
   - Auto-stop vibration when time runs out
+  - Keeps the screen awake while the app is open
 
 - **Score Tracking**
   - Tap to increment/decrement scores
   - Prevents negative values
-  - Swap fighter sides instantly
 
 - **Warnings & Doubles**
   - Quick +/− warning counters per fighter
@@ -63,6 +63,17 @@ cd gdf_hema_timer
 flutter pub get
 flutter build apk --release
 ```
+
+## Tests
+
+```bash
+flutter test                          # everything, incl. design screenshots
+flutter test --exclude-tags golden    # behaviour only (what CI runs)
+flutter test --update-goldens --tags golden   # after an intended design change
+```
+
+The screenshots in `test/goldens/` are rendered on Windows; other OSes may
+differ by a few pixels, so CI skips them.
 
 ## Contributing
 Contributions are welcome!

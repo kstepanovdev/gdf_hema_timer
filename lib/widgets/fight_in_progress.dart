@@ -1,48 +1,34 @@
 import 'package:flutter/material.dart';
+import '../theme/app_colors.dart';
 
 class ActiveTimerBoard extends StatelessWidget {
   final int leftScore;
   final int rightScore;
-  final Color color;
 
   const ActiveTimerBoard({
     super.key,
     required this.leftScore,
     required this.rightScore,
-    this.color = Colors.white,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = TextStyle(
+    const style = TextStyle(
       fontFamily: 'Roboto',
       fontWeight: FontWeight.bold,
       fontSize: 90,
       height: 0.8,
       letterSpacing: 2,
-      color: Colors.white,
+      color: AppColors.onStage,
     );
-    const padding = EdgeInsets.symmetric(horizontal: 8.0);
-
-    return Column(
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Padding(
-              padding: padding,
-              child: Text("$leftScore", style: style),
-            ),
-            Padding(
-              padding: padding,
-              child: Text(":", style: style),
-            ),
-            Padding(
-              padding: padding,
-              child: Text("$rightScore", style: style),
-            ),
-          ],
-        ),
+        for (final text in ['$leftScore', ':', '$rightScore'])
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            child: Text(text, style: style),
+          ),
       ],
     );
   }
