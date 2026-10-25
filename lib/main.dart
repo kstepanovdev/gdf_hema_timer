@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'pages/score_page.dart';
+import 'pages/mode_selection_page.dart';
 import 'modules/settings/settings_storage.dart';
 import 'theme/app_theme.dart';
 import 'l10n/gen/app_localizations.dart';
@@ -46,10 +46,13 @@ class ScoreApp extends StatelessWidget {
             if (child == null) return const SizedBox.shrink();
             final isUk = Localizations.localeOf(context).languageCode == 'uk';
             return isUk
-                ? Theme(data: AppTheme.withUkFont(Theme.of(context)), child: child)
+                ? Theme(
+                    data: AppTheme.withUkFont(Theme.of(context)),
+                    child: child,
+                  )
                 : child;
           },
-          home: const ScorePage(),
+          home: const ModeSelectionPage(),
         );
       },
     );

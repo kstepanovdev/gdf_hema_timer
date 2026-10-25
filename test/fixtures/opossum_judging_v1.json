@@ -1,0 +1,3648 @@
+{
+  "schema_version": 1,
+  "provenance": "Generated from real Opossum domain commands and runtime-validated Timer judging DTOs using synthetic data only.",
+  "rr": {
+    "initial": {
+      "schema_version": 1,
+      "bout": {
+        "bout_id": "00000000-0000-4000-8000-0000000003fa",
+        "tournament_id": "00000000-0000-4000-8000-000000000001",
+        "nomination_id": "00000000-0000-4000-8000-000000000002",
+        "tournament_revision": "22",
+        "stage_id": "00000000-0000-4000-8000-000000000003",
+        "stage_name": "Pools",
+        "stage_type": "SINGLE_ROUND_ROBIN",
+        "stage_status": "IN_PROGRESS",
+        "group_id": "00000000-0000-4000-8000-00000000000a",
+        "group_name": "Pool 1",
+        "piste_id": "00000000-0000-4000-8000-000000000004",
+        "piste_name": "Piste 1",
+        "sequence": 1,
+        "execution_step": 1,
+        "purpose": "REGULAR",
+        "fighter_a": {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "display_name": "Synthetic Fighter 0-0"
+        },
+        "fighter_b": {
+          "fighter_id": "00000000-0000-4000-8000-000000000065",
+          "display_name": "Synthetic Fighter 0-1"
+        },
+        "status": "SCHEDULED",
+        "result_type": null,
+        "score_a": null,
+        "score_b": null,
+        "entity_version": 0,
+        "completed_at": null,
+        "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+        "configuration_sequence": 1,
+        "wave": {
+          "wave_id": "00000000-0000-4000-8000-000000000014",
+          "name": "Wave 1",
+          "order": 1
+        },
+        "bracket_role": null,
+        "bracket_round": null,
+        "tie_break_round": null,
+        "availability": {
+          "available": true,
+          "reason": null
+        },
+        "correction_available": false,
+        "mutual_hits": {
+          "policy": {
+            "threshold": 3,
+            "action": "DOUBLE_LOSS"
+          },
+          "effective_count": 0,
+          "effective_record_ids": [],
+          "phase": "STANDARD",
+          "attempt": 0
+        }
+      },
+      "judging_revision": "809d71d77fca2d511ba749726880901fe72f8074c106b6cfed3acfa7a3d46894",
+      "discipline_policy": {
+        "remarks_per_warning": 5,
+        "warnings_for_disqualification": 3
+      },
+      "fighters": [
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        },
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000065",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        }
+      ],
+      "records": [],
+      "mutual_hit": {
+        "available": true,
+        "reason": null
+      },
+      "permissions": {
+        "judge_write": true,
+        "score_snapshot_write": true,
+        "void": false,
+        "confirm_impact": false
+      },
+      "correction": {
+        "judge_events_require_organizer_review": true,
+        "historical_results_require_administrator": false
+      }
+    },
+    "operations": [
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "23",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": 7,
+            "score_b": 4,
+            "entity_version": 2,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 1,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90"
+              ],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "396a44ecbb559890cfa6668889da4a5a909b305236f5eb9397d2045bd9d88338",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "24",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": 7,
+            "score_b": 4,
+            "entity_version": 3,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 2,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91"
+              ],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "c686964936c82724527580707296b0e96eeab1fe6083458fa32aed136f7961d8",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "25",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "COMPLETED",
+            "result_type": "DOUBLE_LOSS",
+            "score_a": 7,
+            "score_b": 4,
+            "entity_version": 4,
+            "completed_at": "2026-10-24T10:00:00.000Z",
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": false,
+              "reason": "BOUT_NOT_WRITABLE"
+            },
+            "correction_available": true,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 3,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92"
+              ],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "f3c42eb25184f932b9a3e85c63c0fc5e759155978d5e4f96d20847b8a6d00c35",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              },
+              "warning": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              },
+              "warning": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": false,
+            "reason": "ORGANIZER_REVIEW_REQUIRED"
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      }
+    ]
+  },
+  "discipline": {
+    "initial": {
+      "schema_version": 1,
+      "bout": {
+        "bout_id": "00000000-0000-4000-8000-0000000003fa",
+        "tournament_id": "00000000-0000-4000-8000-000000000001",
+        "nomination_id": "00000000-0000-4000-8000-000000000002",
+        "tournament_revision": "23",
+        "stage_id": "00000000-0000-4000-8000-000000000003",
+        "stage_name": "Pools",
+        "stage_type": "SINGLE_ROUND_ROBIN",
+        "stage_status": "IN_PROGRESS",
+        "group_id": "00000000-0000-4000-8000-00000000000a",
+        "group_name": "Pool 1",
+        "piste_id": "00000000-0000-4000-8000-000000000004",
+        "piste_name": "Piste 1",
+        "sequence": 1,
+        "execution_step": 1,
+        "purpose": "REGULAR",
+        "fighter_a": {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "display_name": "Synthetic Fighter 0-0"
+        },
+        "fighter_b": {
+          "fighter_id": "00000000-0000-4000-8000-000000000065",
+          "display_name": "Synthetic Fighter 0-1"
+        },
+        "status": "SCHEDULED",
+        "result_type": null,
+        "score_a": null,
+        "score_b": null,
+        "entity_version": 0,
+        "completed_at": null,
+        "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+        "configuration_sequence": 1,
+        "wave": {
+          "wave_id": "00000000-0000-4000-8000-000000000014",
+          "name": "Wave 1",
+          "order": 1
+        },
+        "bracket_role": null,
+        "bracket_round": null,
+        "tie_break_round": null,
+        "availability": {
+          "available": true,
+          "reason": null
+        },
+        "correction_available": false,
+        "mutual_hits": {
+          "policy": {
+            "threshold": 3,
+            "action": "DOUBLE_LOSS"
+          },
+          "effective_count": 0,
+          "effective_record_ids": [],
+          "phase": "STANDARD",
+          "attempt": 0
+        }
+      },
+      "judging_revision": "a8413699cb90102c68a45c1da6482aeef38da4ce18426662917e4f3eb85d3c8f",
+      "discipline_policy": {
+        "remarks_per_warning": 4,
+        "warnings_for_disqualification": 3
+      },
+      "fighters": [
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        },
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000065",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        }
+      ],
+      "records": [],
+      "mutual_hit": {
+        "available": true,
+        "reason": null
+      },
+      "permissions": {
+        "judge_write": true,
+        "score_snapshot_write": true,
+        "void": false,
+        "confirm_impact": false
+      },
+      "correction": {
+        "judge_events_require_organizer_review": true,
+        "historical_results_require_administrator": false
+      }
+    },
+    "operations": [
+      {
+        "event": {
+          "type": "REMARK",
+          "participant_id": "00000000-0000-4000-8000-000000000064"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "24",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 1,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "3e5bf3a7210884f59176046c1fd89bc718d5d2492da0cd18fd5bb645b2d853c5",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 1,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 1,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "WARNING",
+          "participant_id": "00000000-0000-4000-8000-000000000065"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "25",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 2,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "771609e49aa36b3e52f9b24ff65ec60833395d706f386116d07d3eae08c7be88",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 1,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 1,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 1,
+              "derived_warnings": 0,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "REMARK",
+          "participant_id": "00000000-0000-4000-8000-000000000064"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "26",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 3,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "aa29a8ea6da4b6e3799eeb350af72709912afb8696e1c421fb220f1ae9416e50",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 2,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 2,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 1,
+              "derived_warnings": 0,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "REMARK",
+          "participant_id": "00000000-0000-4000-8000-000000000064"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "27",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 4,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "36dd6a7cd17328ab31273d41419a15a459339ec5c5fd5b88dddcdbce4008bcee",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 3,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 3,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 1,
+              "derived_warnings": 0,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "REMARK",
+          "participant_id": "00000000-0000-4000-8000-000000000064"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "28",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 5,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "3665160ee51e3d8edc94c592bdca2226e8db3107ea69d0013d91e556ee2b0140",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 4,
+              "direct_warnings": 0,
+              "derived_warnings": 1,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 1,
+              "derived_warnings": 0,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "WARNING",
+          "participant_id": "00000000-0000-4000-8000-000000000065"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "29",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 6,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "6b265bf9396a4801497bb4f2e47e9a31d9187868f2450fb0303f71ed08a848ee",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 4,
+              "direct_warnings": 0,
+              "derived_warnings": 1,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 2,
+              "derived_warnings": 0,
+              "total_warnings": 2,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "WARNING",
+          "participant_id": "00000000-0000-4000-8000-000000000065"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-0000000003fa",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "30",
+            "stage_id": "00000000-0000-4000-8000-000000000003",
+            "stage_name": "Pools",
+            "stage_type": "SINGLE_ROUND_ROBIN",
+            "stage_status": "IN_PROGRESS",
+            "group_id": "00000000-0000-4000-8000-00000000000a",
+            "group_name": "Pool 1",
+            "piste_id": "00000000-0000-4000-8000-000000000004",
+            "piste_name": "Piste 1",
+            "sequence": 1,
+            "execution_step": 1,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "display_name": "Synthetic Fighter 0-1"
+            },
+            "status": "CANCELLED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 7,
+            "completed_at": null,
+            "configuration_id": "00000000-0000-4000-8000-0000000003f9",
+            "configuration_sequence": 1,
+            "wave": {
+              "wave_id": "00000000-0000-4000-8000-000000000014",
+              "name": "Wave 1",
+              "order": 1
+            },
+            "bracket_role": null,
+            "bracket_round": null,
+            "tie_break_round": null,
+            "availability": {
+              "available": false,
+              "reason": "BOUT_NOT_WRITABLE"
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "DOUBLE_LOSS"
+              },
+              "effective_count": 0,
+              "effective_record_ids": [],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "b3d86270e1a07a8c41838e696182522cdb1009ca2a92aafe4f2f021a445f06ba",
+          "discipline_policy": {
+            "remarks_per_warning": 4,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 4,
+              "direct_warnings": 0,
+              "derived_warnings": 1,
+              "total_warnings": 1,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              },
+              "warning": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000065",
+              "effective_remarks": 0,
+              "direct_warnings": 3,
+              "derived_warnings": 0,
+              "total_warnings": 3,
+              "remaining_remarks": 0,
+              "disqualified": true,
+              "remark": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              },
+              "warning": {
+                "available": false,
+                "reason": "ORGANIZER_REVIEW_REQUIRED"
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "REMARK",
+              "participant_id": "00000000-0000-4000-8000-000000000064",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f96",
+              "type": "WARNING",
+              "participant_id": "00000000-0000-4000-8000-000000000065",
+              "stage_id": "00000000-0000-4000-8000-000000000003",
+              "bout_id": "00000000-0000-4000-8000-0000000003fa",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": false,
+            "reason": "ORGANIZER_REVIEW_REQUIRED"
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      }
+    ]
+  },
+  "elimination": {
+    "initial": {
+      "schema_version": 1,
+      "bout": {
+        "bout_id": "00000000-0000-4000-8000-000000000258",
+        "tournament_id": "00000000-0000-4000-8000-000000000001",
+        "nomination_id": "00000000-0000-4000-8000-000000000002",
+        "tournament_revision": "23",
+        "stage_id": "00000000-0000-4000-8000-0000000001f4",
+        "stage_name": "Elimination",
+        "stage_type": "SINGLE_ELIMINATION",
+        "stage_status": "IN_PROGRESS",
+        "group_id": null,
+        "group_name": null,
+        "piste_id": null,
+        "piste_name": null,
+        "sequence": 1,
+        "execution_step": null,
+        "purpose": "REGULAR",
+        "fighter_a": {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "display_name": "Synthetic Fighter 0-0"
+        },
+        "fighter_b": {
+          "fighter_id": "00000000-0000-4000-8000-000000000067",
+          "display_name": "Synthetic Fighter 0-3"
+        },
+        "status": "SCHEDULED",
+        "result_type": null,
+        "score_a": null,
+        "score_b": null,
+        "entity_version": 0,
+        "completed_at": null,
+        "configuration_id": null,
+        "configuration_sequence": null,
+        "wave": null,
+        "bracket_role": "SEMIFINAL",
+        "bracket_round": 1,
+        "tie_break_round": null,
+        "availability": {
+          "available": true,
+          "reason": null
+        },
+        "correction_available": false,
+        "mutual_hits": {
+          "policy": {
+            "threshold": 3,
+            "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+            "max_refights": 2
+          },
+          "effective_count": 0,
+          "effective_record_ids": [],
+          "phase": "STANDARD",
+          "attempt": 0
+        }
+      },
+      "judging_revision": "3d3238c0b550f1744cbdebb1083eba0c8b9534d2f28f04068bee233caa15400f",
+      "discipline_policy": {
+        "remarks_per_warning": 5,
+        "warnings_for_disqualification": 3
+      },
+      "fighters": [
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000064",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        },
+        {
+          "fighter_id": "00000000-0000-4000-8000-000000000067",
+          "effective_remarks": 0,
+          "direct_warnings": 0,
+          "derived_warnings": 0,
+          "total_warnings": 0,
+          "remaining_remarks": 0,
+          "disqualified": false,
+          "remark": {
+            "available": true,
+            "reason": null
+          },
+          "warning": {
+            "available": true,
+            "reason": null
+          }
+        }
+      ],
+      "records": [],
+      "mutual_hit": {
+        "available": true,
+        "reason": null
+      },
+      "permissions": {
+        "judge_write": true,
+        "score_snapshot_write": true,
+        "void": false,
+        "confirm_impact": false
+      },
+      "correction": {
+        "judge_events_require_organizer_review": true,
+        "historical_results_require_administrator": false
+      }
+    },
+    "operations": [
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "24",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 1,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 1,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90"
+              ],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "c709fd1fa3b030b08bbb8f6e398bb6ca0026b6338a94f0cac8c324d7536bdef6",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "25",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 2,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 2,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91"
+              ],
+              "phase": "STANDARD",
+              "attempt": 0
+            }
+          },
+          "judging_revision": "ccdbbe99d7ddb0781ace0ea6b64fd4700debb619848c4b7dd1de423644153b56",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "26",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 3,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 3,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 1
+            }
+          },
+          "judging_revision": "bda8ae547e4e254fa0c69e1782dfc7b8fb4f2b6c149ca35696b740bd448e5b66",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "27",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 4,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 4,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 1
+            }
+          },
+          "judging_revision": "daeddd1ea5c6c070e795ef6a37831c202675a20452c4e1968b5cf92c3bd847bb",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "28",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 5,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 5,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93",
+                "00000000-0000-4000-8000-000000015f94"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 1
+            }
+          },
+          "judging_revision": "2c70493154db69b945a35282e5a717d766ddca085411beed4eb9fbc5a87ff3ef",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "29",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 6,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 6,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93",
+                "00000000-0000-4000-8000-000000015f94",
+                "00000000-0000-4000-8000-000000015f95"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 2
+            }
+          },
+          "judging_revision": "a47a0ccb1292db412bc74af870fc85e230291ab0d878d165cdbe0be9b2c00671",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "30",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 7,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 7,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93",
+                "00000000-0000-4000-8000-000000015f94",
+                "00000000-0000-4000-8000-000000015f95",
+                "00000000-0000-4000-8000-000000015f96"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 2
+            }
+          },
+          "judging_revision": "c81ccfec7e802eacdec6b306f13eccab0739e1b1947b2e7adc15aef6491d5a88",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f96",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "31",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 8,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 8,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93",
+                "00000000-0000-4000-8000-000000015f94",
+                "00000000-0000-4000-8000-000000015f95",
+                "00000000-0000-4000-8000-000000015f96",
+                "00000000-0000-4000-8000-000000015f97"
+              ],
+              "phase": "REFIGHT",
+              "attempt": 2
+            }
+          },
+          "judging_revision": "64e787019d058be1b815567c17b73ad8428059f01b7bdcf048e5ef44a0dc3706",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f96",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f97",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      },
+      {
+        "event": {
+          "type": "MUTUAL_HIT"
+        },
+        "judging": {
+          "schema_version": 1,
+          "bout": {
+            "bout_id": "00000000-0000-4000-8000-000000000258",
+            "tournament_id": "00000000-0000-4000-8000-000000000001",
+            "nomination_id": "00000000-0000-4000-8000-000000000002",
+            "tournament_revision": "32",
+            "stage_id": "00000000-0000-4000-8000-0000000001f4",
+            "stage_name": "Elimination",
+            "stage_type": "SINGLE_ELIMINATION",
+            "stage_status": "IN_PROGRESS",
+            "group_id": null,
+            "group_name": null,
+            "piste_id": null,
+            "piste_name": null,
+            "sequence": 1,
+            "execution_step": null,
+            "purpose": "REGULAR",
+            "fighter_a": {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "display_name": "Synthetic Fighter 0-0"
+            },
+            "fighter_b": {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "display_name": "Synthetic Fighter 0-3"
+            },
+            "status": "SCHEDULED",
+            "result_type": null,
+            "score_a": null,
+            "score_b": null,
+            "entity_version": 9,
+            "completed_at": null,
+            "configuration_id": null,
+            "configuration_sequence": null,
+            "wave": null,
+            "bracket_role": "SEMIFINAL",
+            "bracket_round": 1,
+            "tie_break_round": null,
+            "availability": {
+              "available": true,
+              "reason": null
+            },
+            "correction_available": false,
+            "mutual_hits": {
+              "policy": {
+                "threshold": 3,
+                "action": "REFIGHTS_THEN_SUDDEN_DEATH",
+                "max_refights": 2
+              },
+              "effective_count": 9,
+              "effective_record_ids": [
+                "00000000-0000-4000-8000-000000015f90",
+                "00000000-0000-4000-8000-000000015f91",
+                "00000000-0000-4000-8000-000000015f92",
+                "00000000-0000-4000-8000-000000015f93",
+                "00000000-0000-4000-8000-000000015f94",
+                "00000000-0000-4000-8000-000000015f95",
+                "00000000-0000-4000-8000-000000015f96",
+                "00000000-0000-4000-8000-000000015f97",
+                "00000000-0000-4000-8000-000000015f98"
+              ],
+              "phase": "SUDDEN_DEATH",
+              "attempt": 3
+            }
+          },
+          "judging_revision": "2911604982d73071a67190d60c288ed731982db4b6da4ab26f584b293bd34bf0",
+          "discipline_policy": {
+            "remarks_per_warning": 5,
+            "warnings_for_disqualification": 3
+          },
+          "fighters": [
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000064",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            },
+            {
+              "fighter_id": "00000000-0000-4000-8000-000000000067",
+              "effective_remarks": 0,
+              "direct_warnings": 0,
+              "derived_warnings": 0,
+              "total_warnings": 0,
+              "remaining_remarks": 0,
+              "disqualified": false,
+              "remark": {
+                "available": true,
+                "reason": null
+              },
+              "warning": {
+                "available": true,
+                "reason": null
+              }
+            }
+          ],
+          "records": [
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f90",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f91",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f92",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f93",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f94",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f95",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f96",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f97",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            },
+            {
+              "record_id": "00000000-0000-4000-8000-000000015f98",
+              "type": "MUTUAL_HIT",
+              "participant_id": null,
+              "stage_id": "00000000-0000-4000-8000-0000000001f4",
+              "bout_id": "00000000-0000-4000-8000-000000000258",
+              "source": "JUDGE_APP",
+              "entity_version": 0,
+              "issued_at": "2026-10-24T10:00:00.000Z",
+              "voided_at": null,
+              "issued_by_this_device": true
+            }
+          ],
+          "mutual_hit": {
+            "available": true,
+            "reason": null
+          },
+          "permissions": {
+            "judge_write": true,
+            "score_snapshot_write": true,
+            "void": false,
+            "confirm_impact": false
+          },
+          "correction": {
+            "judge_events_require_organizer_review": true,
+            "historical_results_require_administrator": false
+          }
+        }
+      }
+    ]
+  }
+}

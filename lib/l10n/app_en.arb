@@ -29,13 +29,17 @@
   "minutesLabel": "{count} m",
   "@minutesLabel": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "secondsLabel": "{count} s",
   "@secondsLabel": {
     "placeholders": {
-      "count": { "type": "int" }
+      "count": {
+        "type": "int"
+      }
     }
   },
   "secondsShort": "s",
@@ -48,14 +52,234 @@
   "logWarningTo": "Warning to {name}",
   "@logWarningTo": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
   "logCautionTo": "Caution to {name}",
   "@logCautionTo": {
     "placeholders": {
-      "name": { "type": "String" }
+      "name": {
+        "type": "String"
+      }
     }
   },
-  "logDoubleHit": "Double hit"
+  "logDoubleHit": "Double hit",
+  "standaloneMode": "Standalone Timer",
+  "tournamentMode": "Opossum Tournament",
+  "standaloneDescription": "Works offline without an account or server. Bouts and logs stay in memory; restarting opens a new bout.",
+  "tournamentDescription": "Connect to Opossum to load available bouts and submit confirmed results.",
+  "interruptedClock": "Timing was interrupted. The clock is paused. Review the remaining time before starting again.",
+  "sessionNotRestored": "New local bout. Previous scores and timing are not restored after restarting.",
+  "swapSides": "Swap fighter sides",
+  "logPaused": "Timer paused",
+  "logResumed": "Timer resumed",
+  "logElapsed": "Time expired",
+  "logInterrupted": "Timing interrupted — review required",
+  "logTimeAdjusted": "Remaining time adjusted",
+  "logSidesSwapped": "Display sides swapped",
+  "logReset": "New bout — scores and penalties cleared",
+  "leaveBoutTitle": "Leave this bout?",
+  "leaveBoutMessage": "This local bout and its log will be discarded. Nothing is sent to Opossum.",
+  "leaveBout": "Leave bout",
+  "serverUrl": "Opossum server URL",
+  "deviceToken": "Device bearer token",
+  "testConnection": "Test and save connection",
+  "connectionReady": "Connection verified",
+  "chooseTournament": "Select tournament",
+  "chooseNomination": "Select nomination",
+  "worklist": "Work assignments",
+  "refresh": "Refresh",
+  "noWork": "No Round-Robin work is available. Ask the organizer to generate and start the group.",
+  "noTournaments": "No active nominations are available to this credential.",
+  "localHttp": "Allow HTTP on localhost only (local development)",
+  "invalidConnection": "Enter an HTTPS server origin and a device token. HTTP requires the explicit localhost development option.",
+  "secureStorageError": "Secure credential storage is unavailable. Unlock/configure the system keychain and retry. Tokens are never saved as plaintext.",
+  "browserTokenNotice": "This browser keeps the token only in memory. Enter it again after leaving or restarting.",
+  "onlineOnlyNotice": "Online submission only. Pending requests are kept in memory, not on disk. Keep this screen open until acceptance is confirmed; restart can lose a pending request.",
+  "apiAuthentication": "The device token is invalid, expired or revoked.",
+  "apiForbidden": "This credential does not have permission for this operation or assignment.",
+  "apiConflict": "Opossum has a different version or pairing. Your result was not applied. Ask the organizer to review it; automatic overwrite is disabled.",
+  "apiRejected": "Opossum rejected this result. Ask the organizer to review the bout.",
+  "apiUnavailable": "The server is unavailable. Check the address and connection.",
+  "apiTimeout": "No confirmation arrived before the timeout. The request may have been accepted. Retry with the same request identifiers.",
+  "apiProtocol": "Unexpected API response. The submission may be uncertain; do not enter a second result at the desk without checking.",
+  "apiCancelled": "The request was cancelled.",
+  "apiRateLimited": "Too many requests. Wait before retrying the same submission.",
+  "reviewResult": "Review result",
+  "confirmSubmit": "Confirm and submit",
+  "retrySubmission": "Retry same submission",
+  "resultAccepted": "Accepted by Opossum",
+  "duplicateAccepted": "Previously accepted — confirmed by idempotent replay",
+  "acceptedAfterRetry": "Accepted after retry (server replay status unavailable)",
+  "resultPending": "Not submitted",
+  "resultSending": "Awaiting authoritative confirmation",
+  "normalResult": "Normal result",
+  "drawResult": "Draw (NORMAL)",
+  "returnWorklist": "Return to worklist",
+  "refreshFailed": "The result was accepted, but refreshing the current bout/worklist failed. Refresh again; do not resubmit.",
+  "unsupportedHits": "This API cannot submit changes to mutual hits. Restore the loaded count or have the organizer record the reviewed result and hits together.",
+  "localDiscipline": "Remarks and warnings on this device are local notes only; they are not sent to Opossum.",
+  "boutUnavailable": "This bout is no longer writable or is not supported by this first Round-Robin integration. Refresh the worklist.",
+  "leaveConnectedBout": "Discard this local bout draft? Unconfirmed changes have not been sent to Opossum.",
+  "currentServerResult": "Current server result",
+  "configurationLabel": "Configuration",
+  "forgetConnection": "Forget saved connection",
+  "resultUncertain": "Acceptance unknown — retry the same request.",
+  "resultUnconfirmed": "No authoritative acceptance confirmed.",
+  "choosePiste": "Select physical piste",
+  "serverRevision": "Server revision",
+  "recommendationHint": "Recommended is a suggested order. Every ready bout remains selectable.",
+  "recommendedNext": "Recommended next",
+  "readyBout": "Ready for judging",
+  "activeWork": "Active",
+  "plannedWork": "Planned — not yet available",
+  "completedWork": "Completed",
+  "awaitingSchedule": "Awaiting schedule",
+  "waitingStage": "Waiting for the organizer to start the stage",
+  "waitingGroup": "Waiting for the organizer to start the group",
+  "waitingConfiguration": "Waiting for Opossum to activate this configuration",
+  "waitingOtherPistes": "Waiting for remaining bouts on other pistes",
+  "unavailableWork": "Unavailable — refresh or ask the organizer",
+  "cancelledWork": "Cancelled",
+  "voidWork": "Annulled",
+  "stageLocked": "Stage locked for scoring",
+  "fightersHere": "Fighters on this piste",
+  "previousConfiguration": "Previous configuration",
+  "nextConfiguration": "Next configuration",
+  "previousPopulation": "Previously assigned",
+  "currentPopulation": "Assigned in this configuration",
+  "nextPopulation": "Next assigned fighters",
+  "transitionAuthority": "The organizer starts groups; Opossum activates the next configuration after all its current bouts resolve.",
+  "remainingHere": "Remaining here",
+  "remainingElsewhere": "Remaining on other pistes in this configuration",
+  "executionStep": "Step",
+  "otherReadyBout": "Choose another ready bout?",
+  "otherReadyExplanation": "This is not the recommended next bout, but Opossum permits judging it. Confirm the pairing with the organizer.",
+  "upcomingWork": "Current and upcoming work",
+  "activeBoutRetained": "Refreshing never replaces this local bout or its fighters. Finish or explicitly leave it before changing piste.",
+  "activeBoutChanged": "Opossum changed this bout or its availability. Your local draft is preserved. Do not submit it as a new result; ask the organizer to review.",
+  "fightersChanged": "Fighters change pistes — check the current assignment before judging",
+  "fightersLeaving": "Leaving this piste",
+  "fightersArriving": "Arriving on this piste",
+  "waitingGroupCompletion": "Bouts resolved — awaiting organizer group completion",
+  "waitingTieBreak": "Awaiting tie-break resolution",
+  "waitingJudgeSheet": "Awaiting judge-sheet closure",
+  "savedOnDevice": "Saved on this device — awaiting Opossum confirmation.",
+  "draftSavedOnDevice": "Draft saved on this device",
+  "savingLocally": "Saving on this device…",
+  "durableModeNotice": "Scores and confirmed results are stored on this device. Only an Opossum acknowledgement makes a result official.",
+  "durableStorageError": "Local storage failed or is unavailable. Keep this screen open and retry. Do not treat unsaved changes as durable.",
+  "pendingResults": "Results awaiting synchronization",
+  "pendingLeaveWarning": "Unsynchronized confirmed results remain on this device. Leaving or changing assignment does not delete them. Return with the same server and original device credential to synchronize. Pending count:",
+  "openSavedOffline": "Open saved tournament offline",
+  "offlineMode": "Offline / cached work",
+  "cachedWorkWarning": "This is a cached server snapshot. Availability may have changed. Only previously READY bouts can be selected; future configurations never advance locally. Opossum will validate every confirmed result on reconnect.",
+  "resumeSavedBout": "Resume saved bout draft",
+  "recoveredClockNotice": "Recovered paused at the last saved clock reading. Time since interruption is unknown. Review and deliberately adjust the clock before resuming; scores and fighter IDs are preserved.",
+  "leaveSavedBout": "Leave this bout? Its saved draft remains on this device. Unconfirmed scores have not been sent as an official result.",
+  "outboxExplanation": "Local results are retained with their original request identity. Conflicts require review at the organizer desk; this device never overwrites a competing result.",
+  "reconnectForSync": "Reconnect with the original device credential to synchronize. A replaced credential cannot safely replay an uncertain request.",
+  "handledAtDesk": "Handled at organizer desk",
+  "handledExplanation": "Confirm only after the organizer has reviewed this result. This records a local resolution and keeps all evidence; it does not change Opossum scores or approve a correction.",
+  "reviewReason": "Review reason",
+  "confirmReview": "Confirm reviewed resolution",
+  "syncReason": "Synchronization reason",
+  "dependencyNotice": "This entry waits for acknowledgement of its required earlier operations.",
+  "browserPersistenceNotice": "Browser storage is not protected from automatic eviction. Do not clear site data or use private browsing while results are pending. Keep the original device token for recovery.",
+  "retryPausedNotice": "Automatic retries paused after repeated failures. The result is retained. Check the connection, then retry explicitly.",
+  "judgingTitle": "Official judging",
+  "judgeRemark": "Remark",
+  "judgeWarning": "Warning",
+  "judgeMutualHit": "Mutual hits",
+  "judgingPending": "Pending actions (not official)",
+  "judgingConfirm": "Confirm actual judging event",
+  "judgingConfirmExplanation": "Confirm only an event that actually occurred. Opossum determines its sporting consequences.",
+  "judgingPolicy": "Active policy: {remarks} remarks per warning; {warnings} warnings for disqualification.",
+  "@judgingPolicy": {
+    "placeholders": {
+      "remarks": {
+        "type": "int"
+      },
+      "warnings": {
+        "type": "int"
+      }
+    }
+  },
+  "judgingHitPolicy": "Mutual hits: threshold {threshold} · {action}",
+  "@judgingHitPolicy": {
+    "placeholders": {
+      "threshold": {
+        "type": "int"
+      },
+      "action": {
+        "type": "String"
+      }
+    }
+  },
+  "judgingRefight": "Refight · attempt {attempt}",
+  "@judgingRefight": {
+    "placeholders": {
+      "attempt": {
+        "type": "int"
+      }
+    }
+  },
+  "judgingSuddenDeath": "Sudden death — first clean decisive hit",
+  "judgingStandard": "Ordinary bout",
+  "judgingDoubleLoss": "Double Loss — confirmed by Opossum",
+  "judgingDisqualified": "Disqualified — confirmed by Opossum",
+  "judgingReview": "Accepted judging records can only be corrected at the organizer desk. Do not decrement official counts.",
+  "judgingHistory": "Official judging history",
+  "judgingUnavailable": "Official judging is unavailable. Local penalties are disabled in tournament mode.",
+  "judgingNoScope": "This credential cannot issue judging events. Ask the organizer for judge-write access.",
+  "judgingOffline": "Offline actions remain local evidence. The official count and continuation are unknown until Opossum confirms them.",
+  "judgingWaitResult": "Synchronize or resolve judging actions before confirming a result. Scores remain saved on this device.",
+  "judgingCancelLocal": "Cancel unsent action",
+  "judgingCancelledLocal": "Cancelled before submission (not official)",
+  "judgingAccepted": "Official state from Opossum",
+  "judgingRecordVoided": "Voided by organizer",
+  "judgingScoreSnapshot": "Current scores to attest: {scoreA}:{scoreB}",
+  "@judgingScoreSnapshot": {
+    "placeholders": {
+      "scoreA": {
+        "type": "int"
+      },
+      "scoreB": {
+        "type": "int"
+      }
+    }
+  },
+  "judgingDisabledPolicy": "Disabled by stage policy",
+  "judgingDoubleLossPolicy": "Double Loss",
+  "judgingRefightPolicy": "Refights",
+  "judgingHybridPolicy": "Refights, then sudden death",
+  "judgingSyncBlocked": "Judging actions require organizer review; local evidence is retained.",
+  "judgingContinuationTitle": "Review confirmed continuation",
+  "judgingContinuationReview": "Opossum confirmed a new attempt. The clock is paused and your previous local scores are retained. Review them before clearing the draft for the new attempt.",
+  "judgingStartAttempt": "Start confirmed attempt",
+  "judgingResultReview": "Judging actions synchronize separately. This score is official only after Opossum accepts the result.",
+  "judgingScoresRequired": "Both current scores are required for this hit. Atomic score submission also needs result-write permission; otherwise ask the organizer.",
+  "operationalBouts": "Elimination & tie-break bouts",
+  "operationalSelection": "Select an unreserved bout?",
+  "operationalWarning": "Selection is local to this device, not an exclusive reservation. Confirm with the organizer before fencing: another timer may select the same bout. A newer result or changed pairing requires desk review; your local evidence is retained.",
+  "unassignedPiste": "No assigned piste",
+  "automaticWin": "Automatic win — no fight or numeric submission",
+  "bronzeFirst": "Complete the bronze bout before the gold final",
+  "stageTieBreak": "Stage tie-break",
+  "groupTieBreak": "Group tie-break",
+  "semifinalBout": "Semifinal",
+  "bronzeBout": "Bronze match",
+  "goldBout": "Gold/Silver final",
+  "eliminationRound": "Elimination round",
+  "scanPairingQr": "Scan pairing QR",
+  "pairingLink": "One-time pairing link",
+  "usePairingLink": "Use pairing link",
+  "manualConnection": "Manual URL + device token",
+  "pairingIntro": "Ask the organizer for a one-time QR. Review the server address before connecting.",
+  "cameraUnavailable": "Camera scanning is unavailable or permission was denied. Use the pairing link or manual connection below.",
+  "invalidPairingQr": "Invalid pairing QR. Ask for a current Opossum one-time pairing code and an HTTPS server.",
+  "pairingConfirm": "Connect to this Opossum server?",
+  "repairEvidenceNotice": "Re-pairing does not delete saved scores or confirmed operations. Requests tied to the old credential will not be reassigned to a new token: review them with the organizer. An expired, used or uncertain pairing needs a new QR."
 }

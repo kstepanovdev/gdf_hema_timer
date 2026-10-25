@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../utils/touch_number.dart';
+import '../l10n/gen/app_localizations.dart';
 
 class ScoreBoard extends StatelessWidget {
   final String leftName;
@@ -39,6 +40,18 @@ class ScoreBoard extends StatelessWidget {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
+        Row(
+          children: [
+            Expanded(child: Text(leftName, textAlign: TextAlign.center)),
+            IconButton(
+              key: const Key('swap-sides'),
+              tooltip: AppLocalizations.of(context).swapSides,
+              onPressed: swapFighters,
+              icon: const Icon(Icons.swap_horiz),
+            ),
+            Expanded(child: Text(rightName, textAlign: TextAlign.center)),
+          ],
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

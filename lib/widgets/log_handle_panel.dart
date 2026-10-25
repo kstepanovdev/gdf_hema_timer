@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../l10n/gen/app_localizations.dart';
 import '../modules/fight_log/fight_log.dart';
+import '../modules/fight_log/fight_log_view.dart';
 import '../theme/app_colors.dart';
 
 /// A small bottom panel that can be tapped or dragged up to open the fight log.
@@ -25,21 +26,32 @@ class LogHandlePanel extends StatelessWidget {
     // The faint overlay that reads fine on a light background all but vanishes
     // on a dark one, so lift the alpha in dark theme to keep the handle visible.
     final isDark = Theme.of(context).brightness == Brightness.dark;
-    return Container(
-      width: double.infinity,
-      // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.onSurface.withAlpha(isDark ? 45 : 20),
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.keyboard_arrow_up, size: 30, color: AppColors.hint),
-          Text(
-            AppLocalizations.of(context).dragUpForLogs,
-            style: const TextStyle(color: AppColors.hint, fontSize: 14),
-          ),
-        ],
+    return InkWell(
+      onTap: () => FightLogView.show(context, fightLog),
+      child: Container(
+        width: double.infinity,
+        // padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 14),
+        decoration: BoxDecoration(
+          color: Theme.of(
+            context,
+          ).colorScheme.onSurface.withAlpha(isDark ? 45 : 20),
+          borderRadius: BorderRadius.circular(10),
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.keyboard_arrow_up,
+              size: 30,
+              color: AppColors.hint,
+            ),
+            Expanded(
+              child: Text(
+                AppLocalizations.of(context).dragUpForLogs,
+                style: const TextStyle(color: AppColors.hint, fontSize: 14),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

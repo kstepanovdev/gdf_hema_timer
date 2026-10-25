@@ -1,6 +1,3 @@
-/// Which fighter an event refers to.
-enum Fighter { left, right }
-
 /// The kind of penalty a [PenaltyChanged] event carries.
 enum PenaltyKind { warning, caution }
 
@@ -31,11 +28,21 @@ final class FightStarted extends FightEvent {
 /// which stays correct regardless of any later side swaps. Decrements are
 /// recorded too — each entry is a valid state, not a delta.
 final class ScoreChanged extends FightEvent {
+  final String fighterId;
+  final String fighter;
+  final int delta;
+  final int scoreA;
+  final int scoreB;
   final int leftTotal;
   final int rightTotal;
 
   const ScoreChanged(
     super.clock, {
+    required this.fighterId,
+    required this.fighter,
+    required this.delta,
+    required this.scoreA,
+    required this.scoreB,
     required this.leftTotal,
     required this.rightTotal,
   });
@@ -45,6 +52,7 @@ final class ScoreChanged extends FightEvent {
 ///
 /// [fighter] is the fighter's name captured when the event occurred.
 final class PenaltyChanged extends FightEvent {
+  final String fighterId;
   final String fighter;
   final PenaltyKind kind;
   final int delta;
@@ -53,6 +61,7 @@ final class PenaltyChanged extends FightEvent {
   const PenaltyChanged(
     super.clock, {
     required this.fighter,
+    required this.fighterId,
     required this.kind,
     required this.delta,
     required this.total,
@@ -69,4 +78,20 @@ final class DoubleHitChanged extends FightEvent {
     required this.delta,
     required this.total,
   });
+}
+
+/// Local timer/display operations, never official Opossum judge records.
+enum SessionAction {
+  paused,
+  resumed,
+  elapsed,
+  interrupted,
+  timeAdjusted,
+  sidesSwapped,
+  reset,
+}
+
+final class SessionChanged extends FightEvent {
+  const SessionChanged(super.clock, {required this.action});
+  final SessionAction action;
 }
