@@ -13,7 +13,6 @@ import 'package:gdf_hema_timer/modules/bout_session/bout_session.dart';
 import 'package:gdf_hema_timer/modules/bout_session/bout_session_controller.dart';
 import 'package:gdf_hema_timer/modules/fight_log/fight_event.dart';
 import 'package:gdf_hema_timer/modules/settings/settings_storage.dart';
-import 'package:gdf_hema_timer/modules/timer/storage.dart';
 import 'package:gdf_hema_timer/pages/score_page.dart';
 import 'package:gdf_hema_timer/utils/touch_number.dart';
 import 'package:gdf_hema_timer/widgets/penalties_control.dart';
@@ -64,8 +63,9 @@ Finder penalty(int index) => find
     .at(index);
 
 void main() {
-  setUp(() {
+  setUp(() async {
     SharedPreferences.setMockInitialValues({'show_help_on_launch': false});
+    await loadSettings();
     FlutterSecureStorage.setMockInitialValues({});
     localeOverride.value = null;
     darkThemeEnabled.value = false;
@@ -236,7 +236,7 @@ void main() {
   testWidgets(
     'duration survives reopening, scores and session history do not leak',
     (tester) async {
-      await saveTimerValue(const Duration(minutes: 2));
+      await saveTimerDuration(const Duration(minutes: 2));
       await tester.pumpWidget(timerApp());
       await tester.pumpAndSettle();
       expect(find.text('02:00.00'), findsOneWidget);
@@ -278,7 +278,7 @@ void main() {
   testWidgets('reset gestures and time selection retain the saved duration', (
     tester,
   ) async {
-    await saveTimerValue(const Duration(minutes: 2));
+    await saveTimerDuration(const Duration(minutes: 2));
     final controller = BoutSessionController(
       duration: const Duration(seconds: 42),
     );
@@ -306,7 +306,7 @@ void main() {
     await tester.tap(find.text('OK'));
     await tester.pumpAndSettle();
     expect(controller.remaining, const Duration(seconds: 90));
-    expect(await loadTimerValue(), const Duration(seconds: 90));
+    expect(savedTimerDuration, const Duration(seconds: 90));
     await tester.pumpWidget(const SizedBox());
   });
 
@@ -343,7 +343,7 @@ void main() {
       await setDarkTheme(true);
       await setLocale(const Locale('uk'));
       await setYehorsSpecial(true);
-      await saveTimerValue(const Duration(minutes: 3));
+      await saveTimerDuration(const Duration(minutes: 3));
       darkThemeEnabled.value = false;
       localeOverride.value = null;
       yehorsSpecialEnabled.value = false;
@@ -351,7 +351,7 @@ void main() {
       expect(darkThemeEnabled.value, isTrue);
       expect(localeOverride.value, const Locale('uk'));
       expect(yehorsSpecialEnabled.value, isTrue);
-      expect(await loadTimerValue(), const Duration(minutes: 3));
+      expect(savedTimerDuration, const Duration(minutes: 3));
     },
   );
 }

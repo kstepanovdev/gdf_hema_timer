@@ -3,9 +3,9 @@ import '../modules/bout_session/bout_session.dart';
 import '../modules/bout_session/bout_session_controller.dart';
 import '../modules/bout_session/bout_feedback.dart';
 import 'package:flutter/material.dart';
-import 'package:gdf_hema_timer/modules/timer/storage.dart';
+import '../modules/settings/settings_storage.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 import 'package:gdf_hema_timer/widgets/fight_in_progress.dart';
-import 'package:gdf_hema_timer/widgets/reset_button.dart';
 
 import '../widgets/big_button.dart';
 import '../widgets/score_board.dart';
@@ -16,7 +16,6 @@ import '../utils/time_utils.dart';
 import '../modules/fight_log/fight_event.dart';
 import '../modules/fight_log/fight_log_view.dart';
 import '../l10n/gen/app_localizations.dart';
-import '../modules/help/help_storage.dart';
 import '../theme/app_colors.dart';
 import '../widgets/log_handle_panel.dart';
 import '../widgets/help_dialog.dart';
@@ -82,8 +81,8 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
     feedback = widget.feedback ?? StandaloneBoutFeedback();
     session.addListener(_onSessionChanged);
     unawaited(feedback.prepare());
+    unawaited(_setScreenAwake(true));
     _loadTimer();
-    _maybeShowHelp();
   }
 
   void _onSessionChanged() {
@@ -101,7 +100,19 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    if (state != AppLifecycleState.resumed) session.interrupt();
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_setScreenAwake(true));
+    } else {
+      session.interrupt();
+    }
+  }
+
+  Future<void> _setScreenAwake(bool enabled) async {
+    try {
+      await WakelockPlus.toggle(enable: enabled);
+    } catch (_) {
+      // Unsupported platforms must not block scoring or standalone operation.
+    }
   }
 
   @override
@@ -111,22 +122,24 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
     session.removeListener(_onSessionChanged);
     if (widget.controller == null) session.dispose();
     unawaited(feedback.dispose());
+    unawaited(_setScreenAwake(false));
     super.dispose();
   }
 
-  Future<void> _maybeShowHelp() async {
-    if (!await loadShowHelpOnLaunch()) return;
+  void _maybeShowHelp() {
+    if (!showHelpOnLaunch) return;
     if (!mounted) return;
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) HelpDialog.show(context);
     });
   }
 
-  Future<void> _loadTimer() async {
-    final loaded = await loadTimerValue();
+  void _loadTimer() {
+    final loaded = savedTimerDuration;
     if (!mounted) return;
     if (widget.controller == null) session.clock.setRemaining(loaded);
     setState(() => _ready = true);
+    _maybeShowHelp();
   }
 
   void _changeDouble(int value) {
@@ -147,7 +160,7 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
   }
 
   Future<void> resetAll() async {
-    final duration = await loadTimerValue();
+    final duration = savedTimerDuration;
     if (mounted) _resetDuration(duration);
   }
 
@@ -350,9 +363,11 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
                         ),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 10),
-                        child: ResetButton(
+                        child: BigButton(
                           label: l10n.reset,
                           color: AppColors.danger,
+                          fontSize: 35,
+                          width: double.infinity,
                           onPressed: resetAll,
                           onLongPress: resetScoreOnly,
                         ),
@@ -405,25 +420,15 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
                         ),
                       ),
 
-                      GestureDetector(
-                        onVerticalDragUpdate: (details) {
-                          if (details.primaryDelta != null &&
-                              details.primaryDelta! < -10) {
-                            FightLogView.show(context, session.fightLog);
-                          }
-                        },
-                        child: LogHandlePanel(fightLog: session.fightLog),
+                      LogHandlePanel(
+                        onOpen: () => showFightLog(context, session.fightLog),
                       ),
 
                       const SizedBox(height: 10),
 
                       TimeControl(
-                        onMinus1: () =>
-                            session.adjustTime(const Duration(seconds: -1)),
-                        onPlus3: () =>
-                            session.adjustTime(const Duration(seconds: 3)),
-                        onPlus5: () =>
-                            session.adjustTime(const Duration(seconds: 5)),
+                        onAdjust: (seconds) =>
+                            session.adjustTime(Duration(seconds: seconds)),
                       ),
 
                       const SizedBox(height: 10),
@@ -432,31 +437,24 @@ class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
                         widget.judgingControls!
                       else if (widget.onReview == null)
                         PenaltiesControl(
-                          leftWarning: leftWarning,
-                          rightWarning: rightWarning,
-                          leftCaution: leftCaution,
-                          rightCaution: rightCaution,
+                          penalty: (fighter, kind) {
+                            final side = fighter == Fighter.left
+                                ? DisplaySide.left
+                                : DisplaySide.right;
+                            final value = session.at(side);
+                            return kind == PenaltyKind.warning
+                                ? value.warning
+                                : value.caution;
+                          },
+                          onPenaltyChanged: (fighter, kind, value) =>
+                              session.setPenalty(
+                                fighter == Fighter.left
+                                    ? DisplaySide.left
+                                    : DisplaySide.right,
+                                kind,
+                                value,
+                              ),
                           doubleHits: doubleHits,
-                          onLeftWarningChanged: (v) => session.setPenalty(
-                            DisplaySide.left,
-                            PenaltyKind.warning,
-                            v,
-                          ),
-                          onRightWarningChanged: (v) => session.setPenalty(
-                            DisplaySide.right,
-                            PenaltyKind.warning,
-                            v,
-                          ),
-                          onLeftCautionChanged: (v) => session.setPenalty(
-                            DisplaySide.left,
-                            PenaltyKind.caution,
-                            v,
-                          ),
-                          onRightCautionChanged: (v) => session.setPenalty(
-                            DisplaySide.right,
-                            PenaltyKind.caution,
-                            v,
-                          ),
                           onDoubleChanged: _changeDouble,
                         ),
                     ],

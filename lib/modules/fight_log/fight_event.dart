@@ -1,3 +1,6 @@
+/// Visual sides used by the standalone controls, never Opossum fighter IDs.
+enum Fighter { left, right }
+
 /// The kind of penalty a [PenaltyChanged] event carries.
 enum PenaltyKind { warning, caution }
 

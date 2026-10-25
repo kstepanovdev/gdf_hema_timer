@@ -11,6 +11,7 @@ Designed for clarity, speed, and offline use during tournaments and sparring ses
   - Set time easily (tap to edit, +/− controls)
   - Monotonic countdown with centisecond display
   - Auto-stop vibration when time runs out
+  - Keeps the screen awake while a fight session is open
 
 - **Score Tracking**
   - Tap to increment/decrement scores
@@ -375,6 +376,17 @@ flutter pub get
 flutter build apk --release
 ```
 
+## Tests
+
+```bash
+flutter test                          # everything, incl. design screenshots
+flutter test --exclude-tags golden    # behaviour only (what CI runs)
+flutter test --update-goldens --tags golden   # after an intended design change
+```
+
+The fork screenshots in `test/goldens/` are rendered on Linux; other OSes may
+differ by a few pixels, so CI skips them.
+
 ## Contributing
 Contributions are welcome!
   1. Fork the repo
@@ -457,3 +469,8 @@ pairing URIs from that same synthetic server), `prefix`
 organizer cookie and CSRF header). Create those codes using the documented
 organizer pairing API; protect/delete the temporary file after the rehearsal.
 The tool refuses other origins and non-synthetic discovered tournaments.
+
+Linux test runners need `libsqlite3-dev` (`sudo apt-get install libsqlite3-dev`)
+for the real SQLite outbox/restart tests. CI installs it explicitly.
+The platform-dependent golden suite remains separate: `flutter test --exclude-tags golden`
+is the Linux CI command.

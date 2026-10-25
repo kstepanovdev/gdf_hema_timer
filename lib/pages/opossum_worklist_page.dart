@@ -9,7 +9,7 @@ import '../modules/opossum/bout_labels.dart';
 import '../modules/opossum/pending_submission.dart';
 import '../modules/opossum/submission_controller.dart';
 import '../modules/opossum/worklist_controller.dart';
-import '../modules/timer/storage.dart';
+import '../modules/settings/settings_storage.dart';
 import 'opossum_result_page.dart';
 import 'score_page.dart';
 import 'opossum_outbox_page.dart';
@@ -259,6 +259,8 @@ class _OpossumWorklistPageState extends State<OpossumWorklistPage>
         );
       }
       if (saved != null && !_work.restoreDraft(bout)) return;
+      await loadSettings();
+      if (!mounted) return;
       if (widget.api is CachedOpossumClient &&
           (widget.api as CachedOpossumClient).offline &&
           saved == null) {
@@ -282,7 +284,7 @@ class _OpossumWorklistPageState extends State<OpossumWorklistPage>
         if (confirmed != true || !mounted) return;
       }
       controller = BoutSessionController(
-        duration: await loadTimerValue(),
+        duration: savedTimerDuration,
         initialSession: bout.toSession(),
       );
       if (!mounted) return;

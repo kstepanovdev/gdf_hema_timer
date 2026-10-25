@@ -3,50 +3,28 @@ import '../l10n/gen/app_localizations.dart';
 import '../theme/app_colors.dart';
 import 'big_button.dart';
 
+/// A row of buttons that nudge the timer by a few seconds.
 class TimeControl extends StatelessWidget {
-  final VoidCallback onMinus1;
-  final VoidCallback onPlus3;
-  final VoidCallback onPlus5;
+  static const _steps = [-1, 3, 5];
 
-  const TimeControl({
-    super.key,
-    required this.onMinus1,
-    required this.onPlus3,
-    required this.onPlus5,
-  });
+  final ValueChanged<int> onAdjust;
+
+  const TimeControl({super.key, required this.onAdjust});
 
   @override
   Widget build(BuildContext context) {
     final s = AppLocalizations.of(context).secondsShort;
-    return Column(
+    return Row(
+      spacing: 8,
       children: [
-        Row(
-          children: [
-            Expanded(
-              child: BigButton(
-                label: "-1$s",
-                color: AppColors.neutral,
-                onPressed: onMinus1,
-              ),
+        for (final step in _steps)
+          Expanded(
+            child: BigButton(
+              label: "${step > 0 ? '+' : ''}$step$s",
+              color: AppColors.neutral,
+              onPressed: () => onAdjust(step),
             ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: BigButton(
-                label: "+3$s",
-                color: AppColors.neutral,
-                onPressed: onPlus3,
-              ),
-            ),
-            const SizedBox(width: 8),
-            Expanded(
-              child: BigButton(
-                label: "+5$s",
-                color: AppColors.neutral,
-                onPressed: onPlus5,
-              ),
-            ),
-          ],
-        ),
+          ),
       ],
     );
   }

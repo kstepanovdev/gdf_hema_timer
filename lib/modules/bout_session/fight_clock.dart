@@ -1,3 +1,5 @@
+import 'package:clock/clock.dart';
+
 /// Monotonic countdown. Refresh callbacks only read time; they never count it.
 ///
 /// Lifecycle interruptions are deliberately paused by the session controller.
@@ -12,7 +14,7 @@ class FightClock {
   Duration? _startedAt;
 
   static Duration Function() _stopwatchSource() {
-    final watch = Stopwatch()..start();
+    final watch = clock.stopwatch()..start();
     return () => watch.elapsed;
   }
 
