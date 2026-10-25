@@ -17,26 +17,31 @@ class LogHandlePanel extends StatelessWidget {
       onVerticalDragUpdate: (details) {
         if ((details.primaryDelta ?? 0) < -10) onOpen();
       },
-      child: Container(
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: Theme.of(
-            context,
-          ).colorScheme.onSurface.withAlpha(isDark ? 45 : 20),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Row(
-          children: [
-            const Icon(
-              Icons.keyboard_arrow_up,
-              size: 30,
-              color: AppColors.hint,
-            ),
-            Text(
-              AppLocalizations.of(context).dragUpForLogs,
-              style: const TextStyle(color: AppColors.hint, fontSize: 14),
-            ),
-          ],
+      child: InkWell(
+        onTap: onOpen,
+        child: Container(
+          width: double.infinity,
+          decoration: BoxDecoration(
+            color: Theme.of(
+              context,
+            ).colorScheme.onSurface.withAlpha(isDark ? 45 : 20),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Row(
+            children: [
+              const Icon(
+                Icons.keyboard_arrow_up,
+                size: 30,
+                color: AppColors.hint,
+              ),
+              Expanded(
+                child: Text(
+                  AppLocalizations.of(context).dragUpForLogs,
+                  style: const TextStyle(color: AppColors.hint, fontSize: 14),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

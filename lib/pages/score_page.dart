@@ -1,201 +1,305 @@
 import 'dart:async';
-import 'package:audioplayers/audioplayers.dart';
-import 'package:clock/clock.dart';
+import '../modules/bout_session/bout_session.dart';
+import '../modules/bout_session/bout_session_controller.dart';
+import '../modules/bout_session/bout_feedback.dart';
 import 'package:flutter/material.dart';
-import 'package:vibration/vibration.dart';
-import 'package:wakelock_plus/wakelock_plus.dart';
-
-import '../l10n/gen/app_localizations.dart';
-import '../modules/fight_log/fight_event.dart';
-import '../modules/fight_log/fight_log.dart';
-import '../modules/fight_log/fight_log_view.dart';
 import '../modules/settings/settings_storage.dart';
-import '../theme/app_colors.dart';
-import '../utils/time_utils.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
+import 'package:gdf_hema_timer/widgets/fight_in_progress.dart';
+
 import '../widgets/big_button.dart';
-import '../widgets/fight_in_progress.dart';
-import '../widgets/help_dialog.dart';
-import '../widgets/log_handle_panel.dart';
-import '../widgets/penalties_control.dart';
 import '../widgets/score_board.dart';
-import '../widgets/settings_drawer.dart';
-import '../widgets/time_control.dart';
 import '../widgets/timer_display.dart';
+import '../widgets/time_control.dart';
+import '../widgets/penalties_control.dart';
+import '../utils/time_utils.dart';
+import '../modules/fight_log/fight_event.dart';
+import '../modules/fight_log/fight_log_view.dart';
+import '../l10n/gen/app_localizations.dart';
+import '../theme/app_colors.dart';
+import '../widgets/log_handle_panel.dart';
+import '../widgets/help_dialog.dart';
+import '../widgets/settings_drawer.dart';
 
 class ScorePage extends StatefulWidget {
-  const ScorePage({super.key});
+  const ScorePage({
+    super.key,
+    this.controller,
+    this.feedback,
+    this.boutContext,
+    this.connectionStatus,
+    this.onReview,
+    this.beforeLeave,
+    this.durableSession = false,
+    this.judgingControls,
+    this.scoreEditingEnabled = true,
+    this.canReview = true,
+    this.reviewLabel,
+  });
+
+  final BoutSessionController? controller;
+  final BoutFeedback? feedback;
+  final String? boutContext;
+  final Widget? connectionStatus;
+  final Future<void> Function()? onReview;
+  final Future<bool> Function()? beforeLeave;
+  final bool durableSession;
+  final Widget? judgingControls;
+  final bool scoreEditingEnabled, canReview;
+  final String? reviewLabel;
 
   @override
   State<ScorePage> createState() => _ScorePageState();
 }
 
-/// One fighter's tallies.
-class _Side {
-  _Side(this.name);
-  final String name;
-  int score = 0;
-  final penalties = {for (final kind in PenaltyKind.values) kind: 0};
-}
+class _ScorePageState extends State<ScorePage> with WidgetsBindingObserver {
+  late final BoutSessionController session;
+  late final BoutFeedback feedback;
+  Timer? _refresh;
+  bool _ready = false;
+  bool _reviewing = false;
+  bool _leaving = false;
+  bool _confirmingLeave = false;
 
-class _ScorePageState extends State<ScorePage> {
-  static const _tick = Duration(milliseconds: 10);
-
-  final fightLog = FightLog();
-  final _bruhPlayer = AudioPlayer();
-
-  var _left = _Side('F1');
-  var _right = _Side('F2');
-  int doubleHits = 0;
-
-  Duration timer = savedTimerDuration;
-  Timer? countdown;
-  bool get running => countdown?.isActive ?? false;
-
-  late final AppLifecycleListener _lifecycle;
+  int get leftScore => session.at(DisplaySide.left).score;
+  int get rightScore => session.at(DisplaySide.right).score;
+  int get leftWarning => session.at(DisplaySide.left).warning;
+  int get rightWarning => session.at(DisplaySide.right).warning;
+  int get leftCaution => session.at(DisplaySide.left).caution;
+  int get rightCaution => session.at(DisplaySide.right).caution;
+  int get doubleHits => session.session.mutualHits;
+  String get leftName => session.at(DisplaySide.left).name;
+  String get rightName => session.at(DisplaySide.right).name;
+  Duration get timer => session.remaining;
+  bool get running => session.running;
 
   @override
   void initState() {
     super.initState();
-    // Keep the screen awake while the app is in use, so the lock screen can't
-    // get in the way of scoring or stopping the clock (issue #7). The OS only
-    // honours this in the foreground and may drop it in the background, so
-    // re-request it on every return to the app.
-    WakelockPlus.enable();
-    _lifecycle = AppLifecycleListener(onResume: WakelockPlus.enable);
-    if (showHelpOnLaunch) {
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (mounted) HelpDialog.show(context);
+    WidgetsBinding.instance.addObserver(this);
+    session = widget.controller ?? BoutSessionController();
+    feedback = widget.feedback ?? StandaloneBoutFeedback();
+    session.addListener(_onSessionChanged);
+    unawaited(feedback.prepare());
+    unawaited(_setScreenAwake(true));
+    _loadTimer();
+  }
+
+  void _onSessionChanged() {
+    if (!mounted) return;
+    if (running) {
+      _refresh ??= Timer.periodic(const Duration(milliseconds: 16), (_) {
+        if (session.refresh()) unawaited(feedback.timeExpired());
       });
+    } else {
+      _refresh?.cancel();
+      _refresh = null;
     }
-    // Preload the sound and keep it loaded after playback (the default
-    // ReleaseMode.release frees it), so a Double hit plays without delay.
-    _bruhPlayer
-      ..setReleaseMode(ReleaseMode.stop)
-      ..setSource(AssetSource('sounds/bruh.mp3'));
+    setState(() {});
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      unawaited(_setScreenAwake(true));
+    } else {
+      session.interrupt();
+    }
+  }
+
+  Future<void> _setScreenAwake(bool enabled) async {
+    try {
+      await WakelockPlus.toggle(enable: enabled);
+    } catch (_) {
+      // Unsupported platforms must not block scoring or standalone operation.
+    }
   }
 
   @override
   void dispose() {
-    countdown?.cancel();
-    _lifecycle.dispose();
-    WakelockPlus.disable();
-    _bruhPlayer.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+    _refresh?.cancel();
+    session.removeListener(_onSessionChanged);
+    if (widget.controller == null) session.dispose();
+    unawaited(feedback.dispose());
+    unawaited(_setScreenAwake(false));
     super.dispose();
   }
 
-  _Side _side(Fighter fighter) => fighter == Fighter.left ? _left : _right;
-
-  void _changeScore(Fighter fighter, int value) {
-    final side = _side(fighter);
-    if (value == side.score) return;
-    setState(() => side.score = value);
-    fightLog.emit(
-      ScoreChanged(timer, leftTotal: _left.score, rightTotal: _right.score),
-    );
+  void _maybeShowHelp() {
+    if (!showHelpOnLaunch) return;
+    if (!mounted) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) HelpDialog.show(context);
+    });
   }
 
-  void _changePenalty(Fighter fighter, PenaltyKind kind, int value) {
-    final side = _side(fighter);
-    final delta = value - side.penalties[kind]!;
-    if (delta == 0) return;
-    setState(() => side.penalties[kind] = value);
-    fightLog.emit(
-      PenaltyChanged(
-        timer,
-        fighter: side.name,
-        kind: kind,
-        delta: delta,
-        total: value,
-      ),
-    );
+  void _loadTimer() {
+    final loaded = savedTimerDuration;
+    if (!mounted) return;
+    if (widget.controller == null) session.clock.setRemaining(loaded);
+    setState(() => _ready = true);
+    _maybeShowHelp();
   }
 
   void _changeDouble(int value) {
-    final delta = value - doubleHits;
-    if (delta == 0) return;
-    if (delta > 0 && yehorsSpecialEnabled.value) {
-      _bruhPlayer
-        ..seek(Duration.zero)
-        ..resume();
+    if (value > doubleHits) unawaited(feedback.mutualHit());
+    session.setMutualHits(value);
+  }
+
+  void startTimer() => session.start();
+  void stopTimer() => session.pause();
+  void resetScoreOnly() {
+    if (!widget.scoreEditingEnabled) return;
+    if (widget.onReview == null) {
+      session.reset(duration: timer, keepTime: true);
+      return;
     }
-    setState(() => doubleHits = value);
-    fightLog.emit(DoubleHitChanged(timer, delta: delta, total: value));
+    session.setScore(DisplaySide.left, 0);
+    session.setScore(DisplaySide.right, 0);
   }
 
-  void startTimer() {
-    fightLog.markStarted(timer);
-    // Derive the remaining time from a stopwatch rather than subtracting a
-    // fixed step per tick, so late or dropped ticks don't slow the clock.
-    final startedWith = timer;
-    final elapsed = clock.stopwatch()..start();
-    countdown?.cancel();
-    setState(() {
-      countdown = Timer.periodic(_tick, (_) {
-        final remaining = startedWith - elapsed.elapsed;
-        if (remaining > Duration.zero) {
-          setState(() => timer = remaining);
-        } else {
-          timer = Duration.zero;
-          stopTimer();
-          Vibration.hasVibrator().then((has) {
-            if (has) Vibration.vibrate(duration: 1000, amplitude: 255);
-          });
-        }
+  Future<void> resetAll() async {
+    final duration = savedTimerDuration;
+    if (mounted) _resetDuration(duration);
+  }
+
+  void _resetDuration(Duration duration) {
+    if (!widget.scoreEditingEnabled) return;
+    if (widget.onReview == null) {
+      session.reset(duration: duration);
+      return;
+    }
+    session.pause();
+    session.clock.setRemaining(duration);
+    session.adjustTime(Duration.zero);
+    resetScoreOnly();
+  }
+
+  void swapFighters() => session.swapSides();
+
+  Future<void> _review() async {
+    if (_reviewing || widget.onReview == null) return;
+    setState(() => _reviewing = true);
+    stopTimer();
+    try {
+      await widget.onReview!();
+    } finally {
+      if (mounted) setState(() => _reviewing = false);
+    }
+  }
+
+  Future<void> _leaveBout() async {
+    if (_confirmingLeave || _leaving) return;
+    _confirmingLeave = true;
+    stopTimer();
+    final l10n = AppLocalizations.of(context);
+    final leave = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(l10n.leaveBoutTitle),
+        content: Text(
+          widget.onReview == null
+              ? l10n.leaveBoutMessage
+              : widget.durableSession
+              ? l10n.leaveSavedBout
+              : l10n.leaveConnectedBout,
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(l10n.leaveBout),
+          ),
+        ],
+      ),
+    );
+    _confirmingLeave = false;
+    if (leave == true &&
+        widget.beforeLeave != null &&
+        !await widget.beforeLeave!()) {
+      return;
+    }
+    if (leave == true && mounted) {
+      setState(() => _leaving = true);
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (mounted) Navigator.of(context).pop();
       });
-    });
-  }
-
-  void stopTimer() {
-    setState(() => countdown?.cancel());
-  }
-
-  /// Clears scores and penalties; keeps the timer unless [timer] is given.
-  void _reset({Duration? timer}) {
-    fightLog.reset();
-    setState(() {
-      _left = _Side(_left.name);
-      _right = _Side(_right.name);
-      doubleHits = 0;
-      if (timer != null) this.timer = timer;
-    });
-  }
-
-  void _adjustTimer(int seconds) {
-    final adjusted = timer + Duration(seconds: seconds);
-    setState(() => timer = adjusted.isNegative ? Duration.zero : adjusted);
+    }
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => PopScope(
+    canPop: _leaving,
+    onPopInvokedWithResult: (didPop, _) {
+      if (!didPop) unawaited(_leaveBout());
+    },
+    child: _buildTimer(context),
+  );
+
+  Widget _buildTimer(BuildContext context) {
     final l10n = AppLocalizations.of(context);
+    if (!_ready) {
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
+    }
     if (running) {
       return GestureDetector(
         onTap: stopTimer,
         child: Scaffold(
           backgroundColor: AppColors.stage,
           body: SafeArea(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                TimerDisplay(
-                  color: AppColors.onStage,
-                  time: formatTime(timer),
-                  fontSize: 60,
-                ),
-                ActiveTimerBoard(
-                  leftScore: _left.score,
-                  rightScore: _right.score,
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: BigButton(
-                    label: l10n.stop,
-                    color: AppColors.danger,
-                    fontSize: 28,
-                    onPressed: stopTimer,
+            child: LayoutBuilder(
+              builder: (context, constraints) => SingleChildScrollView(
+                child: ConstrainedBox(
+                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      if (widget.boutContext != null)
+                        Padding(
+                          padding: const EdgeInsets.all(12),
+                          child: Text(
+                            widget.boutContext!,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      if (widget.connectionStatus != null)
+                        widget.connectionStatus!,
+                      if (widget.onReview != null)
+                        Text(
+                          '$leftName · $rightName',
+                          style: const TextStyle(color: Colors.white),
+                        ),
+                      TimerDisplay(
+                        color: AppColors.onStage,
+                        time: formatTime(timer),
+                        fontSize: 60,
+                      ),
+                      ActiveTimerBoard(
+                        leftScore: leftScore,
+                        rightScore: rightScore,
+                      ),
+                      if (widget.judgingControls != null)
+                        widget.judgingControls!,
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: SizedBox(
+                          child: BigButton(
+                            label: l10n.stop,
+                            color: AppColors.danger,
+                            fontSize: 28,
+                            onPressed: stopTimer,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ),
-              ],
+              ),
             ),
           ),
         ),
@@ -203,73 +307,162 @@ class _ScorePageState extends State<ScorePage> {
     }
 
     return Scaffold(
+      appBar: AppBar(
+        title: Text(
+          widget.onReview == null ? l10n.standaloneMode : l10n.tournamentMode,
+        ),
+        actions: [
+          IconButton(
+            tooltip: l10n.leaveBout,
+            onPressed: _leaveBout,
+            icon: const Icon(Icons.exit_to_app),
+          ),
+        ],
+      ),
       drawer: const SettingsDrawer(),
-      // The default 20px edge-drag zone sits inside Android's back-swipe
-      // region, so the drawer would never open; widen it past the inset.
+      // The default 20px edge-drag zone sits entirely inside Android's system
+      // gesture-nav (back-swipe) region, so the drawer never opens. Widen the
+      // zone past the system-reserved inset so a swipe that starts just inboard
+      // of the edge still opens Settings.
       drawerEdgeDragWidth: MediaQuery.of(context).systemGestureInsets.left + 80,
       body: SafeArea(
         child: LayoutBuilder(
-          builder: (context, constraints) => SingleChildScrollView(
-            child: ConstrainedBox(
-              constraints: BoxConstraints(minHeight: constraints.maxHeight),
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    BigButton(
-                      label: l10n.reset,
-                      color: AppColors.danger,
-                      fontSize: 35,
-                      width: double.infinity,
-                      onPressed: () => _reset(timer: savedTimerDuration),
-                      onLongPress: _reset,
-                    ),
-                    const SizedBox(height: 20),
-                    TimerDisplay(
-                      time: formatTime(timer),
-                      fontSize: 60,
-                      onLongPress: () async {
-                        final newTime = await showTimeSelectDialog(context);
-                        if (newTime != null) _reset(timer: newTime);
-                      },
-                    ),
-                    const SizedBox(height: 10),
-                    ScoreBoard(
-                      leftScore: _left.score,
-                      rightScore: _right.score,
-                      onLeftChanged: (v) => _changeScore(Fighter.left, v),
-                      onRightChanged: (v) => _changeScore(Fighter.right, v),
-                    ),
-                    const SizedBox(height: 10),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 150,
-                      child: BigButton(
-                        label: l10n.start,
-                        color: AppColors.primary,
-                        fontSize: 40,
-                        onPressed: startTimer,
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(minHeight: constraints.maxHeight),
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(10, 10, 10, 20),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      if (widget.boutContext != null)
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            widget.boutContext!,
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      if (widget.connectionStatus != null)
+                        widget.connectionStatus!,
+                      if (session.interrupted)
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(
+                            l10n.interruptedClock,
+                            key: const Key('clock-interrupted'),
+                            semanticsLabel: l10n.interruptedClock,
+                          ),
+                        )
+                      else if (session.fightLog.isEmpty &&
+                          widget.onReview == null)
+                        Padding(
+                          padding: const EdgeInsets.all(8),
+                          child: Text(l10n.sessionNotRestored),
+                        ),
+                      Padding(
+                        padding: const EdgeInsets.only(bottom: 10),
+                        child: BigButton(
+                          label: l10n.reset,
+                          color: AppColors.danger,
+                          fontSize: 35,
+                          width: double.infinity,
+                          onPressed: resetAll,
+                          onLongPress: resetScoreOnly,
+                        ),
                       ),
-                    ),
-                    LogHandlePanel(
-                      onOpen: () => showFightLog(context, fightLog),
-                    ),
-                    const SizedBox(height: 10),
-                    TimeControl(onAdjust: _adjustTimer),
-                    const SizedBox(height: 10),
-                    PenaltiesControl(
-                      penalty: (fighter, kind) =>
-                          _side(fighter).penalties[kind]!,
-                      onPenaltyChanged: _changePenalty,
-                      doubleHits: doubleHits,
-                      onDoubleChanged: _changeDouble,
-                    ),
-                  ],
+                      const SizedBox(height: 10),
+
+                      TimerDisplay(
+                        time: formatTime(timer),
+                        fontSize: 60,
+                        onLongPress: () async {
+                          final newTime = await showTimeSelectDialog(context);
+                          if (newTime != null) {
+                            if (mounted) _resetDuration(newTime);
+                          }
+                        },
+                      ),
+
+                      const SizedBox(height: 10),
+                      ScoreBoard(
+                        leftName: leftName,
+                        rightName: rightName,
+                        leftScore: leftScore,
+                        rightScore: rightScore,
+                        onLeftChanged: (v) => widget.scoreEditingEnabled
+                            ? session.setScore(DisplaySide.left, v)
+                            : null,
+                        onRightChanged: (v) => widget.scoreEditingEnabled
+                            ? session.setScore(DisplaySide.right, v)
+                            : null,
+                        swapFighters: swapFighters,
+                      ),
+                      const SizedBox(height: 10),
+                      if (widget.onReview != null)
+                        FilledButton(
+                          onPressed: _reviewing || !widget.canReview
+                              ? null
+                              : _review,
+                          child: Text(widget.reviewLabel ?? l10n.reviewResult),
+                        ),
+                      SizedBox(
+                        width: double.infinity,
+                        height: 150,
+                        child: BigButton(
+                          label: l10n.start,
+                          color: AppColors.primary,
+                          fontSize: 40,
+                          onPressed: widget.scoreEditingEnabled
+                              ? startTimer
+                              : () {},
+                        ),
+                      ),
+
+                      LogHandlePanel(
+                        onOpen: () => showFightLog(context, session.fightLog),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      TimeControl(
+                        onAdjust: (seconds) =>
+                            session.adjustTime(Duration(seconds: seconds)),
+                      ),
+
+                      const SizedBox(height: 10),
+
+                      if (widget.judgingControls != null)
+                        widget.judgingControls!
+                      else if (widget.onReview == null)
+                        PenaltiesControl(
+                          penalty: (fighter, kind) {
+                            final side = fighter == Fighter.left
+                                ? DisplaySide.left
+                                : DisplaySide.right;
+                            final value = session.at(side);
+                            return kind == PenaltyKind.warning
+                                ? value.warning
+                                : value.caution;
+                          },
+                          onPenaltyChanged: (fighter, kind, value) =>
+                              session.setPenalty(
+                                fighter == Fighter.left
+                                    ? DisplaySide.left
+                                    : DisplaySide.right,
+                                kind,
+                                value,
+                              ),
+                          doubleHits: doubleHits,
+                          onDoubleChanged: _changeDouble,
+                        ),
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ),
+            );
+          },
         ),
       ),
     );

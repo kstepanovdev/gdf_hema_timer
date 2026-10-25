@@ -15,14 +15,26 @@ void main() {
   });
 
   test(
-    'FightLog drops penalty/double corrections but keeps score decrements',
+    'FightLog preserves penalty/double corrections and score decrements',
     () {
       final log = FightLog()
-        ..emit(const ScoreChanged(clock, leftTotal: 0, rightTotal: 0))
+        ..emit(
+          const ScoreChanged(
+            clock,
+            fighterId: 'local-a',
+            fighter: 'F1',
+            delta: -1,
+            scoreA: 0,
+            scoreB: 0,
+            leftTotal: 0,
+            rightTotal: 0,
+          ),
+        )
         ..emit(const DoubleHitChanged(clock, delta: -1, total: 0))
         ..emit(
           const PenaltyChanged(
             clock,
+            fighterId: 'local-a',
             fighter: 'F1',
             kind: PenaltyKind.warning,
             delta: -1,
@@ -32,6 +44,8 @@ void main() {
         ..emit(const DoubleHitChanged(clock, delta: 1, total: 1));
       expect(log.events.map((e) => e.runtimeType), [
         ScoreChanged,
+        DoubleHitChanged,
+        PenaltyChanged,
         DoubleHitChanged,
       ]);
     },
@@ -52,15 +66,25 @@ void main() {
     final l10n = lookupAppLocalizations(const Locale('en'));
     expect(
       formatFightEvent(
-        const ScoreChanged(clock, leftTotal: 2, rightTotal: 0),
+        const ScoreChanged(
+          clock,
+          fighterId: 'local-a',
+          fighter: 'F1',
+          delta: 2,
+          scoreA: 2,
+          scoreB: 0,
+          leftTotal: 2,
+          rightTotal: 0,
+        ),
         l10n,
       ),
-      '01:15.42 - 2 : 0',
+      '01:15.42 - F1 +2 · 2 : 0',
     );
     expect(
       formatFightEvent(
         const PenaltyChanged(
           clock,
+          fighterId: 'local-b',
           fighter: 'F2',
           kind: PenaltyKind.caution,
           delta: 1,
@@ -68,7 +92,7 @@ void main() {
         ),
         l10n,
       ),
-      '01:15.42 - Caution to F2',
+      '01:15.42 - Caution to F2 +1 (1)',
     );
   });
 }

@@ -1,4 +1,4 @@
-// Screenshots of the established design; any visual change fails these.
+// Screenshots of the fork design, rendered on Linux; visual changes fail these.
 // After an intended design change: flutter test --update-goldens --tags golden
 // Rendering differs slightly between OSes, so CI skips them (see dart_test.yaml).
 @Tags(['golden'])

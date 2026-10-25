@@ -1,6 +1,7 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:audioplayers_platform_interface/audioplayers_platform_interface.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:gdf_hema_timer/main.dart';
 import 'package:gdf_hema_timer/modules/settings/settings_storage.dart';
@@ -137,6 +138,8 @@ Future<PlatformLog> pumpApp(
   });
   await loadSettings();
   await tester.pumpWidget(const ScoreApp());
+  await tester.pumpAndSettle();
+  await tester.tap(find.byKey(const Key('standalone-mode')));
   await tester.pumpAndSettle();
   return log;
 }

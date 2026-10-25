@@ -27,22 +27,26 @@ extension on WidgetTester {
   int valueOf(Finder number) => widget<TouchNumber>(number).value;
 
   Future<void> add(Finder number) async {
+    await ensureVisible(number);
     await tap(number);
     await pump();
   }
 
   Future<void> remove(Finder number) async {
+    await ensureVisible(number);
     await longPress(number);
     await pump();
   }
 
   /// Taps START and renders the first frame (the running clock never settles).
   Future<void> start() async {
+    await ensureVisible(find.text('START'));
     await tap(find.text('START'));
     await pump();
   }
 
   Future<void> tapText(String text) async {
+    await ensureVisible(find.text(text));
     await tap(find.text(text));
     await pumpAndSettle();
   }
@@ -183,7 +187,7 @@ void main() {
       }
     });
 
-    testWidgets('fight log lists scores and penalties but not corrections', (
+    testWidgets('fight log keeps scores, penalties and their corrections', (
       tester,
     ) async {
       await pumpApp(tester);
@@ -196,6 +200,7 @@ void main() {
       await tester.add(_double);
       await tester.remove(_double);
 
+      await tester.ensureVisible(find.text('Drag up for logs'));
       await tester.drag(find.text('Drag up for logs'), const Offset(0, -200));
       await tester.pumpAndSettle();
 
@@ -204,10 +209,13 @@ void main() {
         matching: find.byType(Text),
       );
       expect(tester.widgetList<Text>(lines).map((t) => t.data), [
-        '01:30.00 - Double hit',
-        '01:30.00 - Warning to F1',
-        '01:30.00 - 0 : 0',
-        '01:30.00 - 1 : 0',
+        '01:30.00 - Double hit -1 (0)',
+        '01:30.00 - Double hit +1 (1)',
+        '01:30.00 - Warning to F1 -1 (0)',
+        '01:30.00 - Warning to F1 +1 (1)',
+        '01:30.00 - F1 -1 · 0 : 0',
+        '01:30.00 - F1 +1 · 1 : 0',
+        '01:30.00 - Timer paused',
         '01:30.00 - Fight started',
       ]);
     });
